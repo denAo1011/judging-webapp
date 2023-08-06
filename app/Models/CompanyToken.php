@@ -13,10 +13,22 @@ class CompanyToken extends Model
     protected $fillable = [
         'company_id',
         'value',
+        'used_at',
+        'tallies'
     ];
 
-    public function company() {
+    protected $casts = [
+        'tallies' => 'array',
+    ];
+
+    public function company()
+    {
         return $this->belongsTo(Company::class);
+    }
+
+    public function companyEntryScores()
+    {
+        return $this->hasMany(CompanyEntryScore::class);
     }
 
     protected static function boot()

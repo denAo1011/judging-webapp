@@ -4,6 +4,8 @@ use App\Http\Controllers\Api\AuthenticationController;
 use App\Http\Controllers\Api\CompanyController;
 use App\Http\Controllers\Api\CompanyEntryController;
 use App\Http\Controllers\Api\CompanyTokenController;
+use App\Http\Controllers\Api\JudgingController;
+use App\Http\Controllers\Api\DashboardController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -42,9 +44,14 @@ Route::group(['middleware' => ['auth:sanctum']], function () {
     Route::get('companyEntries/{companyEntry}', [CompanyEntryController::class, 'show']);
     Route::put('companyEntries/{companyEntry}', [CompanyEntryController::class, 'update']);
     Route::delete('companyEntries/{companyEntry}', [CompanyEntryController::class, 'destroy']);
+
+    // Dashboard Route
+    Route::get('dashboard/statistics', [DashboardController::class, 'getStatistics']);
+    Route::get('dashboard/rankings', [DashboardController::class, 'getRankings']);
 });
 
 // Requests for this group, MUST contain header "Company-Token"
-Route::group(['middleware' => 'auth.companyToken'], function() {
-
+Route::group(['middleware' => 'auth.companyToken'], function () {
+    Route::get('judging', [JudgingController::class, 'index']);
+    Route::post('judging', [JudgingController::class, 'submit']);
 });

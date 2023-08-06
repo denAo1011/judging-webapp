@@ -15,6 +15,8 @@ return new class extends Migration
             $table->id();
             $table->foreignId('company_id')->constrained('companies', 'id')->onDelete('cascade');
             $table->string('value')->unique();
+            $table->dateTime('used_at')->nullable(); // Indicates when the token was used
+            $table->json('tallies')->nullable(); // Stores the tallies that was submitted
             $table->timestamps();
         });
     }

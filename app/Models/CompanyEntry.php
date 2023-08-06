@@ -20,7 +20,23 @@ class CompanyEntry extends Model
         'notes'
     ];
 
-    public function company() {
+    protected $appends = [
+        'score'
+    ];
+
+    public function company()
+    {
         return $this->belongsTo(Company::class);
+    }
+
+    public function companyEntryScores()
+    {
+        return $this->hasMany(CompanyEntryScore::class);
+    }
+
+    public function getScoreAttribute()
+    {
+        return $this->companyEntryScores()
+            ->avg('total');
     }
 }

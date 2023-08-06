@@ -32,6 +32,15 @@ class CompanyTokenMiddleware
                 ->json(['error' => '[001] Invalid Token Detected'], 404);
         }
 
+        // Check if token was used already
+        if ($companyToken->used_at) {
+            return response()
+                ->json(['error' => '[002] Token Used Already!'], 422);
+        }
+
+        // Add company token to request attributes
+        $request->attributes->add(['companyToken' => $companyToken]);
+
         return $next($request);
     }
 }
