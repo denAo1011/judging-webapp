@@ -33,3 +33,8 @@ Route::group(['middleware' => ['auth:sanctum']], function () {
     Route::get('companies/{company}/token', [CompanyTokenController::class, 'show']);
     Route::post('companies/{company}/token', [CompanyTokenController::class, 'regenerate']);
 });
+
+// Requests for this group, MUST contain header "Company-Token"
+Route::group(['middleware' => 'auth.companyToken'], function() {
+
+});
