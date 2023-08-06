@@ -18,6 +18,10 @@ class Company extends Model
         return $this->hasOne(CompanyToken::class);
     }
 
+    public function companyEntries() {
+        return $this->hasMany(companyEntries::class);
+    }
+
     protected static function boot()
     {
         parent::boot();

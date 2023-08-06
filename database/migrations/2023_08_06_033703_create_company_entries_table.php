@@ -11,10 +11,17 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('company_tokens', function (Blueprint $table) {
+        Schema::create('company_entries', function (Blueprint $table) {
             $table->id();
             $table->foreignId('company_id')->constrained('companies', 'id')->onDelete('cascade');
-            $table->string('value')->unique();
+            $table->string('link');
+            $table->string('email');
+            $table->string('firstname');
+            $table->string('lastname');
+            $table->string('position');
+            $table->string('status')
+                ->default('PENDING');
+            $table->string('notes');
             $table->timestamps();
         });
     }
@@ -24,6 +31,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('company_tokens');
+        Schema::dropIfExists('company_entries');
     }
 };
