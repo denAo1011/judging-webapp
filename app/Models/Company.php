@@ -13,4 +13,19 @@ class Company extends Model
         'name',
         'email'
     ];
+
+    public function companyToken() {
+        return $this->hasOne(CompanyToken::class);
+    }
+
+    protected static function boot()
+    {
+        parent::boot();
+
+        // Creating
+        static::created(function ($model) {
+            $model->companyToken()
+                ->create(['token' => 'placeholder-token']);
+        });
+    }
 }

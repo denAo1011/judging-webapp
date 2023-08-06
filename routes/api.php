@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\Api\AuthenticationController;
 use App\Http\Controllers\Api\CompanyController;
+use App\Http\Controllers\Api\CompanyTokenController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -27,4 +28,8 @@ Route::group(['middleware' => ['auth:sanctum']], function () {
 
     // Company routes
     Route::apiResource('companies', CompanyController::class);
+
+    // CompanyToken routes
+    Route::get('companies/{company}/token', [CompanyTokenController::class, 'show']);
+    Route::post('companies/{company}/token', [CompanyTokenController::class, 'regenerate']);
 });
