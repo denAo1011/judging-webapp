@@ -23,6 +23,8 @@ use Illuminate\Support\Facades\Route;
 // Public routes
 Route::post('login', [AuthenticationController::class, 'login']);
 Route::post('logout', [AuthenticationController::class, 'logout']);
+
+Route::get('companies', [CompanyController::class, 'index']);
 Route::post('companies/{company}/companyEntries', [CompanyEntryController::class, 'store']);
 
 // Authenticated routes
@@ -33,7 +35,8 @@ Route::group(['middleware' => ['auth:sanctum']], function () {
     });
 
     // Company routes
-    Route::apiResource('companies', CompanyController::class);
+    Route::apiResource('companies', CompanyController::class)
+        ->only(['store', 'show', 'update', 'destroy']);
 
     // CompanyToken routes
     Route::get('companies/{company}/token', [CompanyTokenController::class, 'show']);
@@ -52,6 +55,6 @@ Route::group(['middleware' => ['auth:sanctum']], function () {
 
 // Requests for this group, MUST contain header "Company-Token"
 Route::group(['middleware' => 'auth.companyToken'], function () {
-    Route::get('judging', [JudgingController::class, 'index']);
-    Route::post('judging', [JudgingController::class, 'submit']);
+    Route::get('judging', [JudgingController::class, 'index']); // List approved entries
+    Route::post('judging', [JudgingController::class, 'submit']); // Submit scores
 });

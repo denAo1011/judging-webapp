@@ -11,7 +11,7 @@ use App\Models\Company;
 
 class CompanyEntryController extends Controller
 {
-   /**
+    /**
      * Display a listing of the resource.
      */
     public function index()
@@ -29,7 +29,8 @@ class CompanyEntryController extends Controller
      */
     public function store(StoreCompanyEntryRequest $request, Company $company)
     {
-        $company = CompanyEntry::create($request->validated());
+        $company = $company->companyEntries()
+            ->create($request->validated());
 
         return new CompanyEntryResource($company);
     }
