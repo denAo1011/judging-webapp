@@ -14,11 +14,21 @@ return new class extends Migration
         Schema::create('company_entries', function (Blueprint $table) {
             $table->id();
             $table->foreignId('company_id')->constrained('companies', 'id')->onDelete('cascade');
-            $table->string('link');
             $table->string('email');
-            $table->string('firstname');
-            $table->string('lastname');
-            $table->string('position');
+            $table->string('link');
+            $table->string('title');
+            $table->date('premiere_date')->nullable();
+            $table->enum('day_of_airing', ['MONDAY', 'TUESDAY', 'WEDNESDAY', 'THURSDAY', 'FRIDAY', 'SATURDAY','SUNDAY']);
+            $table->time('time_of_airing');
+            $table->string('production_company');
+            $table->string('producers')->nullable();
+            $table->string('executive_producers')->nullable();
+            $table->string('directors')->nullable();
+            $table->string('writers')->nullable();
+            $table->longText('synopsis');
+            $table->string('contact_person');
+            $table->string('contact_person_email');
+            $table->string('contact_person_number');
             $table->string('status')
                 ->default('PENDING');
             $table->string('notes');

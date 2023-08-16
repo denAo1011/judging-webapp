@@ -22,13 +22,23 @@ class StoreCompanyEntryRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'link' => ['required', 'string'],
-
             'email' => ['required', 'email'],
-            'firstname' => ['required', 'string'],
-            'lastname' => ['required', 'string'],
-            'contact' => ['required', 'string'],
-            'position' => ['required', 'string']
+            'link' => ['required', 'string'],
+            'title' => ['required', 'string'],
+            'day_of_airing' => ['required', 'string', 'in:MONDAY,TUESDAY,WEDNESDAY,THURSDAY,FRIDAY,SATURDAY,SUNDAY'],
+            'time_of_airing' => ['required', 'date_format:H:i'],
+            'production_company' => ['required', 'string'],
+            'synopsis' => ['required', 'string'],
+
+            'contact_person' => ['required', 'string'],
+            'contact_person_email' => ['required', 'email'],
+            'contact_person_number' => ['required', 'string'],
+
+            'producers' => ['nullable', 'string'],
+            'executive_producers' => ['nullable', 'string'],
+            'premiere_date' => ['nullable', 'date'],
+            'directors' => ['nullable', 'string'],
+            'writers' => ['nullable', 'string'],
         ];
     }
 }

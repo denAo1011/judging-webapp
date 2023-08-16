@@ -10,12 +10,22 @@ class CompanyEntry extends Model
     use HasFactory;
 
     protected $fillable = [
-        'link',
+        'company_id',
         'email',
-        'firstname',
-        'lastname',
-        'contact',
-        'position',
+        'link',
+        'title',
+        'premiere_date',
+        'day_of_airing',
+        'time_of_airing',
+        'production_company',
+        'producers',
+        'executive_producers',
+        'directors',
+        'writers',
+        'synopsis',
+        'contact_person',
+        'contact_person_email',
+        'contact_person_number',
         'status',
         'notes'
     ];
