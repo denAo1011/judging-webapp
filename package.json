@@ -8,11 +8,18 @@
     "devDependencies": {
         "axios": "^1.1.2",
         "laravel-vite-plugin": "^0.7.5",
+        "sass": "^1.65.1",
         "vite": "^4.0.0"
     },
     "dependencies": {
+        "@mdi/font": "^7.2.96",
         "@vitejs/plugin-vue": "^4.2.3",
+        "lodash": "^4.17.21",
         "vue": "^3.2.36",
-        "vue-loader": "^17.0.1"
+        "vue-loader": "^17.0.1",
+        "vue-router": "^4.2.4",
+        "vuetify": "^3.3.12",
+        "vuex": "^4.1.0",
+        "vuex-persistedstate": "^4.1.0"
     }
 }
