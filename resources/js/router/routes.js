@@ -17,6 +17,16 @@ export default [
     name: 'jurors',
   },
   {
+    path: '/eligibility',
+    component: () =>import('../views/pages/Eligibility.vue'),
+    name: 'eligibility',
+  },
+  {
+    path: '/faqs',
+    component: () =>import('../views/pages/FAQ.vue'),
+    name: 'faqs',
+  },
+  {
     path: '/admin',
     redirect: "/admin/entries",
     component: () =>import('../views/admin/Scaffold.vue'),

@@ -39,12 +39,12 @@ function goTo(route) {
                                     Southeast Asian Foundation for Children's
                                     Television) was the result of nagging
                                     concerns expressed in various forums in
-                                    society. Parents and teachers, not only in
+                                    society. <br /><br /> Parents and teachers, not only in
                                     the Philippines but in all of Asia,
                                     increasingly agitated for more
                                     child-sensitive TV programs and shows that
                                     helped define to children what it was to be
-                                    Asian. The executives running the TV
+                                    Asian. <br /><br /> The executives running the TV
                                     networks in the Philippines, even in
                                     Southeast Asia, are parents themselves, torn
                                     between raking in profit and delighting the
