@@ -3,6 +3,7 @@
 defineProps({
     text: String,
 });
+defineEmits(["click"]);
 </script>
 <template>
     <v-hover>
@@ -14,7 +15,7 @@ defineProps({
                 class="button-shadow"
             >
                 <v-card-text class="text-center text-white">
-                    <h1>{{ text }}</h1>
+                    <h1 class="text-2xl font-bold">{{ text }}</h1>
                 </v-card-text></v-card
             >
         </template>

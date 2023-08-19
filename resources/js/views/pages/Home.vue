@@ -1,7 +1,6 @@
 <script setup>
-import { ref } from "vue";
+import BaseButton from "../../components/BaseButton.vue";
 import { useRouter } from "vue-router";
-import Button from "../../components/Button.vue";
 
 const router = useRouter();
 
@@ -56,20 +55,23 @@ function goTo(route) {
                     </h1>
                 </v-row>
                 <v-row class="mt-10" justify="center">
-                    <v-col cols="2">
-                        <Button @click="goTo('/about-us')" :text="'About Us'" />
+                    <v-col cols="10" sm="3" lg="2">
+                        <BaseButton
+                            @click="goTo('/about-us')"
+                            :text="'About Us'"
+                        />
                     </v-col>
-                    <v-col cols="2">
-                        <Button @click="goTo('/jurors')" :text="'Jurors'" />
+                    <v-col cols="10" sm="3" lg="2">
+                        <BaseButton @click="goTo('/jurors')" :text="'Jurors'" />
                     </v-col>
-                    <v-col cols="2">
-                        <Button
+                    <v-col cols="10" sm="3" lg="2">
+                        <BaseButton
                             @click="goTo('/eligibility')"
                             :text="'Eligibility'"
                         />
                     </v-col>
-                    <v-col cols="2">
-                        <Button @click="goTo('/faqs')" :text="'FAQs'" />
+                    <v-col cols="10" sm="3" lg="2">
+                        <BaseButton @click="goTo('/faqs')" :text="'FAQs'" />
                     </v-col>
                 </v-row>
             </v-col>
