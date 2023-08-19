@@ -111,7 +111,7 @@ function goTo(route) {
             <v-col cols="11">
                 <v-row justify="center" class="mt-12 text-center text-white">
                     <h1 class="text-5xl font-bold text-purple-darken-4">
-                        Our Partners
+                        Member Networks
                     </h1>
                 </v-row>
                 <v-row class="mt-12" justify="center">
