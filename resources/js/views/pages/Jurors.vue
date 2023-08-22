@@ -8,26 +8,126 @@ import BaseButton from "../../components/BaseButton.vue";
 const router = useRouter();
 
 const jurors = ref([
-    { id: 1, name: "Dr. Grace Javier Alfonso", img: "/images/jurors/1.jpg" },
-    { id: 2, name: "Dr. Grace Javier Alfonso", img: "/images/jurors/2.jpg" },
-    { id: 3, name: "Dr. Grace Javier Alfonso", img: "/images/jurors/3.jpg" },
-    { id: 4, name: "Dr. Grace Javier Alfonso", img: "/images/jurors/4.jpg" },
-    { id: 5, name: "Dr. Grace Javier Alfonso", img: "/images/jurors/5.jpg" },
-    { id: 6, name: "Dr. Grace Javier Alfonso", img: "/images/jurors/6.jpg" },
-    { id: 7, name: "Dr. Grace Javier Alfonso", img: "/images/jurors/7.jpg" },
-    { id: 8, name: "Dr. Grace Javier Alfonso", img: "/images/jurors/8.jpg" },
-    { id: 8, name: "Dr. Grace Javier Alfonso", img: "/images/jurors/8.jpg" },
-    { id: 8, name: "Dr. Grace Javier Alfonso", img: "/images/jurors/8.jpg" },
-    { id: 8, name: "Dr. Grace Javier Alfonso", img: "/images/jurors/8.jpg" },
-    { id: 8, name: "Dr. Grace Javier Alfonso", img: "/images/jurors/8.jpg" },
-    { id: 8, name: "Dr. Grace Javier Alfonso", img: "/images/jurors/8.jpg" },
-    { id: 8, name: "Dr. Grace Javier Alfonso", img: "/images/jurors/8.jpg" },
-    { id: 8, name: "Dr. Grace Javier Alfonso", img: "/images/jurors/8.jpg" },
-    { id: 8, name: "Dr. Grace Javier Alfonso", img: "/images/jurors/8.jpg" },
-    { id: 8, name: "Dr. Grace Javier Alfonso", img: "/images/jurors/8.jpg" },
-    { id: 8, name: "Dr. Grace Javier Alfonso", img: "/images/jurors/8.jpg" },
-    { id: 8, name: "Dr. Grace Javier Alfonso", img: "/images/jurors/8.jpg" },
-    { id: 8, name: "Dr. Grace Javier Alfonso", img: "/images/jurors/8.jpg" },
+    {
+        id: 1,
+        name: "Dr. Grace Javier Alfonso",
+        position: "CEO",
+        company: "Unknown",
+    },
+    {
+        id: 2,
+        name: "Dr. Grace Javier Alfonso",
+        position: "CEO",
+        company: "Unknown",
+    },
+    {
+        id: 3,
+        name: "Dr. Grace Javier Alfonso",
+        position: "CEO",
+        company: "Unknown",
+    },
+    {
+        id: 4,
+        name: "Dr. Grace Javier Alfonso",
+        position: "CEO",
+        company: "Unknown",
+    },
+    {
+        id: 5,
+        name: "Dr. Grace Javier Alfonso",
+        position: "CEO",
+        company: "Unknown",
+    },
+    {
+        id: 6,
+        name: "Dr. Grace Javier Alfonso",
+        position: "CEO",
+        company: "Unknown",
+    },
+    {
+        id: 7,
+        name: "Dr. Grace Javier Alfonso",
+        position: "CEO",
+        company: "Unknown",
+    },
+    {
+        id: 8,
+        name: "Dr. Grace Javier Alfonso",
+        position: "CEO",
+        company: "Unknown",
+    },
+    {
+        id: 8,
+        name: "Dr. Grace Javier Alfonso",
+        position: "CEO",
+        company: "Unknown",
+    },
+    {
+        id: 8,
+        name: "Dr. Grace Javier Alfonso",
+        position: "CEO",
+        company: "Unknown",
+    },
+    {
+        id: 8,
+        name: "Dr. Grace Javier Alfonso",
+        position: "CEO",
+        company: "Unknown",
+    },
+    {
+        id: 8,
+        name: "Dr. Grace Javier Alfonso",
+        position: "CEO",
+        company: "Unknown",
+    },
+    {
+        id: 8,
+        name: "Dr. Grace Javier Alfonso",
+        position: "CEO",
+        company: "Unknown",
+    },
+    {
+        id: 8,
+        name: "Dr. Grace Javier Alfonso",
+        position: "CEO",
+        company: "Unknown",
+    },
+    {
+        id: 8,
+        name: "Dr. Grace Javier Alfonso",
+        position: "CEO",
+        company: "Unknown",
+    },
+    {
+        id: 8,
+        name: "Dr. Grace Javier Alfonso",
+        position: "CEO",
+        company: "Unknown",
+    },
+    {
+        id: 8,
+        name: "Dr. Grace Javier Alfonso",
+        position: "CEO",
+        company: "Unknown",
+    },
+    {
+        id: 8,
+        name: "Dr. Grace Javier Alfonso",
+        position: "CEO",
+        company: "Unknown",
+    },
+    {
+        id: 8,
+        name: "Dr. Grace Javier Alfonso",
+        position: "CEO",
+        company: "Unknown",
+    },
+    {
+        id: 8,
+        name: "Dr. Grace Javier Alfonso",
+        position: "CEO",
+        company: "Unknown",
+    },
 ]);
 
 function goTo(route) {
@@ -35,8 +135,8 @@ function goTo(route) {
 }
 </script>
 <template>
-    <div class="juror-container d-flex align-items-start">
-        <v-row justify="center" class="mt-12">
+    <div class="juror-container d-flex align-items-start py-12">
+        <v-row justify="center">
             <v-col cols="11" lg="10" xl="8">
                 <v-row>
                     <v-col>
@@ -69,7 +169,6 @@ function goTo(route) {
                 <v-row class="mt-5">
                     <v-col cols="12">
                         <v-row>
-                            <Carousel></Carousel>
                             <!-- <carousel :items-to-show="1.5">
                                 <slide v-for="slide in 10" :key="slide">
                                     {{ slide }}
@@ -80,20 +179,28 @@ function goTo(route) {
                                     <pagination />
                                 </template>
                             </carousel> -->
-                            <BaseButton
-                                @click="goTo('/jurors')"
-                                :text="'Jurors'"
-                            />
-                            <!-- <v-col
+                            <v-col
                                 v-for="(juror, index) in jurors"
                                 :key="index"
                                 cols="12"
                                 lg="3"
                             >
-                                <h1 class="text-xl font-bold">
-                                    {{ juror.name }}
-                                </h1>
-                            </v-col> -->
+                                <v-card class="card-border">
+                                    <v-card-text>
+                                        <h1
+                                            class="text-xl font-bold text-center"
+                                        >
+                                            {{ juror.name }}
+                                        </h1>
+                                        <p class="text-sm text-center">
+                                            {{ juror.position }}
+                                        </p>
+                                        <p class="text-sm text-center">
+                                            {{ juror.company }}
+                                        </p>
+                                    </v-card-text>
+                                </v-card>
+                            </v-col>
                         </v-row>
                     </v-col>
                 </v-row>
@@ -103,14 +210,13 @@ function goTo(route) {
 </template>
 <style scoped>
 .juror-container {
-    height: 100vh;
     width: 100vw;
     /* justify-content: center; */
     /* Add Linear Background */
     background: #5452a3;
 }
 
-.card-shadow {
+.card-border {
     /* box-shadow: -10px 20px 15px 5px rgba(0, 0, 0, 1); */
     border-radius: 20px !important;
 }
