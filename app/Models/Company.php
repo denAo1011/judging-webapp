@@ -14,22 +14,11 @@ class Company extends Model
         'email'
     ];
 
-    public function companyToken() {
-        return $this->hasOne(CompanyToken::class);
+    public function companyJurors() {
+        return $this->hasMany(CompanyJuror::class);
     }
 
     public function companyEntries() {
         return $this->hasMany(companyEntries::class);
-    }
-
-    protected static function boot()
-    {
-        parent::boot();
-
-        // Creating
-        static::created(function ($model) {
-            $model->companyToken()
-                ->create(['token' => 'placeholder-token']);
-        });
     }
 }

@@ -6,42 +6,33 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\SubmitTallyRequest;
 use App\Models\CompanyEntry;
 use App\Models\CompanyEntryScore;
+use App\Models\Setting;
 use Illuminate\Http\Request;
 
 class JudgingController extends Controller
 {
-    /**
-     * Class constructor
-     */
-    public function __construct()
-    {
-        /**
-         * Redundancy, this checks are also done in a middleware
-         */
-
-        $companyToken = request()->attributes->get('companyToken', NULL);
-        if (!$companyToken)
-            return response()
-                ->json(['error' => 'Missing Token!'], 500);
-
-        // Check if token was used already
-        if ($companyToken->used_at) {
-            return response()
-                ->json(['error' => 'Token Used Already!'], 422);
-        }
-    }
-
     /**
      * List approved entries, exclude entries from token company owner
      */
     public function index(Request $request)
     {
         // Retrieve company token from request
-        $companyToken = $request->attributes->get('companyToken', NULL);
+        $companyJuror = $request->attributes->get('companyJuror', NULL);
 
-        $companyEntries = CompanyEntry::whereStatus('APPROVED')
-            ->whereNotIn('company_id', [$companyToken->company_id])
-            ->get();
+        // Determine level of voting
+        $levelOfVoting = Setting::getLevelOfVoting();
+        if ($levelOfVoting === 'LEVEL_ONE') {
+            $companyEntries = CompanyEntry::whereStatus('APPROVED')
+                ->whereNotIn('company_id', [$companyJuror->company_id])
+                ->get();
+        } elseif ($levelOfVoting === 'LEVEL_TWO') {
+            $companyEntries = CompanyEntry::withAvg('companyEntryScores', 'rating1')
+                ->whereStatus('APPROVED')
+                ->whereNotIn('company_id', [$companyJuror->company_id])
+                ->having('companyEntryScores_avg_rating1', '>', 6.9)
+                ->inRandomOrder()
+                ->get();
+        } else $companyEntries = [];
 
         return response()
             ->json($companyEntries);
@@ -52,31 +43,41 @@ class JudgingController extends Controller
      */
     public function submit(SubmitTallyRequest $request)
     {
-        // Retrieve company token from request
-        $companyToken = $request->attributes->get('companyToken', NULL);
+        // Retrieve company juror from request
+        $companyJuror = $request->attributes->get('companyJuror', NULL);
 
         $tallies = $request->validated()['tallies'];
 
-        foreach ($tallies as $key => $tally) {
+        // Get level of voting, if null then return error
+        $levelOfVoting = Setting::getLevelOfVoting();
+        if ($levelOfVoting === NULL) {
+            return response()
+                ->json(['message' => 'Voting is closed.'], 400);
+        }
+
+        foreach ($tallies as $tally) {
             // Retrieve entry
-            $companyEntry = CompanyEntry::find($key);
+            $companyEntry = CompanyEntry::find($tally['entry_id']);
+
+            // If level of voting is one, then set the rating to level one rating,
+            // else set the rating to level two rating
+            $payload = [];
+            if ($levelOfVoting === 'LEVEL_ONE') {
+                $payload['level_one_rating'] = $tally['rating'];
+            } else if ($levelOfVoting === 'LEVEL_TWO') {
+                $payload['level_two_rating'] = $tally['rating'];
+            }
 
             // Record / Update score
             CompanyEntryScore::updateOrCreate(
-                ['company_token_id' => $companyToken->id, 'company_entry_id' => $companyEntry->id],
-                [
-                    'originality' => $tally['originality'],
-                    'adaptability' => $tally['adaptability'],
-                    'sustainability' => $tally['sustainability'],
-                    'upliftment' => $tally['upliftment'],
-                    'total' => ($tally['originality'] + $tally['adaptability'] + $tally['sustainability'] + $tally['upliftment']) / 4
-                ]
+                ['company_juror_id' => $companyJuror->id, 'company_entry_id' => $companyEntry->id],
+                $payload
             );
         }
 
         // Update company token
-        $companyToken->update([
-            'used_at' => now(),
+        $companyJuror->update([
+            'voted_at' => now(),
             'tallies' => $tallies
         ]);
 

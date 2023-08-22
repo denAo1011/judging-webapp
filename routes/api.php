@@ -3,7 +3,7 @@
 use App\Http\Controllers\Api\AuthenticationController;
 use App\Http\Controllers\Api\CompanyController;
 use App\Http\Controllers\Api\CompanyEntryController;
-use App\Http\Controllers\Api\CompanyTokenController;
+use App\Http\Controllers\Api\CompanyJurorController;
 use App\Http\Controllers\Api\JudgingController;
 use App\Http\Controllers\Api\DashboardController;
 use Illuminate\Http\Request;
@@ -27,6 +27,8 @@ Route::post('logout', [AuthenticationController::class, 'logout']);
 Route::get('companies', [CompanyController::class, 'index']);
 Route::post('companies/{company}/companyEntries', [CompanyEntryController::class, 'store']);
 
+Route::get('companyJurors', [CompanyJurorController::class, 'index']);
+
 // Authenticated routes
 Route::group(['middleware' => ['auth:sanctum']], function () {
     // Test route, whoami
@@ -38,22 +40,26 @@ Route::group(['middleware' => ['auth:sanctum']], function () {
     Route::apiResource('companies', CompanyController::class)
         ->only(['store', 'show', 'update', 'destroy']);
 
-    // CompanyToken routes
-    Route::get('companies/{company}/token', [CompanyTokenController::class, 'show']);
-    Route::post('companies/{company}/token', [CompanyTokenController::class, 'regenerate']);
-
     // Company entries routes
     Route::get('companyEntries', [CompanyEntryController::class, 'index']);
     Route::get('companyEntries/{companyEntry}', [CompanyEntryController::class, 'show']);
     Route::put('companyEntries/{companyEntry}', [CompanyEntryController::class, 'update']);
     Route::delete('companyEntries/{companyEntry}', [CompanyEntryController::class, 'destroy']);
 
+    // Company jurors routes
+    Route::get('companyJurors/{companyJuror}', [CompanyJurorController::class, 'show']);
+    Route::put('companyJurors/{companyJuror}', [CompanyJurorController::class, 'update']);
+    Route::delete('companyJurors/{companyJuror}', [CompanyJurorController::class, 'destroy']);
+
+    // Create company juror
+    Route::post('companies/{company}/companyJurors', [CompanyJurorController::class, 'store']);
+
     // Dashboard Route
     Route::get('dashboard/statistics', [DashboardController::class, 'getStatistics']);
     Route::get('dashboard/rankings', [DashboardController::class, 'getRankings']);
 });
 
-// Requests for this group, MUST contain header "Company-Token"
+// Requests for this group, MUST contain header "X-Juror-Token"
 Route::group(['middleware' => 'auth.companyToken'], function () {
     Route::get('judging', [JudgingController::class, 'index']); // List approved entries
     Route::post('judging', [JudgingController::class, 'submit']); // Submit scores

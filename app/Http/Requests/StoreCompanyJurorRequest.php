@@ -4,7 +4,7 @@ namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class SubmitTallyRequest extends FormRequest
+class StoreCompanyJurorRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -22,9 +22,9 @@ class SubmitTallyRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'tallies' => ['required', 'array'],
-            'tallies.*.entry_id' => ['required', 'numeric', 'exists:company_entries,id'],
-            'tallies.*.rating' => ['required', 'numeric', 'min:1', 'max:10'],
+            'name' => ['required'],
+            'position' => ['required'],
+            'is_current' => ['required', 'boolean'],
         ];
     }
 }

@@ -4,7 +4,6 @@ namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
 use App\Models\CompanyEntry;
-use App\Models\CompanyToken;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 
@@ -22,16 +21,8 @@ class DashboardController extends Controller
             'approved' => CompanyEntry::whereStatus('APPROVED')->count(),
         ];
 
-        $votes = [
-            'voted' => CompanyToken::whereHas('companyEntryScores')->count(),
-            'notVoted' => CompanyToken::doesntHave('companyEntryScores')->count(),
-        ];
-
         return response()
-            ->json([
-                'entries' => $numberOfEntries,
-                'votes' => $votes
-            ]);
+            ->json(['entries' => $numberOfEntries]);
     }
 
     /**
@@ -39,15 +30,10 @@ class DashboardController extends Controller
      */
     public function getRankings()
     {
-        $entryScores = CompanyEntry::withCount([
-            'companyEntryScores as average_score' => function ($query) {
-                $query->select(DB::raw('avg(score)'));
-            }
-        ])->whereStatus('APPROVED') // Only approved entries are scored
-            ->orderBy('average_score', 'desc') // Order by average score descending order
-            ->paginate(10);
-
         return response()
-            ->json($entryScores);
+            ->json([
+                'level_one' => CompanyEntry::orderByAverageLevelOneRating()->get(),
+                'level_two' => CompanyEntry::orderByAverageLevelTwoRating()->get(),
+            ]);
     }
 }

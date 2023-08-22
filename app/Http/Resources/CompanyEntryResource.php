@@ -16,7 +16,7 @@ class CompanyEntryResource extends JsonResource
     {
         return array_merge(
             parent::toArray($request), [
-                'company' => $this->company
+                'company' => $this->company,
             ]
         );
     }
