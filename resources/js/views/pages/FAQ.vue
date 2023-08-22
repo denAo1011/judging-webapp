@@ -50,6 +50,8 @@ const faqs = ref([
                     <v-card-text>
                         <v-row>
                             <v-col
+                                data-aos="fade-up"
+                                :data-aos-delay="index + 1 + '00'"
                                 v-for="(faq, index) in faqs"
                                 :key="index"
                                 cols="12"

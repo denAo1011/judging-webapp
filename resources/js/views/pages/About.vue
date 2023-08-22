@@ -36,7 +36,12 @@ function goTo(route) {
                         </h1>
                     </v-row>
                     <v-row class="mt-8" justify="center" align="center">
-                        <v-col cols="11" lg="6" class="order-2 order-lg-1">
+                        <v-col
+                            data-aos="fade-up-right"
+                            cols="11"
+                            lg="6"
+                            class="order-2 order-lg-1"
+                        >
                             <v-card color="primary" class="card-border">
                                 <v-card-text>
                                     <p class="text-sm lg:text-2xl text-white">
@@ -71,6 +76,7 @@ function goTo(route) {
                             </v-card>
                         </v-col>
                         <v-col
+                            data-aos="fade-up-left"
                             cols="12"
                             lg="6"
                             sm="6"
@@ -133,6 +139,8 @@ function goTo(route) {
                     </v-row>
                     <v-row class="mt-12" justify="center">
                         <v-col
+                            data-aos="fade-up"
+                            :data-aos-delay="index + 1 + '00'"
                             cols="6"
                             md="4"
                             lg="2"

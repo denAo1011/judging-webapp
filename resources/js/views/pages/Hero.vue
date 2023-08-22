@@ -6,15 +6,18 @@ import BaseButton from "../../components/BaseButton.vue";
         <v-row justify="center">
             <v-col cols="12" xl="8" lg="10">
                 <v-row justify="center" class="pa-5 text-center">
-                    <h1 class="text-5xl font-bold text-secondary">
+                    <h1
+                        data-aos="fade-down"
+                        class="text-5xl font-bold text-secondary"
+                    >
                         WELCOME TO THE 2023 DIGITAL AWARDS
                     </h1>
                 </v-row>
                 <v-row class="mb-10" justify="center" align="center">
-                    <v-col col="12" sm="6" lg="5">
+                    <v-col data-aos="fade-right" col="12" sm="6" lg="5">
                         <v-img src="/images/logo1.png"></v-img>
                     </v-col>
-                    <v-col cols="12" lg="7">
+                    <v-col data-aos="fade-left" cols="12" lg="7">
                         <v-card color="primary" class="card-border">
                             <v-card-text>
                                 <v-row
@@ -72,7 +75,7 @@ import BaseButton from "../../components/BaseButton.vue";
                     <v-col cols="6" sm="3" lg="2">
                         <BaseButton
                             @click="$emit('goTo', 'eligibilityPage')"
-                            :text="'Eligibility'"
+                            :text="'Guildlines'"
                         />
                     </v-col>
                     <v-col cols="6" sm="3" lg="2">

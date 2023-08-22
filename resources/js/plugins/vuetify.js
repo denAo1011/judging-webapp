@@ -7,6 +7,7 @@ import * as directives from "vuetify/directives";
 import "@mdi/font/css/materialdesignicons.css";
 import { md1 } from "vuetify/blueprints";
 import "../../css/style.scss";
+import 'aos/dist/aos.css';
 
 const vuetify = createVuetify({
     blueprint: md1,

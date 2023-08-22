@@ -17,7 +17,7 @@ function goTo(route) {
                     </h1>
                 </v-row>
                 <v-row>
-                    <v-col cols="12" md="4">
+                    <v-col data-aos="flip-down"  data-aos-anchor-placement="center-center" cols="12" md="4">
                         <v-card color="#885598" class="card-border">
                             <v-card-text>
                                 <v-row>
@@ -40,7 +40,7 @@ function goTo(route) {
                             </v-card-text>
                         </v-card>
                     </v-col>
-                    <v-col cols="12" md="4">
+                    <v-col data-aos="flip-down"  data-aos-anchor-placement="center-center" cols="12" md="4">
                         <v-card color="#769657" class="card-border">
                             <v-card-text>
                                 <v-row>
@@ -62,7 +62,7 @@ function goTo(route) {
                             </v-card-text>
                         </v-card>
                     </v-col>
-                    <v-col cols="12" md="4">
+                    <v-col data-aos="flip-down"  data-aos-anchor-placement="center-center" cols="12" md="4">
                         <v-card color="#5452a3" class="card-border">
                             <v-card-text>
                                 <v-row>
