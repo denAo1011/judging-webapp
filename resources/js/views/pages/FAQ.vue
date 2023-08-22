@@ -1,72 +1,80 @@
-<script setup></script>
+<script setup>
+import { ref } from "vue";
+
+const faqs = ref([
+    {
+        question: "How do I manage my account?",
+        answer: "Dolorem aliquid error odio, eaque asperiores itaque eius, voluptas libero ratione iste hic? Magni architecto recusandae sit eos laudantium quod porro culpa! Lorem ipsum dolor sit amet consectetur adipisicing elit. Iste libero nulla nam, odio atque labore quasi eum omnis voluptate id dolorem dolorum.",
+    },
+    {
+        question: "How do I manage my account?",
+        answer: "Dolorem aliquid error odio, eaque asperiores itaque eius, voluptas libero ratione iste hic? Magni architecto recusandae sit eos laudantium quod porro culpa! Lorem ipsum dolor sit amet consectetur adipisicing elit. Iste libero nulla nam, odio atque labore quasi eum omnis voluptate id dolorem dolorum.",
+    },
+    {
+        question: "How do I manage my account?",
+        answer: "Dolorem aliquid error odio, eaque asperiores itaque eius, voluptas libero ratione iste hic? Magni architecto recusandae sit eos laudantium quod porro culpa! Lorem ipsum dolor sit amet consectetur adipisicing elit. Iste libero nulla nam, odio atque labore quasi eum omnis voluptate id dolorem dolorum.",
+    },
+    {
+        question: "How do I manage my account?",
+        answer: "Dolorem aliquid error odio, eaque asperiores itaque eius, voluptas libero ratione iste hic? Magni architecto recusandae sit eos laudantium quod porro culpa! Lorem ipsum dolor sit amet consectetur adipisicing elit. Iste libero nulla nam, odio atque labore quasi eum omnis voluptate id dolorem dolorum.",
+    },
+    {
+        question: "How do I manage my account?",
+        answer: "Dolorem aliquid error odio, eaque asperiores itaque eius, voluptas libero ratione iste hic? Magni architecto recusandae sit eos laudantium quod porro culpa! Lorem ipsum dolor sit amet consectetur adipisicing elit. Iste libero nulla nam, odio atque labore quasi eum omnis voluptate id dolorem dolorum.",
+    },
+    {
+        question: "How do I manage my account?",
+        answer: "Dolorem aliquid error odio, eaque asperiores itaque eius, voluptas libero ratione iste hic? Magni architecto recusandae sit eos laudantium quod porro culpa! Lorem ipsum dolor sit amet consectetur adipisicing elit. Iste libero nulla nam, odio atque labore quasi eum omnis voluptate id dolorem dolorum.",
+    },
+    {
+        question: "How do I manage my account?",
+        answer: "Dolorem aliquid error odio, eaque asperiores itaque eius, voluptas libero ratione iste hic? Magni architecto recusandae sit eos laudantium quod porro culpa! Lorem ipsum dolor sit amet consectetur adipisicing elit. Iste libero nulla nam, odio atque labore quasi eum omnis voluptate id dolorem dolorum.",
+    },
+    {
+        question: "How do I manage my account?",
+        answer: "Dolorem aliquid error odio, eaque asperiores itaque eius, voluptas libero ratione iste hic? Magni architecto recusandae sit eos laudantium quod porro culpa! Lorem ipsum dolor sit amet consectetur adipisicing elit. Iste libero nulla nam, odio atque labore quasi eum omnis voluptate id dolorem dolorum.",
+    },
+]);
+</script>
 
 <template>
-  <div class="home-container">
-    <v-row justify="center">
-      <v-col cols="11" lg="10" xl="8">
-        <v-card color="#D2467F" class="card-shadow">
-          <v-card-text>
-            <v-row>
-              <v-col cols="12">
-                <v-row>
-                  <v-col>
-                    <h1 class="text-5xl font-bold text-white">
-                      Frequently Asked Questions
+    <div class="faq-container d-flex py-12">
+        <v-row justify="center">
+            <v-col cols="11" lg="10" xl="8">
+                <v-row justify="center" class="pa-5 text-center">
+                    <h1 class="text-5xl font-bold text-primary">
+                        Frequently Asked Questions
                     </h1>
-                    <p class="text-sm lg:text-xl text-white mt-5 text-justify">
-                      <span class="font-bold"
-                        >Lorem ipsum dolor sit amet consectetur adipisicing elit?</span
-                      >
-                      <br />>> Dolorem aliquid error odio, eaque asperiores itaque eius,
-                      voluptas libero ratione iste hic? Magni architecto recusandae sit
-                      eos laudantium quod porro culpa! Lorem ipsum dolor sit amet
-                      consectetur adipisicing elit. Iste libero nulla nam, odio atque
-                      labore quasi eum omnis voluptate id dolorem dolorum.
-                    </p>
-
-                    <p class="text-sm lg:text-xl text-white mt-5 text-justify">
-                      <span class="font-bold"
-                        >Lorem ipsum dolor sit amet consectetur adipisicing elit?</span
-                      >
-                      <br />>> Dolorem aliquid error odio, eaque asperiores itaque eius,
-                      voluptas libero ratione iste hic? Magni architecto recusandae sit
-                      eos laudantium quod porro culpa! Lorem ipsum dolor sit amet
-                      consectetur adipisicing elit. Iste libero nulla nam, odio atque
-                      labore quasi eum omnis voluptate id dolorem dolorum.
-                    </p>
-
-                    <p class="text-sm lg:text-xl text-white mt-5 text-justify">
-                      <span class="font-bold"
-                        >Lorem ipsum dolor sit amet consectetur adipisicing elit?</span
-                      >
-                      <br />>> Dolorem aliquid error odio, eaque asperiores itaque eius,
-                      voluptas libero ratione iste hic? Magni architecto recusandae sit
-                      eos laudantium quod porro culpa! Lorem ipsum dolor sit amet
-                      consectetur adipisicing elit. Iste libero nulla nam, odio atque
-                      labore quasi eum omnis voluptate id dolorem dolorum.
-                    </p>
-                  </v-col>
                 </v-row>
-              </v-col>
-            </v-row>
-          </v-card-text>
-        </v-card>
-      </v-col>
-    </v-row>
-  </div>
+                <v-card color="white" class="card-border mt-12">
+                    <v-card-text>
+                        <v-row>
+                            <v-col
+                                v-for="(faq, index) in faqs"
+                                :key="index"
+                                cols="12"
+                                lg="6"
+                            >
+                                <dt
+                                    class="text-sm lg:text-xl text-primary font-semibold"
+                                >
+                                    {{ faq.question }}
+                                </dt>
+                                <dd class="mt-3 text-black-400 text-sm">
+                                    {{ faq.answer }}
+                                </dd>
+                            </v-col>
+                        </v-row>
+                    </v-card-text>
+                </v-card>
+            </v-col>
+        </v-row>
+    </div>
 </template>
 <style scoped>
-.home-container {
-  height: 100vh;
-  width: 100vw;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  /* Add Linear Background */
-  background: linear-gradient(45deg, #4b114b 25%, 75%, #e6d1c1);
-}
-
-.card-shadow {
-  box-shadow: -10px 20px 15px 5px rgba(0, 0, 0, 1);
+.faq-container {
+    width: 100vw;
+    /* Add Linear Background */
+    background: #a9df73;
 }
 </style>

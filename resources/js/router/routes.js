@@ -27,6 +27,11 @@ export default [
     name: 'faqs',
   },
   {
+    path: '/entry-form',
+    component: () =>import('../views/pages/EntryForm.vue'),
+    name: 'entry-form',
+  },
+  {
     path: '/admin',
     redirect: "/admin/entries",
     component: () =>import('../views/admin/Scaffold.vue'),
