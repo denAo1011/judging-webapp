@@ -1,5 +1,5 @@
 <script setup>
-import { ref } from "vue";
+import { onMounted, ref } from "vue";
 import BaseButton from "../../components/BaseButton.vue";
 import { useRouter } from "vue-router";
 import { useStore } from "vuex";
@@ -59,6 +59,11 @@ function submitEntry() {
         console.log("Valid");
     }
 }
+
+onMounted(() => {
+    //Make the scroll to top of the page
+    window.scrollTo(0, 0);
+});
 </script>
 
 <template>
