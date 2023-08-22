@@ -39,6 +39,8 @@ class StoreCompanyEntryRequest extends FormRequest
             'premiere_date' => ['nullable', 'date'],
             'directors' => ['nullable', 'string'],
             'writers' => ['nullable', 'string'],
+
+            'payment_reference' => ['required'],
         ];
     }
 }

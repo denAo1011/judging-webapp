@@ -15,11 +15,8 @@ return new class extends Migration
             $table->id();
             $table->foreignId('company_token_id')->constrained('company_tokens', 'id')->onDelete('cascade');
             $table->foreignId('company_entry_id')->constrained('company_entries', 'id')->onDelete('cascade');
-            $table->decimal('originality');
-            $table->decimal('adaptability');
-            $table->decimal('sustainability');
-            $table->decimal('upliftment');
-            $table->decimal('total');
+            $table->decimal('level_one_rating');
+            $table->decimal('level_two_rating');
             $table->timestamps();
         });
     }

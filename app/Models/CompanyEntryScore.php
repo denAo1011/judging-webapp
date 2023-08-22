@@ -11,15 +11,13 @@ class CompanyEntryScore extends Model
 
     protected $fillable = [
         'company_token_id',
-        'company_entry_id',
-        'originality',
-        'sustainability',
-        'adaptability',
-        'upliftment',
+        'company_juror_id',
+        'level_one_rating',
+        'level_two_rating',
     ];
 
-    public function companyToken() {
-        return $this->belongsTo(CompanyToken::class);
+    public function companyJuror() {
+        return $this->belongsTo(CompanyJuror::class);
     }
 
     public function companyEntry() {

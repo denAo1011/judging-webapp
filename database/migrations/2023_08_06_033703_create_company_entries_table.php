@@ -32,6 +32,7 @@ return new class extends Migration
             $table->string('status')
                 ->default('PENDING');
             $table->string('notes');
+            $table->string('payment_reference');
             $table->timestamps();
         });
     }
