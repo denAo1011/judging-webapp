@@ -114,7 +114,7 @@
         </v-col>
     </v-row>
     <v-divider></v-divider>
-    <div class="text-center d-flex flex-column">
+    <div class="text-center d-flex flex-column pb-5">
         <div>
             <v-btn
                 v-for="icon in icons"
@@ -126,7 +126,9 @@
         </div>
         <div>
             {{ new Date().getFullYear() }} — Powered By
-            <strong>Dreamers.ph</strong>
+            <a href="https://dreamers.ph" target="_blank"
+                ><strong class="text-secondary">Dreamers.ph</strong></a
+            >
         </div>
     </div>
 </template>
