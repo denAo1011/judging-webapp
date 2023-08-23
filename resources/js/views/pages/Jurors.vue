@@ -146,7 +146,7 @@ function goTo(route) {
                             Meet the Jurors
                         </h1>
                         <p class="text-sm lg:text-xl mt-12 text-white">
-                            The creation of an organization such as anak TV (the
+                            The creation of an organization such as Anak TV (the
                             original name upon inception was Southeast Asian
                             Foundation for Children's Television) was the result
                             of nagging concerns expressed in various forums in

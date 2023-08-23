@@ -32,7 +32,7 @@ function goTo(route) {
                         class="mt-12 text-center text-white"
                     >
                         <h1 class="text-5xl font-bold text-secondary">
-                            About anak TV
+                            About Anak TV
                         </h1>
                     </v-row>
                     <v-row class="mt-8" justify="center" align="center">
@@ -46,7 +46,7 @@ function goTo(route) {
                                 <v-card-text>
                                     <p class="text-sm lg:text-2xl text-white">
                                         The creation of an organization such as
-                                        anak TV (the original name upon
+                                        Anak TV (the original name upon
                                         inception was Southeast Asian Foundation
                                         for Children's Television) was the
                                         result of nagging concerns expressed in

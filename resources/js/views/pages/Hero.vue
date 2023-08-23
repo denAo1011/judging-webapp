@@ -30,7 +30,7 @@ import BaseButton from "../../components/BaseButton.vue";
                                             class="lg:text-lg xl:text-2xl text-white"
                                         >
                                             The creation of an organization such
-                                            as anak TV (the original name upon
+                                            as Anak TV (the original name upon
                                             inception was Southeast Asian
                                             Foundation for Children's
                                             Television) was the result of
@@ -75,7 +75,7 @@ import BaseButton from "../../components/BaseButton.vue";
                     <v-col cols="6" sm="3" lg="2">
                         <BaseButton
                             @click="$emit('goTo', 'eligibilityPage')"
-                            :text="'Guildlines'"
+                            :text="'Guidelines'"
                         />
                     </v-col>
                     <v-col cols="6" sm="3" lg="2">
