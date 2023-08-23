@@ -1,14 +1,13 @@
 <script setup>
 import { ref } from "vue";
-
+import { useStore } from "vuex";
 import { useRouter } from "vue-router";
 const router = useRouter();
-
+const store = useStore();
 const drawer = ref(null);
 
 function logout() {
-    localStorage.clear();
-    router.push({ name: "home" });
+    store.dispatch("logout");
 }
 </script>
 <template>
@@ -16,6 +15,9 @@ function logout() {
         <v-list :lines="false" density="compact" nav color="primary">
             <v-list-item to="/admin/entries">
                 <v-list-item-title>Entries</v-list-item-title>
+            </v-list-item>
+            <v-list-item to="/admin/jurors">
+                <v-list-item-title>Jurors</v-list-item-title>
             </v-list-item>
         </v-list>
         <template v-slot:append>

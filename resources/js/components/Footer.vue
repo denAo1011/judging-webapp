@@ -144,5 +144,21 @@ export default {
             text: "",
         },
     }),
+    methods: {
+        email(value) {
+            if (!value) return true;
+            return /.+@.+\..+/.test(value) || "E-mail must be valid";
+        },
+        number(value) {
+            if (!value) return true;
+            return /^\d+$/.test(value) || "Must be a number";
+        },
+        required(value) {
+            return !!value || "Required.";
+        },
+        submitEntry() {
+            this.messageForm = true;
+        },
+    },
 };
 </script>

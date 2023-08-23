@@ -31,6 +31,16 @@ export default [
     component: () =>import('../views/pages/EntryForm.vue'),
     name: 'entry-form',
   },
+//   {
+//     path: '/judging',
+//     component: () =>import('../views/pages/Judging.vue'),
+//     name: 'judging',
+//   },
+  {
+    path: '/signin',
+    component: () =>import('../views/pages/SignIn.vue'),
+    name: 'signin',
+  },
   {
     path: '/admin',
     redirect: "/admin/entries",

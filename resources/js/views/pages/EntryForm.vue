@@ -1,69 +1,104 @@
-<script setup>
+<script>
 import { onMounted, ref } from "vue";
 import BaseButton from "../../components/BaseButton.vue";
 import { useRouter } from "vue-router";
 import { useStore } from "vuex";
 
-let store = useStore();
-let router = useRouter();
-
-let entry = ref({
-    link: "",
-    title: "",
-    day_of_airing: "",
-    time_of_airing: "",
-    production_company: "",
-    synopsis: "",
-    contact_person: "",
-    contact_person_email: "",
-    contact_person_number: "",
-    producers: "",
-    executive_producers: "",
-    premiere_date: "",
-    directors: "",
-    writers: "",
-    payment_reference: [],
-});
-
-let networks = ref([
-    { id: 1, name: "ABS-CBN" },
-    { id: 2, name: "GMA" },
-    { id: 3, name: "TV5" },
-    { id: 4, name: "CNN Philippines" },
-    { id: 5, name: "PTV" },
-    { id: 6, name: "IBC" },
-    { id: 7, name: "RPN" },
-    { id: 8, name: "GMA News TV" },
-    { id: 9, name: "A2Z" },
-    { id: 10, name: "Other" },
-]);
-
-let entryForm = ref(false);
-
-function email(value) {
-    if (!value) return true;
-    return /.+@.+\..+/.test(value) || "E-mail must be valid";
-}
-
-function number(value) {
-    if (!value) return true;
-    return /^\d+$/.test(value) || "Must be a number";
-}
-
-function required(value) {
-    return !!value || "Required.";
-}
-
-function submitEntry() {
-    if (this.entryForm) {
-        console.log("Valid");
-    }
-}
-
-onMounted(() => {
-    //Make the scroll to top of the page
-    window.scrollTo(0, 0);
-});
+export default {
+    components: { BaseButton },
+    data() {
+        return {
+            entry: {
+                link: "",
+                title: "",
+                day_of_airing: "",
+                time_of_airing: "",
+                production_company: "",
+                synopsis: "",
+                contact_person: "",
+                contact_person_email: "",
+                contact_person_number: "",
+                producers: "",
+                executive_producers: "",
+                premiere_date: "",
+                directors: "",
+                writers: "",
+                payment_reference: [],
+            },
+            networks: [],
+            rules: {
+                required: (value) => !!value || "Required.",
+                email: (value) => {
+                    if (!value) {
+                        return "Required.";
+                    } else if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(value)) {
+                        return "Invalid Email.";
+                    }
+                    return true;
+                },
+                number: (value) => {
+                    if (!value) {
+                        return "Required.";
+                    } else if (!/^\d+$/.test(value)) {
+                        return "Must be a number.";
+                    }
+                },
+            },
+        };
+    },
+    methods: {
+        async submitEntry() {
+            const { valid } = await this.$refs.form.validate();
+            if (valid) {
+                window.axios
+                    .post("api/login", this.user)
+                    .then((response) => {
+                        Store.dispatch("login", response.data.token);
+                        Swal.fire({
+                            toast: true,
+                            icon: "success",
+                            title: "Login Successful",
+                            icon: "success",
+                        });
+                        this.$router.push({ name: "entries" });
+                    })
+                    .catch((error) => {
+                        Swal.fire({
+                            icon: "error",
+                            title: "Invalid Credentials",
+                            icon: "error",
+                        });
+                        // this.errors = {
+                        //     email: error.response.data,
+                        //     password: error.response.data,
+                        // };
+                        console.log(error);
+                    })
+                    .finally(() => {
+                        this.loginForm = false;
+                    });
+            }
+        },
+        fetchNetworks() {
+            window.axios
+                .get("api/companies", {
+                    params: {
+                        perPage: 0,
+                    },
+                })
+                .then((response) => {
+                    this.networks = response.data.data;
+                })
+                .catch((error) => {
+                    console.log(error);
+                });
+        },
+    },
+    mounted() {
+        this.fetchNetworks();
+        window.scrollTo(0, 0);
+    },
+};
 </script>
 
 <template>
@@ -79,10 +114,7 @@ onMounted(() => {
                     <v-col cols="12" md="8">
                         <v-card class="card-border">
                             <v-card-text>
-                                <v-form
-                                    v-model="entryForm"
-                                    @submit.prevent="submitEntry"
-                                >
+                                <v-form ref="form">
                                     <v-row>
                                         <v-col cols="12" class="ma-0">
                                             <h3 class="text-lg font-bold">
@@ -97,7 +129,7 @@ onMounted(() => {
                                                 variant="underlined"
                                                 color="primary"
                                                 v-model="entry.network"
-                                                :rules="[required]"
+                                                :rules="[rules.required]"
                                             >
                                                 <template v-slot:label
                                                     >Network
@@ -113,7 +145,7 @@ onMounted(() => {
                                                 color="primary"
                                                 label="Contact Person"
                                                 v-model="entry.contact_person"
-                                                :rules="[required]"
+                                                :rules="[rules.required]"
                                                 ><template v-slot:label
                                                     >Contact Person
                                                     <strong class="text-error"
@@ -130,7 +162,7 @@ onMounted(() => {
                                                 v-model="
                                                     entry.contact_person_email
                                                 "
-                                                :rules="[required, email]"
+                                                :rules="[rules.email]"
                                             >
                                                 <template v-slot:label>
                                                     Email
@@ -148,7 +180,7 @@ onMounted(() => {
                                                 v-model="
                                                     entry.contact_person_number
                                                 "
-                                                :rules="[required, number]"
+                                                :rules="[rules.number]"
                                                 ><template v-slot:label
                                                     >Number
                                                     <strong class="text-error"
@@ -168,7 +200,8 @@ onMounted(() => {
                                             >
                                                 Disclaimer: For Producers,
                                                 Executive Producers, Directors,
-                                                Writer for separate comma
+                                                and Writer, please use comma (,)
+                                                to separate multiple entries
                                             </span>
                                         </v-col>
                                         <v-col cols="12" class="ma-0" lg="3">
@@ -177,7 +210,7 @@ onMounted(() => {
                                                 color="primary"
                                                 label="Title"
                                                 v-model="entry.title"
-                                                :rules="[required]"
+                                                :rules="[rules.required]"
                                             >
                                                 <template v-slot:label
                                                     >Title
@@ -193,7 +226,7 @@ onMounted(() => {
                                                 color="primary"
                                                 label="Date Published"
                                                 v-model="entry.premiere_date"
-                                                :rules="[required]"
+                                                :rules="[rules.required]"
                                             >
                                                 <template v-slot:label
                                                     >Date Published
@@ -209,10 +242,10 @@ onMounted(() => {
                                                 color="primary"
                                                 label="Day of Airing"
                                                 v-model="entry.day_of_airing"
-                                                :rules="[required]"
+                                                :rules="[rules.required]"
                                             >
                                                 <template v-slot:label
-                                                    >Dat of Airing
+                                                    >Date of Airing
                                                     <strong class="text-error"
                                                         >*</strong
                                                     >
@@ -225,7 +258,7 @@ onMounted(() => {
                                                 color="primary"
                                                 label="Time of Airing"
                                                 v-model="entry.time_of_airing"
-                                                :rules="[required]"
+                                                :rules="[rules.required]"
                                             >
                                                 <template v-slot:label
                                                     >Time of Airing
@@ -241,7 +274,7 @@ onMounted(() => {
                                                 color="primary"
                                                 label="Link of Entry"
                                                 v-model="entry.link"
-                                                :rules="[required]"
+                                                :rules="[rules.required]"
                                             >
                                                 <template v-slot:label
                                                     >Link of Entry
@@ -259,7 +292,7 @@ onMounted(() => {
                                                 v-model="
                                                     entry.production_company
                                                 "
-                                                :rules="[required]"
+                                                :rules="[rules.required]"
                                             >
                                                 <template v-slot:label
                                                     >Production Company
@@ -309,7 +342,7 @@ onMounted(() => {
                                                 color="primary"
                                                 label="Program Synopsis"
                                                 v-model="entry.synopsis"
-                                                :rules="[required]"
+                                                :rules="[rules.required]"
                                             >
                                                 <template v-slot:label
                                                     >Program Sypnosis
@@ -336,7 +369,7 @@ onMounted(() => {
                                                 prepend-icon="mdi-paperclip"
                                                 variant="outlined"
                                                 :show-size="1000"
-                                                :rules="[required]"
+                                                :rules="[rules.required]"
                                             >
                                                 <template v-slot:label
                                                     >Payment Referrence
@@ -350,20 +383,20 @@ onMounted(() => {
                                             <v-checkbox
                                                 color="success"
                                                 v-model="entry.verify"
-                                                :rules="[required]"
                                                 label="I hereby certify that the information provided in this form is complete, true and correct to the best of my knowledge."
+                                                :rules="[rules.required]"
                                             >
                                             </v-checkbox>
                                         </v-col>
                                     </v-row>
                                     <v-row justify="center" class="pb-5">
                                         <!-- <v-col cols="7" md="4" lg="4"> -->
-                                        <button type="submit">
-                                            <BaseButton
-                                                @click="submitEntry()"
-                                                :text="'Submit Entry'"
-                                            />
-                                        </button>
+                                        <!-- <button type="submit"> -->
+                                        <BaseButton
+                                            @click="submitEntry()"
+                                            :text="'Submit Entry'"
+                                        />
+                                        <!-- </button> -->
                                         <!-- </v-col> -->
                                     </v-row>
                                 </v-form>
