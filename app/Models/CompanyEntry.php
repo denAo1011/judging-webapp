@@ -39,10 +39,6 @@ class CompanyEntry extends Model
         'day_of_airing' => 'array'
     ];
 
-    protected $appends = [
-        'score'
-    ];
-
     public function setPaymentReferenceAttribute($value)
     {
         if ($value != null && $value != '') {
