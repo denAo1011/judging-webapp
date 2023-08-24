@@ -1,3 +1,16 @@
 <template>
-    How To Install Vue 3 in Laravel 9 with Vite - TechvBlogs
+    <div class="w-full">
+        <router-view> </router-view>
+    </div>
+    <Footer v-if="!isAuth"></Footer>
 </template>
+<script setup>
+import Footer from "./components/Footer.vue";
+import { useStore } from "vuex";
+import { computed } from "vue";
+const store = useStore();
+
+const isAuth = computed(() => {
+    return store.getters.isAuth;
+});
+</script>
