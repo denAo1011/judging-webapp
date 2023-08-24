@@ -9,6 +9,7 @@ export default {
     data() {
         return {
             entry: {
+                network: "",
                 link: "",
                 title: "",
                 day_of_airing: "",
@@ -43,6 +44,18 @@ export default {
                         return "Must be a number.";
                     }
                 },
+                link: (value) => {
+                    if (!value) {
+                        return "Required.";
+                    } else if (
+                        !/^https?:\/\/(?:www\.)?youtube\.com\/watch\?(?=.*v=\w+).*$/i.test(
+                            value
+                        )
+                    ) {
+                        return "Invalid Link.";
+                    }
+                    return true;
+                },
             },
         };
     },
@@ -51,9 +64,14 @@ export default {
             const { valid } = await this.$refs.form.validate();
             if (valid) {
                 window.axios
-                    .post("api/login", this.user)
+                    .post(
+                        "api/companies/" +
+                            this.entry.network +
+                            "/companyEntries",
+                        this.entry
+                    )
                     .then((response) => {
-                        Store.dispatch("login", response.data.token);
+                        // Store.dispatch("login", response.data.token);
                         Swal.fire({
                             toast: true,
                             icon: "success",
@@ -274,7 +292,7 @@ export default {
                                                 color="primary"
                                                 label="Link of Entry"
                                                 v-model="entry.link"
-                                                :rules="[rules.required]"
+                                                :rules="[rules.link]"
                                             >
                                                 <template v-slot:label
                                                     >Link of Entry
@@ -359,7 +377,42 @@ export default {
                                                 Payment Details
                                             </h3>
                                         </v-col>
+                                        <!-- Display the bank details -->
                                         <v-col cols="12" class="ma-0">
+                                            <h3 class="text-sm font-bold">
+                                                Bank: Union Bank
+                                                <br />
+                                                Account Number: 123456789
+                                            </h3>
+                                        </v-col>
+                                        <span
+                                            class="ml-3 text-medium-emphasis text-caption text-error"
+                                        >
+                                            Disclaimer: Pleast input the
+                                            referrence numabe and upload a
+                                            screenshot of your payment
+                                            referrence
+                                        </span>
+                                        <v-col cols="12" lg="6" class="ma-0">
+                                            <v-text-field
+                                                v-model="
+                                                    entry.payment_reference_number
+                                                "
+                                                label="Payment Referrence Number"
+                                                placeholder="Input the referrence number"
+                                                variant="outlined"
+                                                :show-size="1000"
+                                                :rules="[rules.required]"
+                                            >
+                                                <template v-slot:label
+                                                    >Payment Referrence Number
+                                                    <strong class="text-error"
+                                                        >*</strong
+                                                    >
+                                                </template>
+                                            </v-text-field>
+                                        </v-col>
+                                        <v-col cols="12" lg="6" class="ma-0">
                                             <v-file-input
                                                 v-model="
                                                     entry.payment_reference
@@ -383,7 +436,7 @@ export default {
                                             <v-checkbox
                                                 color="success"
                                                 v-model="entry.verify"
-                                                label="I hereby certify that the information provided in this form is complete, true and correct to the best of my knowledge."
+                                                label="I HEREBY CERTIFY that the information provided in this form is complete, true and correct to the best of my knowledge. I give my consent to AnakTV  to collect, use and process my personal information. I understand that my consent does not preclude the existence of other criteria for lawful processing of personal data, and does not waive any of my rights under the Data Privacy Act of 2012 and other applicable laws."
                                                 :rules="[rules.required]"
                                             >
                                             </v-checkbox>
