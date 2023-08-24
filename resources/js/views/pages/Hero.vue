@@ -112,6 +112,10 @@ import BaseButton from "../../components/BaseButton.vue";
     background-size: cover;
 }
 
+.card-border {
+    border-radius: 20px !important;
+}
+
 .about-text {
     font-size: x-large;
     line-height: normal;

@@ -97,4 +97,8 @@ const faqs = ref([
     /* Add Linear Background */
     background: #a9df73;
 }
+
+.card-border {
+    border-radius: 20px !important;
+}
 </style>

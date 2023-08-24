@@ -96,4 +96,8 @@ function goTo(route) {
     /* Add Linear Background */
     /* background: #ed8682; */
 }
+
+.card-border {
+    border-radius: 20px !important;
+}
 </style>

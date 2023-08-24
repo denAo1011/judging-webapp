@@ -172,6 +172,10 @@ function goTo(route) {
     background: linear-gradient(0deg, #b7f1a5 10%, 50%, #ffffff);
 }
 
+.card-border {
+    border-radius: 20px !important;
+}
+
 .about-text {
     font-size: x-large;
     line-height: normal;
