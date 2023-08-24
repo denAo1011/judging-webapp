@@ -30,6 +30,11 @@ class CompanyEntry extends Model
         'status',
         'notes',
         'payment_reference',
+        'payment_reference_number',
+    ];
+
+    protected $casts = [
+        'day_of_airing' => 'array'
     ];
 
     protected $appends = [

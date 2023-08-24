@@ -25,7 +25,7 @@ class StoreCompanyEntryRequest extends FormRequest
             'email' => ['required', 'email'],
             'link' => ['required', 'string'],
             'title' => ['required', 'string'],
-            'day_of_airing' => ['required', 'string', 'in:MONDAY,TUESDAY,WEDNESDAY,THURSDAY,FRIDAY,SATURDAY,SUNDAY'],
+            'day_of_airing' => ['required', 'array'],
             'time_of_airing' => ['required', 'date_format:H:i'],
             'production_company' => ['required', 'string'],
             'synopsis' => ['required', 'string'],
@@ -41,6 +41,7 @@ class StoreCompanyEntryRequest extends FormRequest
             'writers' => ['nullable', 'string'],
 
             'payment_reference' => ['required'],
+            'payment_reference_number' => ['required'],
         ];
     }
 }
