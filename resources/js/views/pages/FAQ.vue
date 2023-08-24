@@ -3,36 +3,54 @@ import { ref } from "vue";
 
 const faqs = ref([
     {
-        question: "How do I manage my account?",
-        answer: "Dolorem aliquid error odio, eaque asperiores itaque eius, voluptas libero ratione iste hic? Magni architecto recusandae sit eos laudantium quod porro culpa! Lorem ipsum dolor sit amet consectetur adipisicing elit. Iste libero nulla nam, odio atque labore quasi eum omnis voluptate id dolorem dolorum.",
+        question: "What is the purpose of this Anak TV Seal Judging website?",
+        answer: "This digital judging website of Anak TV serves as a platform to conduct online screening and survey of all programs from the different networks of the country that are child-friendly, values laden, and child-centric. It allows jurors or the viewers to evaluate submissions remotely and efficiently..",
     },
     {
-        question: "How do I manage my account?",
-        answer: "Dolorem aliquid error odio, eaque asperiores itaque eius, voluptas libero ratione iste hic? Magni architecto recusandae sit eos laudantium quod porro culpa! Lorem ipsum dolor sit amet consectetur adipisicing elit. Iste libero nulla nam, odio atque labore quasi eum omnis voluptate id dolorem dolorum.",
+        question: "How do I become a judge on this platform?",
+        answer: "The Anak TV Secretariat handpicked and invited jurors from different sectors like the Academe, Business, Advertising, TV Networks, child-focus groups, etc. for specific competitions like the Net Anak TV Seal award. You can also be one of the Jurors for the Net Makabata Star award, where we will let the netizens choose the artist that they think has the characteristics of being a Makabata Star awardee.",
     },
     {
-        question: "How do I manage my account?",
-        answer: "Dolorem aliquid error odio, eaque asperiores itaque eius, voluptas libero ratione iste hic? Magni architecto recusandae sit eos laudantium quod porro culpa! Lorem ipsum dolor sit amet consectetur adipisicing elit. Iste libero nulla nam, odio atque labore quasi eum omnis voluptate id dolorem dolorum.",
+        question: "What kind of programs can I expect to judge here?",
+        answer: "You can expect to judge a wide range of programs, as well as artist from the different networks of the country. The platform caters to diverse fields and interests.",
     },
     {
-        question: "How do I manage my account?",
-        answer: "Dolorem aliquid error odio, eaque asperiores itaque eius, voluptas libero ratione iste hic? Magni architecto recusandae sit eos laudantium quod porro culpa! Lorem ipsum dolor sit amet consectetur adipisicing elit. Iste libero nulla nam, odio atque labore quasi eum omnis voluptate id dolorem dolorum.",
+        question: "How does the judging process work?",
+        answer: "Once registered and selected as a judge for the event, you will gain access to the submissions assigned to you. You can review each submission, provide feedback, and assign scores based on predefined criteria.",
     },
     {
-        question: "How do I manage my account?",
-        answer: "Dolorem aliquid error odio, eaque asperiores itaque eius, voluptas libero ratione iste hic? Magni architecto recusandae sit eos laudantium quod porro culpa! Lorem ipsum dolor sit amet consectetur adipisicing elit. Iste libero nulla nam, odio atque labore quasi eum omnis voluptate id dolorem dolorum.",
+        question: "Is the judging process anonymous?",
+        answer: "Yes, the judging process for the Net Makabata Star has an option to be anonymous. You won't have access to the names or identities of the participants while evaluating their submissions.",
     },
     {
-        question: "How do I manage my account?",
-        answer: "Dolorem aliquid error odio, eaque asperiores itaque eius, voluptas libero ratione iste hic? Magni architecto recusandae sit eos laudantium quod porro culpa! Lorem ipsum dolor sit amet consectetur adipisicing elit. Iste libero nulla nam, odio atque labore quasi eum omnis voluptate id dolorem dolorum.",
+        question:
+            "Can I communicate with other jurors or participants during the judging process?",
+        answer: "No, the platform doesn't provide communication tools that allow you to discuss submissions with fellow jurors. However, direct communication with participants might be limited to maintain fairness.",
     },
     {
-        question: "How do I manage my account?",
-        answer: "Dolorem aliquid error odio, eaque asperiores itaque eius, voluptas libero ratione iste hic? Magni architecto recusandae sit eos laudantium quod porro culpa! Lorem ipsum dolor sit amet consectetur adipisicing elit. Iste libero nulla nam, odio atque labore quasi eum omnis voluptate id dolorem dolorum.",
+        question: "How are the winners determined?",
+        answer: "Winners are determined based on the cumulative scores from all judges for each submission. For Anak TV Seal submissions, the programs with 7-10 ratings win the recognition.",
     },
     {
-        question: "How do I manage my account?",
-        answer: "Dolorem aliquid error odio, eaque asperiores itaque eius, voluptas libero ratione iste hic? Magni architecto recusandae sit eos laudantium quod porro culpa! Lorem ipsum dolor sit amet consectetur adipisicing elit. Iste libero nulla nam, odio atque labore quasi eum omnis voluptate id dolorem dolorum.",
+        question: "Can I participate as a juror in both awards simultaneously?",
+        answer: "No, you can't participate as a juror in multiple events running separately. However, ensure that you can allocate sufficient time to review and evaluate submissions for each award.",
+    },
+    {
+        question: "What if I encounter technical issues while judging?",
+        answer: "If you face technical problems, you can contact the platform's support team for assistance. Look for the contact information provided or help resources on the website.",
+    },
+    {
+        question: "Can I access the judging platform from my mobile device?",
+        answer: "Yes, the platform is accessible from both desktop and android or iOS mobile devices, allowing you to judge on the go.",
+    },
+    {
+        question: "How can I provide feedback about the judging experience?",
+        answer: 'You can provide your thoughts in the "Message Us" section. Alternatively, you might contact the Anak TV Secretariat directly with your feedback.',
+    },
+    {
+        question:
+            "Where can I find additional help if my question isn't answered here?",
+        answer: "If you have more questions or need assistance, you can explore the platform's help section or contact the Anak TV Secretariat through the provided support channels.",
     },
 ]);
 </script>

@@ -50,23 +50,14 @@ function goTo(route) {
                             Meet the Jurors
                         </h1>
                         <p class="text-sm lg:text-xl mt-12 text-white">
-                            The creation of an organization such as Anak TV (the
-                            original name upon inception was Southeast Asian
-                            Foundation for Children's Television) was the result
-                            of nagging concerns expressed in various forums in
-                            society.
-                            <br /><br />
-                            Parents and teachers, not only in the Philippines
-                            but in all of Asia, increasingly agitated for more
-                            child-sensitive TV programs and shows that helped
-                            define to children what it was to be Asian.
-                            <br /><br />
-                            The executives running the TV networks in the
-                            Philippines, even in Southeast Asia, are parents
-                            themselves, torn between raking in profit and
-                            delighting the stockholders on one side and ensuring
-                            that their children had a healthy media diet, on the
-                            other.
+                            At the heart of Anak TV's commitment to excellence
+                            lies our meticulous approach to selecting jurors for
+                            our prestigious awards, such as the coveted Net Anak
+                            TV Seal award. Our dedicated Anak TV Secretariat
+                            takes great care in handpicking jurors from diverse
+                            sectors encompassing the Academe, Business,
+                            Advertising, TV Networks, child-focused groups, and
+                            more.
                         </p>
                     </v-col>
                 </v-row>

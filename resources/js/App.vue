@@ -9,7 +9,11 @@ import Footer from "./components/Footer.vue";
 import { useRouter } from "vue-router";
 import { computed } from "vue";
 const router = useRouter();
-const validRoutePaths = ["/judge/process", "/judge/judging", "/entry-form"];
+const validRoutePaths = [
+    "/digital-judging/judge/process",
+    "/digital-judging/judge/judging",
+    "/digital-judging/entry-form",
+];
 const safeRoute = computed(() => {
     return validRoutePaths.includes(router.currentRoute.value.path);
 });

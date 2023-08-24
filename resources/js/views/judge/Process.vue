@@ -42,7 +42,7 @@ function goTo(route) {
                 </v-row>
                 <v-row justify="center">
                     <v-col cols="7" md="3" lg="2">
-                        <BaseButton @click="goTo('/judge/judging')" :text="'Judge Now'" />
+                        <BaseButton @click="goTo('/digital-judging/judge/judging')" :text="'Judge Now'" />
                     </v-col>
                 </v-row>
             </v-col>

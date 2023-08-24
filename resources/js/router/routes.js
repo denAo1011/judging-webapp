@@ -1,62 +1,66 @@
 // general routes
 
 export default [
+    {
+        path: '/',
+        redirect: '/digital-judging',
+    },
   {
-    path: '/',
+    path: '/digital-judging',
     component: () => import('../views/pages/Home.vue'),
     name: 'home',
   },
   {
-    path: '/about-us',
+    path: '/digital-judging/about-us',
     component: () =>import('../views/pages/About.vue'),
     name: 'about',
   },
   {
-    path: '/jurors',
+    path: '/digital-judging/jurors',
     component: () =>import('../views/pages/Jurors.vue'),
     name: 'jurors',
   },
   {
-    path: '/eligibility',
+    path: '/digital-judging/eligibility',
     component: () =>import('../views/pages/Eligibility.vue'),
     name: 'eligibility',
   },
   {
-    path: '/faqs',
+    path: '/digital-judging/faqs',
     component: () =>import('../views/pages/FAQ.vue'),
     name: 'faqs',
   },
   {
-    path: '/entry-form',
+    path: '/digital-judging/entry-form',
     component: () =>import('../views/pages/EntryForm.vue'),
     name: 'entry-form',
   },
   {
-    path: '/judge',
+    path: '/digital-judging/judge',
     redirect: "/judge/process",
   },
   {
-    path: '/judge/process',
+    path: '/digital-judging/judge/process',
     component: () =>import('../views/judge/Process.vue'),
     name: 'process',
   },
   {
-    path: '/judge/judging',
+    path: '/digital-judging/judge/judging',
     component: () =>import('../views/judge/Judging.vue'),
     name: 'judging',
   },
   {
-    path: '/signin',
+    path: '/digital-judging/signin',
     component: () =>import('../views/pages/SignIn.vue'),
     name: 'signin',
   },
   {
-    path: '/admin',
+    path: '/digital-judging/admin',
     redirect: "/admin/entries",
     component: () =>import('../views/admin/Scaffold.vue'),
     children: [
       {
-        path: '/admin/entries',
+        path: '/digital-judging/admin/entries',
         name: 'entries',
         component: () =>import('../views/admin/Entries.vue'),
       },

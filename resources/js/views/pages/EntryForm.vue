@@ -1,18 +1,20 @@
 <script>
+import Swal from "sweetalert2";
 import { onMounted, ref } from "vue";
 import BaseButton from "../../components/BaseButton.vue";
+import { VDatePicker } from "vuetify/labs/VDatePicker";
 import { useRouter } from "vue-router";
-import { useStore } from "vuex";
-
+import { Store } from "vuex";
+import moment from "moment";
 export default {
-    components: { BaseButton },
+    components: { BaseButton, VDatePicker },
     data() {
         return {
             entry: {
                 network: "",
                 link: "",
                 title: "",
-                day_of_airing: "",
+                day_of_airing: ["MONDAY"],
                 time_of_airing: "",
                 production_company: "",
                 synopsis: "",
@@ -25,8 +27,12 @@ export default {
                 directors: "",
                 writers: "",
                 payment_reference: [],
+                payment_reference_number: "",
             },
+            dateMenu: false,
             networks: [],
+            image_name: [],
+            disclaimerDialog: true,
             rules: {
                 required: (value) => !!value || "Required.",
                 email: (value) => {
@@ -65,20 +71,24 @@ export default {
             if (valid) {
                 window.axios
                     .post(
-                        "api/companies/" +
+                        "/api/companies/" +
                             this.entry.network +
                             "/companyEntries",
-                        this.entry
+                        {
+                            ...this.entry,
+                            email: this.entry.contact_person_email,
+                            premiere_date: moment(
+                                this.entry.premiere_date
+                            ).format("YYYY-MM-DD"),
+                        }
                     )
                     .then((response) => {
                         // Store.dispatch("login", response.data.token);
                         Swal.fire({
-                            toast: true,
                             icon: "success",
-                            title: "Login Successful",
+                            title: "Entry Submitted!",
                             icon: "success",
                         });
-                        this.$router.push({ name: "entries" });
                     })
                     .catch((error) => {
                         Swal.fire({
@@ -93,13 +103,26 @@ export default {
                         console.log(error);
                     })
                     .finally(() => {
-                        this.loginForm = false;
+                        this.entry = {
+                            ...this.entry,
+                            link: "",
+                            title: "",
+                            day_of_airing: ["MONDAY"],
+                            time_of_airing: "",
+                            production_company: "",
+                            synopsis: "",
+                            producers: "",
+                            executive_producers: "",
+                            premiere_date: "",
+                            directors: "",
+                            writers: "",
+                        };
                     });
             }
         },
         fetchNetworks() {
             window.axios
-                .get("api/companies", {
+                .get("/api/companies", {
                     params: {
                         perPage: 0,
                     },
@@ -110,6 +133,27 @@ export default {
                 .catch((error) => {
                     console.log(error);
                 });
+        },
+        convertImage() {
+            try {
+                const file = this.image_name[0];
+                const blob = new Blob([file], { type: file.type });
+                const reader = new FileReader();
+                reader.onload = () => {
+                    this.entry.payment_reference = reader.result;
+                };
+                reader.readAsDataURL(blob);
+            } catch (error) {
+                this.image_name = null;
+                this.entry.payment_reference = null;
+            }
+        },
+    },
+    computed: {
+        formattedDate() {
+            return this.entry.premiere_date
+                ? moment(this.entry.premiere_date).format("MMMM Do YYYY")
+                : "";
         },
     },
     mounted() {
@@ -209,14 +253,6 @@ export default {
                                             <h3 class="text-lg font-bold">
                                                 Program Details
                                             </h3>
-                                            <span
-                                                class="text-medium-emphasis text-caption text-error"
-                                            >
-                                                Disclaimer: For Producers,
-                                                Executive Producers, Directors,
-                                                and Writer, please use comma (,)
-                                                to separate multiple entries
-                                            </span>
                                         </v-col>
                                         <v-col cols="12" class="ma-0" lg="3">
                                             <v-text-field
@@ -234,39 +270,76 @@ export default {
                                             </v-text-field>
                                         </v-col>
                                         <v-col cols="12" class="ma-0" lg="3">
-                                            <v-text-field
-                                                variant="underlined"
-                                                label="Date Published"
-                                                v-model="entry.premiere_date"
-                                                :rules="[rules.required]"
+                                            <v-menu
+                                                v-model="dateMenu"
+                                                :close-on-content-click="false"
+                                                :nudge-right="40"
+                                                transition="scale-transition"
+                                                end
+                                                min-width="auto"
                                             >
-                                                <template v-slot:label
-                                                    >Date Published
-                                                    <strong class="text-error"
-                                                        >*</strong
+                                                <template
+                                                    v-slot:activator="{ props }"
+                                                >
+                                                    <v-text-field
+                                                        variant="underlined"
+                                                        label="Date Published"
+                                                        readonly
+                                                        v-bind="props"
+                                                        v-model="formattedDate"
+                                                        :rules="[
+                                                            rules.required,
+                                                        ]"
                                                     >
+                                                        <template v-slot:label
+                                                            >Date Published
+                                                            <strong
+                                                                class="text-error"
+                                                                >*</strong
+                                                            >
+                                                        </template>
+                                                    </v-text-field>
                                                 </template>
-                                            </v-text-field>
+                                                <v-date-picker
+                                                    v-model="
+                                                        entry.premiere_date
+                                                    "
+                                                    @click:save="
+                                                        dateMenu = false
+                                                    "
+                                                ></v-date-picker>
+                                            </v-menu>
                                         </v-col>
                                         <v-col cols="12" class="ma-0" lg="3">
-                                            <v-text-field
+                                            <v-select
+                                                :items="[
+                                                    'MONDAY',
+                                                    'TUESDAY',
+                                                    'WEDNESDAY',
+                                                    'THURSDAY',
+                                                    'FRIDAY',
+                                                    'SATURDAY',
+                                                    'SUNDAY',
+                                                ]"
+                                                multiple
                                                 variant="underlined"
                                                 label="Day of Airing"
                                                 v-model="entry.day_of_airing"
                                                 :rules="[rules.required]"
                                             >
                                                 <template v-slot:label
-                                                    >Date of Airing
+                                                    >Day of Airing
                                                     <strong class="text-error"
                                                         >*</strong
                                                     >
                                                 </template>
-                                            </v-text-field>
+                                            </v-select>
                                         </v-col>
                                         <v-col cols="12" class="ma-0" lg="3">
                                             <v-text-field
                                                 variant="underlined"
                                                 label="Time of Airing"
+                                                type="time"
                                                 v-model="entry.time_of_airing"
                                                 :rules="[rules.required]"
                                             >
@@ -309,6 +382,16 @@ export default {
                                                     >
                                                 </template>
                                             </v-text-field>
+                                        </v-col>
+                                        <v-col cols="12">
+                                            <span
+                                                class="text-medium-emphasis text-caption text-error"
+                                            >
+                                                Disclaimer: For Producers,
+                                                Executive Producers, Directors,
+                                                and Writer, please use comma (,)
+                                                to separate multiple entries
+                                            </span>
                                         </v-col>
                                         <v-col cols="12" class="ma-0" lg="3">
                                             <v-text-field
@@ -364,10 +447,17 @@ export default {
                                         </v-col>
                                         <!-- Display the bank details -->
                                         <v-col cols="12" class="ma-0">
-                                            <h3 class="text-sm font-bold">
-                                                Bank: Union Bank
-                                                <br />
-                                                Account Number: 123456789
+                                            <h3 class="text-sm">
+                                                Bank:
+                                                <strong
+                                                    >Metrobank Tomas
+                                                    Morato</strong
+                                                ><br />
+                                                Bank Account name:
+                                                <strong>Anak TV Inc.</strong
+                                                ><br />
+                                                Account number:
+                                                <strong>007 180 50946 8</strong>
                                             </h3>
                                         </v-col>
                                         <span
@@ -399,13 +489,12 @@ export default {
                                         </v-col>
                                         <v-col cols="12" lg="6" class="ma-0">
                                             <v-file-input
-                                                v-model="
-                                                    entry.payment_reference
-                                                "
+                                                v-model="image_name"
                                                 label="Payment Referrence"
                                                 placeholder="Select your files"
                                                 prepend-icon="mdi-paperclip"
                                                 variant="outlined"
+                                                @change="convertImage()"
                                                 :show-size="1000"
                                                 :rules="[rules.required]"
                                             >
@@ -445,6 +534,26 @@ export default {
             </v-col>
         </v-row>
     </div>
+    <v-dialog v-model="disclaimerDialog" persistent width="500">
+        <v-card class="card-border">
+            <v-card-title class="text-h5 text-center"> Notice! </v-card-title>
+            <v-card-text>
+                You can opt to skip the online submission process if you prefer
+                to pay in cash or by cheque. Offline submission must be
+                completed at the Anak TV office.
+            </v-card-text>
+            <v-card-actions>
+                <v-spacer></v-spacer>
+                <v-btn
+                    color="green-darken-1"
+                    class="mr-3"
+                    @click="disclaimerDialog = false"
+                >
+                    Continue
+                </v-btn>
+            </v-card-actions>
+        </v-card>
+    </v-dialog>
 </template>
 <style scoped>
 .home-container {

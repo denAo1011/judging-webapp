@@ -17,7 +17,7 @@ function goTo(route) {
                     </h1>
                 </v-row>
                 <v-row>
-                    <v-col data-aos="flip-down"  data-aos-anchor-placement="center-center" cols="12" md="4">
+                    <v-col data-aos="flip-down"  cols="12" md="4">
                         <v-card color="#885598" class="card-border">
                             <v-card-text>
                                 <v-row>
@@ -40,8 +40,8 @@ function goTo(route) {
                             </v-card-text>
                         </v-card>
                     </v-col>
-                    <v-col data-aos="flip-down"  data-aos-anchor-placement="center-center" cols="12" md="4">
-                        <v-card color="#769657" class="card-border">
+                    <v-col data-aos="flip-down"  cols="12" md="4">
+                        <v-card color="#8CB166" class="card-border">
                             <v-card-text>
                                 <v-row>
                                     <v-col cols="12" class="text-white">
@@ -62,7 +62,7 @@ function goTo(route) {
                             </v-card-text>
                         </v-card>
                     </v-col>
-                    <v-col data-aos="flip-down"  data-aos-anchor-placement="center-center" cols="12" md="4">
+                    <v-col data-aos="flip-down"   cols="12" md="4">
                         <v-card color="#5452a3" class="card-border">
                             <v-card-text>
                                 <v-row>
@@ -70,7 +70,7 @@ function goTo(route) {
                                         <h2 class="text-center text-base lg:text-3xl font-semibold my-4">Timelines and Deadlines</h2>
                                         <p class="mb-2 text-base">Submission Deadline: <strong> August 26 to September 1, 2023</strong></p>
                                         <p class="mb-2 text-base">First Level Judging: <strong> October 1 to 15, 2023</strong></p>
-                                        <p>Second Level Judging: <strong >November 1 to 15, 2023</strong></p>
+                                        <p class="mb-2 text-base">Second Level Judging: <strong >November 1 to 15, 2023</strong></p>
                                         <!-- Add more timeline and deadline details here -->
                                     </v-col>
                                 </v-row>
@@ -80,7 +80,7 @@ function goTo(route) {
                 </v-row>
                 <v-row justify="center">
                     <v-col cols="7" md="4" lg="4">
-                        <BaseButton @click="goTo('/entry-form')" :text="'Submit Entry'" />
+                        <BaseButton @click="goTo('/digital-judging/entry-form')" :text="'Submit Entry'" />
                     </v-col>
                 </v-row>
             </v-col>

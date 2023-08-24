@@ -116,14 +116,19 @@
     <v-divider></v-divider>
     <div class="text-center d-flex flex-column pb-5">
         <div>
-            <v-btn
-                color="primary"
+            <a
                 v-for="icon in icons"
-                :key="icon"
-                class="mx-4"
-                :icon="icon"
-                variant="text"
-            ></v-btn>
+                :key="icon.icon"
+                :href="icon.to"
+                target="_blank"
+            >
+                <v-btn
+                    color="primary"
+                    class="mx-4"
+                    :icon="icon.icon"
+                    variant="text"
+                ></v-btn>
+            </a>
         </div>
         <div>
             {{ new Date().getFullYear() }} — Powered By
@@ -136,7 +141,16 @@
 <script>
 export default {
     data: () => ({
-        icons: ["mdi-facebook", "mdi-twitter", "mdi-linkedin", "mdi-instagram"],
+        icons: [
+            {
+                to: "https://www.facebook.com/AnakTVFoundation/",
+                icon: "mdi-facebook",
+            },
+            {
+                to: "https://www.youtube.com/channel/UCTSk_YoUEPcpKXqo9FTIW9g",
+                icon: "mdi-youtube",
+            },
+        ],
         messageForm: false,
         message: {
             name: "",

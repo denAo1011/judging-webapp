@@ -29,29 +29,35 @@ import BaseButton from "../../components/BaseButton.vue";
                                         <p
                                             class="lg:text-lg xl:text-2xl text-black"
                                         >
-                                            The creation of an organization such
-                                            as Anak TV (the original name upon
-                                            inception was Southeast Asian
-                                            Foundation for Children's
-                                            Television) was the result of
-                                            nagging concerns expressed in
-                                            various forums in society.
+                                            Transforming Anak TV from a
+                                            traditional setup to a cutting-edge
+                                            digital powerhouse is an
+                                            exhilarating journey! Imagine this:
+                                            parents, teachers, and visionaries
+                                            from all corners of Asia coming
+                                            together to make kid-friendly,
+                                            Asian-inspired TV that's nothing
+                                            short of excellence.
                                             <br /><br />
-                                            Parents and teachers, not only in
-                                            the Philippines but in all of Asia,
-                                            increasingly agitated for more
-                                            child-sensitive TV programs and
-                                            shows that helped define to children
-                                            what it was to be Asian.
+                                            Our executives, torn between profit
+                                            and their own kids' media health,
+                                            are now steering Anak TV into a bold
+                                            digital future. Our aim? To
+                                            turbocharge our organization with
+                                            the latest tech and ingenious
+                                            strategies, supercharging efficiency
+                                            and magnifying our outreach. We're
+                                            not just embracing digitalization;
+                                            we're redefining it.
                                             <br /><br />
-                                            The executives running the TV
-                                            networks in the Philippines, even in
-                                            Southeast Asia, are parents
-                                            themselves, torn between raking in
-                                            profit and delighting the
-                                            stockholders on one side and
-                                            ensuring that their children had a
-                                            healthy media diet, on the other.
+                                            A world where AnakTV seamlessly
+                                            weaves into every fiber of our
+                                            existence, revolutionizing how we
+                                            fulfill our mission. Join us on this
+                                            electrifying journey as we harness
+                                            digital power to ignite change and
+                                            magnify our impact for the
+                                            communities we cherish!
                                         </p>
                                     </v-col>
                                 </v-row>
