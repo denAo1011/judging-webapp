@@ -41,7 +41,7 @@ function goTo(route) {
 <template>
     <div class="juror-container d-flex align-items-start py-12">
         <v-row justify="center">
-            <v-col cols="11" lg="10" xl="8">
+            <v-col cols="11" lg="11" xl="9">
                 <v-row>
                     <v-col>
                         <h1

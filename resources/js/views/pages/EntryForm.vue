@@ -168,7 +168,7 @@ export default {
         <v-row justify="center">
             <v-col cols="11" xl="10">
                 <v-row justify="center" class="pa-5 text-center">
-                    <h1 class="text-5xl font-bold text-white">
+                    <h1 class="text-5xl font-bold text-primary">
                         Submission Form
                     </h1>
                 </v-row>
@@ -562,7 +562,7 @@ export default {
     align-items: center;
     justify-content: center;
     /* Add Linear Background */
-    background: #5452a3;
+    background: #b7f1a5;
 }
 
 .card-border {

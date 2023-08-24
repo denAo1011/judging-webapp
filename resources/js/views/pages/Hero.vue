@@ -4,7 +4,7 @@ import BaseButton from "../../components/BaseButton.vue";
 <template>
     <div class="home-container py-10">
         <v-row justify="center">
-            <v-col cols="12" xl="8" lg="10">
+            <v-col cols="12" xl="9" lg="11">
                 <v-row justify="center" class="pa-5 text-center">
                     <h1
                         data-aos="fade-down"
@@ -14,10 +14,10 @@ import BaseButton from "../../components/BaseButton.vue";
                     </h1>
                 </v-row>
                 <v-row class="mb-10" justify="center" align="center">
-                    <v-col data-aos="fade-right" col="12" sm="6" lg="5">
+                    <v-col data-aos="fade-right" col="12" sm="6" lg="6">
                         <v-img src="/images/logo-full.png"></v-img>
                     </v-col>
-                    <v-col data-aos="fade-left" cols="12" lg="7">
+                    <v-col data-aos="fade-left" cols="12" lg="6">
                         <v-card color="tertiary" class="card-border">
                             <v-card-text>
                                 <v-row

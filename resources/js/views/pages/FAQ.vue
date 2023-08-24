@@ -58,7 +58,7 @@ const faqs = ref([
 <template>
     <div class="faq-container d-flex py-12">
         <v-row justify="center">
-            <v-col cols="11" lg="10" xl="8">
+            <v-col cols="11" lg="11" xl="9">
                 <v-row justify="center" class="pa-5 text-center">
                     <h1 class="text-5xl font-bold text-primary">
                         Frequently Asked Questions
