@@ -18,7 +18,7 @@ return new class extends Migration
             $table->string('link');
             $table->string('title');
             $table->date('premiere_date')->nullable();
-            $table->enum('day_of_airing', ['MONDAY', 'TUESDAY', 'WEDNESDAY', 'THURSDAY', 'FRIDAY', 'SATURDAY','SUNDAY']);
+            $table->json('day_of_airing');
             $table->time('time_of_airing');
             $table->string('production_company');
             $table->string('producers')->nullable();
@@ -33,6 +33,7 @@ return new class extends Migration
                 ->default('PENDING');
             $table->string('notes');
             $table->string('payment_reference');
+            $table->string('payment_reference_number');
             $table->timestamps();
         });
     }
