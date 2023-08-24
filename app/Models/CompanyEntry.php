@@ -2,12 +2,14 @@
 
 namespace App\Models;
 
+use App\Traits\FileUpload;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Str;
 
 class CompanyEntry extends Model
 {
+    use FileUpload;
     use HasFactory;
 
     protected $fillable = [
@@ -44,9 +46,9 @@ class CompanyEntry extends Model
     public function setPaymentReferenceAttribute($value)
     {
         if ($value != null && $value != '') {
-            $fileName = 'payment-references-' . time() . '-'. Str::random(3);
+            $fileName = 'payment-references-' . time() . '-' . Str::random(3);
             $imageUrl = $this->uploadBase64EncodedImage($value, $fileName, 'payment-referencess');
-            $this->attributes['image'] = $imageUrl;
+            $this->attributes['payment_reference'] = $imageUrl;
         }
     }
 

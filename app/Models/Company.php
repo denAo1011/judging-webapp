@@ -14,11 +14,13 @@ class Company extends Model
         'email'
     ];
 
-    public function companyJurors() {
+    public function companyJurors()
+    {
         return $this->hasMany(CompanyJuror::class);
     }
 
-    public function companyEntries() {
-        return $this->hasMany(companyEntries::class);
+    public function companyEntries()
+    {
+        return $this->hasMany(CompanyEntry::class);
     }
 }

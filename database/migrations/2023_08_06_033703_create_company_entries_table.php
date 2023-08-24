@@ -31,7 +31,7 @@ return new class extends Migration
             $table->string('contact_person_number');
             $table->string('status')
                 ->default('PENDING');
-            $table->string('notes');
+            $table->string('notes')->nullable();
             $table->string('payment_reference');
             $table->string('payment_reference_number');
             $table->timestamps();
