@@ -10,123 +10,27 @@ const router = useRouter();
 const jurors = ref([
     {
         id: 1,
-        name: "Dr. Grace Javier Alfonso",
-        position: "CEO",
-        company: "Unknown",
+        name: "Rina Lopez-Bautista",
+        position: "President",
+        company: "Knowledge Channel",
     },
     {
         id: 2,
-        name: "Dr. Grace Javier Alfonso",
-        position: "CEO",
-        company: "Unknown",
+        name: "Ralph Menorca",
+        position: "Head of Programming and On Air Operations",
+        company: "ABS-CBN",
     },
     {
         id: 3,
-        name: "Dr. Grace Javier Alfonso",
-        position: "CEO",
-        company: "Unknown",
+        name: "Aleli Suguitan",
+        position: "Head, Digital Media and Interactive Services",
+        company: "PTV",
     },
     {
         id: 4,
-        name: "Dr. Grace Javier Alfonso",
-        position: "CEO",
-        company: "Unknown",
-    },
-    {
-        id: 5,
-        name: "Dr. Grace Javier Alfonso",
-        position: "CEO",
-        company: "Unknown",
-    },
-    {
-        id: 6,
-        name: "Dr. Grace Javier Alfonso",
-        position: "CEO",
-        company: "Unknown",
-    },
-    {
-        id: 7,
-        name: "Dr. Grace Javier Alfonso",
-        position: "CEO",
-        company: "Unknown",
-    },
-    {
-        id: 8,
-        name: "Dr. Grace Javier Alfonso",
-        position: "CEO",
-        company: "Unknown",
-    },
-    {
-        id: 8,
-        name: "Dr. Grace Javier Alfonso",
-        position: "CEO",
-        company: "Unknown",
-    },
-    {
-        id: 8,
-        name: "Dr. Grace Javier Alfonso",
-        position: "CEO",
-        company: "Unknown",
-    },
-    {
-        id: 8,
-        name: "Dr. Grace Javier Alfonso",
-        position: "CEO",
-        company: "Unknown",
-    },
-    {
-        id: 8,
-        name: "Dr. Grace Javier Alfonso",
-        position: "CEO",
-        company: "Unknown",
-    },
-    {
-        id: 8,
-        name: "Dr. Grace Javier Alfonso",
-        position: "CEO",
-        company: "Unknown",
-    },
-    {
-        id: 8,
-        name: "Dr. Grace Javier Alfonso",
-        position: "CEO",
-        company: "Unknown",
-    },
-    {
-        id: 8,
-        name: "Dr. Grace Javier Alfonso",
-        position: "CEO",
-        company: "Unknown",
-    },
-    {
-        id: 8,
-        name: "Dr. Grace Javier Alfonso",
-        position: "CEO",
-        company: "Unknown",
-    },
-    {
-        id: 8,
-        name: "Dr. Grace Javier Alfonso",
-        position: "CEO",
-        company: "Unknown",
-    },
-    {
-        id: 8,
-        name: "Dr. Grace Javier Alfonso",
-        position: "CEO",
-        company: "Unknown",
-    },
-    {
-        id: 8,
-        name: "Dr. Grace Javier Alfonso",
-        position: "CEO",
-        company: "Unknown",
-    },
-    {
-        id: 8,
-        name: "Dr. Grace Javier Alfonso",
-        position: "CEO",
-        company: "Unknown",
+        name: "Cheryl Ching-Sy",
+        position: "VP, Business Development 1, Drama, Entertainment Group",
+        company: "GMA",
     },
 ]);
 
@@ -195,7 +99,9 @@ function goTo(route) {
                                         <p class="text-sm text-center">
                                             {{ juror.position }}
                                         </p>
-                                        <p class="text-sm text-center">
+                                        <p
+                                            class="text-sm text-center text-primary"
+                                        >
                                             {{ juror.company }}
                                         </p>
                                     </v-card-text>

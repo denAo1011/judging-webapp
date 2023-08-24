@@ -11,7 +11,7 @@ defineEmits(["click"]);
             <v-card
                 @click="$emit('click')"
                 v-bind="props"
-                :color="isHovering ? 'secondary-light' : 'secondary'"
+                :color="isHovering ? 'primary-light' : 'primary'"
                 class="button-shadow"
             >
                 <v-card-text class="text-center text-white">

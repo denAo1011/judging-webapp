@@ -2,15 +2,15 @@
     <div class="w-full">
         <router-view> </router-view>
     </div>
-    <Footer v-if="!isAuth"></Footer>
+    <Footer v-if="!safeRoute"></Footer>
 </template>
 <script setup>
 import Footer from "./components/Footer.vue";
-import { useStore } from "vuex";
+import { useRouter } from "vue-router";
 import { computed } from "vue";
-const store = useStore();
-
-const isAuth = computed(() => {
-    return store.getters.isAuth;
+const router = useRouter();
+const validRoutePaths = ["/judge/process", "/judge/judging", "/entry-form"];
+const safeRoute = computed(() => {
+    return validRoutePaths.includes(router.currentRoute.value.path);
 });
 </script>

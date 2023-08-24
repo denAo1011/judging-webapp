@@ -22,10 +22,9 @@ const vuetify = createVuetify({
             myCustomTheme: {
               dark: false,
               colors: {
-                primary: '#4B114B',
-                secondary: '#EA2E28',
-                'secondary-light': '#F26E6A5',
-                tertiary: '#D2467F5',
+                primary: '#EA2E28',
+                'primary-light': '#F26E6A5',
+                tertiary: '#B7F1A5',
                 fourth: '#1435B4',
                 error: '#B00020',
                 info: '#2196F3',

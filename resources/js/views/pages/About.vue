@@ -31,7 +31,7 @@ function goTo(route) {
                         justify="center"
                         class="mt-12 text-center text-white"
                     >
-                        <h1 class="text-5xl font-bold text-secondary">
+                        <h1 class="text-5xl font-bold text-primary">
                             About Anak TV
                         </h1>
                     </v-row>
@@ -42,9 +42,9 @@ function goTo(route) {
                             lg="6"
                             class="order-2 order-lg-1"
                         >
-                            <v-card color="primary" class="card-border">
+                            <v-card color="#9BE484" class="card-border">
                                 <v-card-text>
-                                    <p class="text-sm lg:text-2xl text-white">
+                                    <p class="text-sm lg:text-2xl text-black">
                                         The creation of an organization such as
                                         Anak TV (the original name upon
                                         inception was Southeast Asian Foundation
@@ -133,7 +133,7 @@ function goTo(route) {
                         justify="center"
                         class="my-12 text-center text-white"
                     >
-                        <h1 class="text-5xl font-bold text-secondary">
+                        <h1 class="text-5xl font-bold text-primary">
                             Member Networks
                         </h1>
                     </v-row>
@@ -169,7 +169,7 @@ function goTo(route) {
     justify-content: center;
     flex-direction: column;
     /* Add Linear Background */
-    background: linear-gradient(0deg, #4b114b 10%, 50%, #ffffff);
+    background: linear-gradient(0deg, #b7f1a5 10%, 50%, #ffffff);
 }
 
 .about-text {

@@ -31,11 +31,20 @@ export default [
     component: () =>import('../views/pages/EntryForm.vue'),
     name: 'entry-form',
   },
-//   {
-//     path: '/judging',
-//     component: () =>import('../views/pages/Judging.vue'),
-//     name: 'judging',
-//   },
+  {
+    path: '/judge',
+    redirect: "/judge/process",
+  },
+  {
+    path: '/judge/process',
+    component: () =>import('../views/judge/Process.vue'),
+    name: 'process',
+  },
+  {
+    path: '/judge/judging',
+    component: () =>import('../views/judge/Judging.vue'),
+    name: 'judging',
+  },
   {
     path: '/signin',
     component: () =>import('../views/pages/SignIn.vue'),

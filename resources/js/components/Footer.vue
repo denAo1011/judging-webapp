@@ -5,7 +5,7 @@
                 <v-col cols="12" lg="7">
                     <v-row justify="center" class="pa-5">
                         <v-col cols="12">
-                            <h1 class="text-4xl font-bold text-secondary">
+                            <h1 class="text-4xl font-bold text-primary">
                                 More About Us
                             </h1>
                             <p class="text-xl">
@@ -40,7 +40,7 @@
                 <v-col col="12" sm="6" lg="5">
                     <v-row justify="center" class="pa-5">
                         <v-col>
-                            <h1 class="text-4xl font-bold text-secondary">
+                            <h1 class="text-4xl font-bold text-primary">
                                 Message Us
                             </h1>
                             <v-form
@@ -117,6 +117,7 @@
     <div class="text-center d-flex flex-column pb-5">
         <div>
             <v-btn
+                color="primary"
                 v-for="icon in icons"
                 :key="icon"
                 class="mx-4"
@@ -127,7 +128,7 @@
         <div>
             {{ new Date().getFullYear() }} — Powered By
             <a href="https://dreamers.ph" target="_blank"
-                ><strong class="text-secondary">Dreamers.ph</strong></a
+                ><strong class="text-primary">Dreamers.ph</strong></a
             >
         </div>
     </div>

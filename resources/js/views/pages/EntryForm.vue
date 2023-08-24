@@ -145,7 +145,6 @@ export default {
                                                 item-value="id"
                                                 item-title="name"
                                                 variant="underlined"
-                                                color="primary"
                                                 v-model="entry.network"
                                                 :rules="[rules.required]"
                                             >
@@ -160,7 +159,6 @@ export default {
                                         <v-col cols="12" class="ma-0" lg="3">
                                             <v-text-field
                                                 variant="underlined"
-                                                color="primary"
                                                 label="Contact Person"
                                                 v-model="entry.contact_person"
                                                 :rules="[rules.required]"
@@ -175,7 +173,6 @@ export default {
                                         <v-col cols="12" class="ma-0" lg="3">
                                             <v-text-field
                                                 variant="underlined"
-                                                color="primary"
                                                 label="Contact Person Email"
                                                 v-model="
                                                     entry.contact_person_email
@@ -193,7 +190,6 @@ export default {
                                         <v-col cols="12" class="ma-0" lg="3">
                                             <v-text-field
                                                 variant="underlined"
-                                                color="primary"
                                                 label="Contact Person Number"
                                                 v-model="
                                                     entry.contact_person_number
@@ -225,7 +221,6 @@ export default {
                                         <v-col cols="12" class="ma-0" lg="3">
                                             <v-text-field
                                                 variant="underlined"
-                                                color="primary"
                                                 label="Title"
                                                 v-model="entry.title"
                                                 :rules="[rules.required]"
@@ -241,7 +236,6 @@ export default {
                                         <v-col cols="12" class="ma-0" lg="3">
                                             <v-text-field
                                                 variant="underlined"
-                                                color="primary"
                                                 label="Date Published"
                                                 v-model="entry.premiere_date"
                                                 :rules="[rules.required]"
@@ -257,7 +251,6 @@ export default {
                                         <v-col cols="12" class="ma-0" lg="3">
                                             <v-text-field
                                                 variant="underlined"
-                                                color="primary"
                                                 label="Day of Airing"
                                                 v-model="entry.day_of_airing"
                                                 :rules="[rules.required]"
@@ -273,7 +266,6 @@ export default {
                                         <v-col cols="12" class="ma-0" lg="3">
                                             <v-text-field
                                                 variant="underlined"
-                                                color="primary"
                                                 label="Time of Airing"
                                                 v-model="entry.time_of_airing"
                                                 :rules="[rules.required]"
@@ -289,7 +281,6 @@ export default {
                                         <v-col cols="12" class="ma-0" lg="6">
                                             <v-text-field
                                                 variant="underlined"
-                                                color="primary"
                                                 label="Link of Entry"
                                                 v-model="entry.link"
                                                 :rules="[rules.link]"
@@ -305,7 +296,6 @@ export default {
                                         <v-col cols="12" class="ma-0" lg="6">
                                             <v-text-field
                                                 variant="underlined"
-                                                color="primary"
                                                 label="Production Company"
                                                 v-model="
                                                     entry.production_company
@@ -323,7 +313,6 @@ export default {
                                         <v-col cols="12" class="ma-0" lg="3">
                                             <v-text-field
                                                 variant="underlined"
-                                                color="primary"
                                                 label="Producer(s)"
                                                 v-model="entry.producers"
                                             />
@@ -331,7 +320,6 @@ export default {
                                         <v-col cols="12" class="ma-0" lg="3">
                                             <v-text-field
                                                 variant="underlined"
-                                                color="primary"
                                                 label="Executive Producer(s)"
                                                 v-model="
                                                     entry.executive_producers
@@ -341,7 +329,6 @@ export default {
                                         <v-col cols="12" class="ma-0" lg="3">
                                             <v-text-field
                                                 variant="underlined"
-                                                color="primary"
                                                 label="Director(s)"
                                                 v-model="entry.directors"
                                             />
@@ -349,7 +336,6 @@ export default {
                                         <v-col cols="12" class="ma-0" lg="3">
                                             <v-text-field
                                                 variant="underlined"
-                                                color="primary"
                                                 label="Writer(s)"
                                                 v-model="entry.writers"
                                             />
@@ -357,7 +343,6 @@ export default {
                                         <v-col cols="12" class="ma-0">
                                             <v-textarea
                                                 variant="underlined"
-                                                color="primary"
                                                 label="Program Synopsis"
                                                 v-model="entry.synopsis"
                                                 :rules="[rules.required]"
@@ -388,8 +373,8 @@ export default {
                                         <span
                                             class="ml-3 text-medium-emphasis text-caption text-error"
                                         >
-                                            Disclaimer: Pleast input the
-                                            referrence numabe and upload a
+                                            Disclaimer: Please input the
+                                            referrence number and upload a
                                             screenshot of your payment
                                             referrence
                                         </span>
@@ -468,7 +453,7 @@ export default {
     align-items: center;
     justify-content: center;
     /* Add Linear Background */
-    background: #885598;
+    background: #5452a3;
 }
 
 .card-border {

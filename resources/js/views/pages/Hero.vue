@@ -8,17 +8,17 @@ import BaseButton from "../../components/BaseButton.vue";
                 <v-row justify="center" class="pa-5 text-center">
                     <h1
                         data-aos="fade-down"
-                        class="text-5xl font-bold text-secondary"
+                        class="text-5xl font-bold text-primary"
                     >
                         WELCOME TO THE 2023 DIGITAL AWARDS
                     </h1>
                 </v-row>
                 <v-row class="mb-10" justify="center" align="center">
                     <v-col data-aos="fade-right" col="12" sm="6" lg="5">
-                        <v-img src="/images/logo1.png"></v-img>
+                        <v-img src="/images/logo-full.png"></v-img>
                     </v-col>
                     <v-col data-aos="fade-left" cols="12" lg="7">
-                        <v-card color="primary" class="card-border">
+                        <v-card color="tertiary" class="card-border">
                             <v-card-text>
                                 <v-row
                                     justify="center"
@@ -27,7 +27,7 @@ import BaseButton from "../../components/BaseButton.vue";
                                 >
                                     <v-col>
                                         <p
-                                            class="lg:text-lg xl:text-2xl text-white"
+                                            class="lg:text-lg xl:text-2xl text-black"
                                         >
                                             The creation of an organization such
                                             as Anak TV (the original name upon
@@ -96,7 +96,14 @@ import BaseButton from "../../components/BaseButton.vue";
     align-items: center;
     justify-content: center;
     /* Add Linear Background */
-    /* background: #f6eaf6; */
+    background: url("/images/bg3.png");
+    /* background: url("/images/bg2.gif"); */
+    /* background-size: cover; */
+    /* Add Parallax Effect */
+    background-attachment: fixed;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
 }
 
 .about-text {
