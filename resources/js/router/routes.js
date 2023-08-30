@@ -71,6 +71,16 @@ export default [
         name: 'entries',
         component: () =>import('../views/admin/Entries.vue'),
       },
+      {
+        path: '/digital-judging/admin/jurors',
+        name: 'jurors',
+        component: () =>import('../views/admin/Jurors.vue'),
+      },
+      {
+        path: '/digital-judging/admin/dashboard',
+        name: 'dashboard',
+        component: () =>import('../views/admin/Dashboard.vue'),
+      }
     ],
     beforeEnter: (to, from, next) => {
       if (store.getters.isAuth) {

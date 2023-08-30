@@ -40,7 +40,6 @@ export default {
         serverItems: [],
         loading: true,
         totalItems: 0,
-        entries: [],
         photo: "",
         photoDialog: false,
     }),
@@ -55,7 +54,7 @@ export default {
                 })
                 .then((response) => {
                     let data = response.data;
-                    this.entries = data.data;
+                    this.serverItems = data.data;
                     this.totalItems = data.meta.total;
                 })
                 .catch((error) => {
@@ -112,7 +111,7 @@ export default {
                             v-model:items-per-page="itemsPerPage"
                             :headers="headers"
                             :items-length="totalItems"
-                            :items="entries"
+                            :items="serverItems"
                             :loading="loading"
                             elevation="0"
                             item-value="name"

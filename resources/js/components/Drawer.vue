@@ -25,6 +25,9 @@ function logout() {
 <template>
     <v-navigation-drawer v-model="drawer" permanent absolute>
         <v-list :lines="false" density="compact" nav color="primary">
+            <v-list-item to="/digital-judging/admin/dashboard">
+                <v-list-item-title>Dashboard</v-list-item-title>
+            </v-list-item>
             <v-list-item to="/digital-judging/admin/entries">
                 <v-list-item-title>Entries</v-list-item-title>
             </v-list-item>
