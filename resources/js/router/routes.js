@@ -1,5 +1,5 @@
 // general routes
-
+import store from '../store';
 export default [
     {
         path: '/',
@@ -53,10 +53,17 @@ export default [
     path: '/digital-judging/signin',
     component: () =>import('../views/pages/SignIn.vue'),
     name: 'signin',
+    beforeEnter: (to, from, next) => {
+      if (!store.getters.isAuth) {
+        next();
+      } else {
+        next('/digital-judging/admin/entries');
+      }
+    },
   },
   {
     path: '/digital-judging/admin',
-    redirect: "/admin/entries",
+    redirect: "/digital-judging/admin/entries",
     component: () =>import('../views/admin/Scaffold.vue'),
     children: [
       {
@@ -65,6 +72,13 @@ export default [
         component: () =>import('../views/admin/Entries.vue'),
       },
     ],
+    beforeEnter: (to, from, next) => {
+      if (store.getters.isAuth) {
+        next();
+      } else {
+        next('/digital-judging/signin');
+      }
+    }
   },
 //   {
 //     path: '/:pathMatch(.*)*',

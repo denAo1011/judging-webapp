@@ -15,11 +15,10 @@ export default createStore({
     }
   },
   mutations: {
-    login(state, {  token }) {
+    login(state, token ) {
       state.token = token;
     },
     logout(state) {
-      state.user = null;
       state.token = null;
     }
   },

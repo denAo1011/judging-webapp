@@ -38,27 +38,27 @@ class CompanyEntryController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(CompanyEntry $company)
+    public function show(CompanyEntry $entry)
     {
-        return new CompanyEntryResource($company);
+        return new CompanyEntryResource($entry);
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(UpdateCompanyEntryRequest $request, CompanyEntry $company)
+    public function update(UpdateCompanyEntryRequest $request, CompanyEntry $entry)
     {
-        $company->update($request->validated());
+        $entry->update($request->validated());
 
-        return new CompanyEntryResource($company);
+        return new CompanyEntryResource($entry);
     }
 
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(CompanyEntry $company)
+    public function destroy(CompanyEntry $entry)
     {
-        $company->delete();
+        $entry->delete();
 
         return response()->noContent();
     }

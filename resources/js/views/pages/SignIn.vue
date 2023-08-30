@@ -1,72 +1,72 @@
-<script>
+<script setup>
 import Swal from "sweetalert2";
-import { Store } from "vuex";
 import BaseButton from "../../components/BaseButton.vue";
+import { useStore } from "vuex";
+import { useRouter } from "vue-router";
 import { ref } from "vue";
-export default {
-    components: {
-        BaseButton,
-    },
-    data() {
-        return {
-            visible: ref(false),
-            user: ref({
-                email: "",
-                password: "",
-            }),
-            errors: {
-                email: "",
-                password: "",
-            },
-            rules: {
-                required: (value) => !!value || "Required.",
-                email: (value) => {
-                    if (!value) {
-                        return "Required.";
-                    } else if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(value)) {
-                        return "Invalid Email.";
-                    }
-                    return true;
-                },
-            },
-        };
-    },
+const store = useStore();
+const router = useRouter();
 
-    methods: {
-        async submitLogin() {
-            const { valid } = await this.$refs.form.validate();
-            if (valid) {
-                window.axios
-                    .post("api/login", this.user)
-                    .then((response) => {
-                        Store.dispatch("login", response.data.token);
-                        Swal.fire({
-                            toast: true,
-                            icon: "success",
-                            title: "Login Successful",
-                            icon: "success",
-                        });
-                        this.$router.push({ name: "entries" });
-                    })
-                    .catch((error) => {
-                        Swal.fire({
-                            icon: "error",
-                            title: "Invalid Credentials",
-                            icon: "error",
-                        });
-                        // this.errors = {
-                        //     email: error.response.data,
-                        //     password: error.response.data,
-                        // };
-                        console.log(error);
-                    })
-                    .finally(() => {
-                        this.loginForm = false;
-                    });
-            }
-        },
+let form = ref(false);
+let visible = ref(false);
+let user = ref({
+    email: "",
+    password: "",
+});
+let errors = ref({
+    email: "",
+    password: "",
+});
+let rules = ref({
+    required: (value) => !!value || "Required.",
+    email: (value) => {
+        if (!value) {
+            return "Required.";
+        } else if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(value)) {
+            return "Invalid Email.";
+        }
+        return true;
     },
-};
+});
+
+async function submitLogin() {
+    // const { valid } = await this.$refs.form.validate();
+    if (form) {
+        window.axios
+            .post("/api/login", this.user)
+            .then((response) => {
+                console.log(response.data);
+                let token = response.data;
+                store.dispatch("login", token);
+                Swal.fire({
+                    toast: true,
+                    icon: "success",
+                    title: "Login Successful",
+                    icon: "success",
+                    position: "top-end",
+                    showConfirmButton: false,
+                    timer: 3000,
+                    timerProgressBar: true,
+                });
+                router.push({ name: "entries" });
+            })
+            .catch((error) => {
+                Swal.fire({
+                    icon: "error",
+                    title: "Invalid Credentials",
+                    icon: "error",
+                });
+                // this.errors = {
+                //     email: error.response.data,
+                //     password: error.response.data,
+                // };
+                console.log(error);
+            })
+            .finally(() => {
+                this.loginForm = false;
+            });
+    }
+}
 </script>
 
 <template>
@@ -80,7 +80,7 @@ export default {
                     <v-col cols="12" md="4" lg="3">
                         <v-card class="card-border">
                             <v-card-text>
-                                <v-form ref="form">
+                                <v-form v-model="form">
                                     <v-row>
                                         <v-col cols="12">
                                             <div

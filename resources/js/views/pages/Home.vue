@@ -6,6 +6,7 @@ import AboutPage from "./About.vue";
 import JurorsPage from "./Jurors.vue";
 import EligibilityPage from "./Eligibility.vue";
 import FaqsPage from "./FAQ.vue";
+import Footer from "../../components/Footer.vue";
 
 const showScrollButton = ref(false);
 
@@ -54,7 +55,7 @@ onMounted(() => {
     <JurorsPage id="jurorPage" />
     <EligibilityPage id="eligibilityPage" />
     <FaqsPage id="faqPage" />
-
+    <Footer v-if="!safeRoute"></Footer>
     <v-btn
         v-if="showScrollButton"
         @click="scrollToTop"

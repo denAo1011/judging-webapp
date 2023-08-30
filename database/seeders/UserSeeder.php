@@ -15,7 +15,7 @@ class UserSeeder extends Seeder
     {
         User::create([
             'email' => 'administrator@anaktv.ph',
-            'password' => 'administrator@anaktv.ph',
+            'password' => 'password',
         ]);
     }
 }
