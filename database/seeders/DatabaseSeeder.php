@@ -21,6 +21,8 @@ class DatabaseSeeder extends Seeder
             CompanySeeder::class, // Company Seeder
             CompanyJurorSeeder::class, // Company Juror Seeder
             SettingSeeder::class, // Setting Seeder
+            CompanyJurorSeeder::class, // Must come after Company seeder
+            CompanyEntriesSeeder::class, // Must come after Company seeder
         ]);
     }
 }
