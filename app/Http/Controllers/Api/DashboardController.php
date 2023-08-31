@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
 use App\Models\CompanyEntry;
+use App\Models\CompanyJuror;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 
@@ -21,8 +22,10 @@ class DashboardController extends Controller
             'approved' => CompanyEntry::whereStatus('APPROVED')->count(),
         ];
 
+        $jurorCount = CompanyJuror::count();
+
         return response()
-            ->json(['entries' => $numberOfEntries]);
+            ->json(['entries' => $numberOfEntries, 'jurors' => $jurorCount]);
     }
 
     /**
