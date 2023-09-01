@@ -19,7 +19,7 @@ class CompanyEntriesSeeder extends Seeder
             $company->companyEntries()
                 ->create([
                     'email' => fake()->email(),
-                    'link' => fake()->link(),
+                    'link' => 'https://www.youtube.com/watch?v=XToA-1dZYWA&list=RDdglBgJSMr-E&index=10&ab_channel=SunkissedLolaVEVO',
                     'title' => fake()->sentence(),
                     'premiere_date' => fake()->date(),
                     'day_of_airing' => fake()->dayOfWeek(),

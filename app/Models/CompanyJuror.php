@@ -24,6 +24,10 @@ class CompanyJuror extends Model
         'tallies' => 'array'
     ];
 
+    protected $with = [
+        'company'
+    ];
+
     // Get owning company
     public function company()
     {
