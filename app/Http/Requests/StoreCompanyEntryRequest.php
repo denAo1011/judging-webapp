@@ -40,8 +40,8 @@ class StoreCompanyEntryRequest extends FormRequest
             'directors' => ['nullable', 'string'],
             'writers' => ['nullable', 'string'],
 
-            'payment_reference' => ['required'],
-            'payment_reference_number' => ['required'],
+            'payment_reference' => ['sometimes'],
+            'payment_reference_number' => ['sometimes'],
         ];
     }
 }

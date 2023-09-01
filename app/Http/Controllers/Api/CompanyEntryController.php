@@ -46,11 +46,11 @@ class CompanyEntryController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(UpdateCompanyEntryRequest $request, CompanyEntry $entry)
+    public function update(UpdateCompanyEntryRequest $request, CompanyEntry $companyEntry)
     {
-        $entry->update($request->validated());
+        $companyEntry->update($request->validated());
 
-        return new CompanyEntryResource($entry);
+        return new CompanyEntryResource($companyEntry);
     }
 
     /**

@@ -35,7 +35,6 @@ async function submitLogin() {
         window.axios
             .post("/api/login", this.user)
             .then((response) => {
-                console.log(response.data);
                 let token = response.data;
                 store.dispatch("login", token);
                 Swal.fire({
@@ -56,10 +55,6 @@ async function submitLogin() {
                     title: "Invalid Credentials",
                     icon: "error",
                 });
-                // this.errors = {
-                //     email: error.response.data,
-                //     password: error.response.data,
-                // };
                 console.log(error);
             })
             .finally(() => {

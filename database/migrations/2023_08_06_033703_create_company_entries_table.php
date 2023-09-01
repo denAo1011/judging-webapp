@@ -33,7 +33,7 @@ return new class extends Migration
                 ->default('PENDING');
             $table->string('notes')->nullable();
             $table->string('payment_reference')->default('');
-            $table->string('payment_reference_number');
+            $table->string('payment_reference_number')->default('');
             $table->timestamps();
         });
     }
