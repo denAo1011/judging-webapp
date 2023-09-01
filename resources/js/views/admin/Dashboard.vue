@@ -1,9 +1,17 @@
 <script>
 export default {
-    data: () => ({}),
+    data: () => ({
+        entries: {},
+        jurors: 0,
+    }),
     methods: {
         fetchDashboard() {
             this.loading = true;
+            axios.get("/api/dashboard/statistics").then((response) => {
+                let data = response.data;
+                this.jurors = data.jurors;
+                this.entries = data.entries;
+            });
         },
     },
 
@@ -26,11 +34,11 @@ export default {
                         <v-row justify="center">
                             <v-col cols="12" md="6" lg="3">
                                 <v-card>
-                                    <v-card-text>
+                                    <v-card-text class="text-center">
                                         <h1
                                             class="text-5xl font-bold text-primary"
                                         >
-                                            0
+                                            {{ entries.total }}
                                         </h1>
                                         <h2
                                             class="text-xl font-bold text-primary"
@@ -42,14 +50,62 @@ export default {
                             </v-col>
                             <v-col cols="12" md="6" lg="3">
                                 <v-card>
-                                    <v-card-text>
+                                    <v-card-text class="text-center">
                                         <h1
-                                            class="text-5xl font-bold text-primary"
+                                            class="text-5xl font-bold text-success"
                                         >
-                                            0
+                                            {{ entries.approved }}
                                         </h1>
                                         <h2
-                                            class="text-xl font-bold text-primary"
+                                            class="text-xl font-bold text-success"
+                                        >
+                                            Approved
+                                        </h2>
+                                    </v-card-text>
+                                </v-card>
+                            </v-col>
+                            <v-col cols="12" md="6" lg="3">
+                                <v-card>
+                                    <v-card-text class="text-center">
+                                        <h1
+                                            class="text-5xl font-bold text-error"
+                                        >
+                                            {{ entries.disapproved }}
+                                        </h1>
+                                        <h2
+                                            class="text-xl font-bold text-error"
+                                        >
+                                            Rejected
+                                        </h2>
+                                    </v-card-text>
+                                </v-card>
+                            </v-col>
+                            <v-col cols="12" md="6" lg="3">
+                                <v-card>
+                                    <v-card-text class="text-center">
+                                        <h1
+                                            class="text-5xl font-bold text-warning"
+                                        >
+                                            {{ entries.pending }}
+                                        </h1>
+                                        <h2
+                                            class="text-xl font-bold text-warning"
+                                        >
+                                            Pending
+                                        </h2>
+                                    </v-card-text>
+                                </v-card>
+                            </v-col>
+                            <v-col cols="12" md="6" lg="3">
+                                <v-card>
+                                    <v-card-text class="text-center">
+                                        <h1
+                                            class="text-5xl font-bold text-secondary"
+                                        >
+                                            {{ jurors }}
+                                        </h1>
+                                        <h2
+                                            class="text-xl font-bold text-secondary"
                                         >
                                             Total Jurors
                                         </h2>

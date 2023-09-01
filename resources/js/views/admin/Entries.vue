@@ -43,7 +43,6 @@ export default {
         search: "",
         serverItems: [],
         loading: true,
-        totalItems: 0,
         editedIndex: -1,
         networks: [],
         entry: {},
@@ -105,7 +104,6 @@ export default {
                 .then((response) => {
                     let data = response.data;
                     this.serverItems = data.data;
-                    this.totalItems = data.meta.total;
                 })
                 .catch((error) => {
                     console.log(error);
@@ -251,7 +249,6 @@ export default {
                         <v-data-table
                             v-model:items-per-page="itemsPerPage"
                             :headers="headers"
-                            :items-length="totalItems"
                             :items="serverItems"
                             :loading="loading"
                             elevation="0"

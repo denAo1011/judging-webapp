@@ -17,15 +17,15 @@ class CompanyJurorController extends Controller
      */
     public function index()
     {
-        $perPage = request('perPage', 10);
+        // $perPage = request('perPage', 10);
 
         // Determine the base query based on authentication status
         $query = Auth::check() ? CompanyJuror::query() : CompanyJuror::whereIsCurrent(TRUE);
 
         // Check if there's a need to paginate or return all results
-        if ($perPage < 0)
-            return CompanyJurorResource::collection($query->get());
-        else return CompanyJurorResource::collection($query->paginate($perPage));
+        // if ($perPage < 0)
+        return CompanyJurorResource::collection($query->get());
+        // else return CompanyJurorResource::collection($query->paginate($perPage));
     }
 
     /**

@@ -16,12 +16,12 @@ class CompanyEntryController extends Controller
      */
     public function index()
     {
-        $perPage = request('perPage', 10);
+        // $perPage = request('perPage', 10);
 
-        if ($perPage < 0) // Return all companies
-            return CompanyEntryResource::collection(CompanyEntry::all());
-        else // Return paginated companies
-            return CompanyEntryResource::collection(CompanyEntry::paginate($perPage));
+        // if ($perPage < 0) // Return all companies
+        return CompanyEntryResource::collection(CompanyEntry::all());
+        // else // Return paginated companies
+        // return CompanyEntryResource::collection(CompanyEntry::paginate($perPage));
     }
 
     /**

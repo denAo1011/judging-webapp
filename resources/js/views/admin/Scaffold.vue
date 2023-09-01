@@ -17,6 +17,8 @@ onBeforeMount(() => {
 <template>
     <v-app>
         <Drawer />
-        <View />
+        <div class="w-full overflow-y-auto">
+            <View />
+        </div>
     </v-app>
 </template>
