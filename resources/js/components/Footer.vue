@@ -147,6 +147,14 @@ export default {
                 icon: "mdi-facebook",
             },
             {
+                to: "https://www.linkedin.com/in/anak-tv-b4a40a28b?trk=contact-info",
+                icon: "mdi-linkedin",
+            },
+            {
+                to: "https://instagram.com/seavfc?igshid=MzRlODBiNWFlZA==",
+                icon: "mdi-instagram",
+            },
+            {
                 to: "https://www.youtube.com/channel/UCTSk_YoUEPcpKXqo9FTIW9g",
                 icon: "mdi-youtube",
             },

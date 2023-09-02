@@ -50,7 +50,7 @@ import BaseButton from "../../components/BaseButton.vue";
                                             not just embracing digitalization;
                                             we're redefining it.
                                             <br /><br />
-                                            A world where AnakTV seamlessly
+                                            A world where Anak TV seamlessly
                                             weaves into every fiber of our
                                             existence, revolutionizing how we
                                             fulfill our mission. Join us on this
