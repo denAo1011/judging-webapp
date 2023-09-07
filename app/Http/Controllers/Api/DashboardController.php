@@ -23,9 +23,12 @@ class DashboardController extends Controller
         ];
 
         $jurorCount = CompanyJuror::count();
+        $votedJurorCount = CompanyJuror::whereNotNull('voted_at')
+            ->whereNotNull('tallies')
+            ->count();
 
         return response()
-            ->json(['entries' => $numberOfEntries, 'jurors' => $jurorCount]);
+            ->json(['entries' => $numberOfEntries, 'jurors' => $jurorCount, 'votedJurors' => $votedJurorCount]);
     }
 
     /**
