@@ -61,6 +61,12 @@ Route::group(['middleware' => ['auth:sanctum']], function () {
 
 // Requests for this group, MUST contain header "X-Juror-Token"
 Route::group(['middleware' => 'auth.companyToken'], function () {
+    Route::get('tokenCheck', function () {
+        return response()->json([
+            'message' => 'Valid token',
+            'juror' => request()->companyJuror
+        ]);
+    });
     Route::get('judging', [JudgingController::class, 'index']); // List approved entries
     Route::post('judging', [JudgingController::class, 'submit']); // Submit scores
 });
