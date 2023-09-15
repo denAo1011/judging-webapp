@@ -33,7 +33,7 @@ async function submitLogin() {
     // const { valid } = await this.$refs.form.validate();
     if (form) {
         window.axios
-            .post("/api/login", this.user)
+            .post("/api/login", user)
             .then((response) => {
                 let token = response.data;
                 store.dispatch("login", token);
