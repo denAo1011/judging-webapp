@@ -93,13 +93,9 @@ export default {
                     .catch((error) => {
                         Swal.fire({
                             icon: "error",
-                            title: "Invalid Credentials",
+                            title: "Something Went Wrong!",
                             icon: "error",
                         });
-                        // this.errors = {
-                        //     email: error.response.data,
-                        //     password: error.response.data,
-                        // };
                         console.log(error);
                     })
                     .finally(() => {
