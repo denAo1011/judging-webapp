@@ -12,6 +12,7 @@ export default {
             tallies: [],
             loading: false,
             confirmDialog: true,
+            successDialog: false,
             rules: {
                 required: (value) => !!value || "Required.",
             },
@@ -101,8 +102,7 @@ export default {
                         console.log(error);
                     })
                     .finally(() => {
-                        // this.loading = false;
-                        // this.loading = true;
+                        this.successDialog = true;
                     });
             } else {
                 Swal.fire({
@@ -111,6 +111,10 @@ export default {
                     icon: "error",
                 });
             }
+        },
+
+        backHome() {
+            this.$router.push({ name: "home" });
         },
     },
 };
@@ -201,9 +205,40 @@ export default {
             </v-card-actions>
         </v-card>
     </v-dialog>
+    <v-dialog v-model="successDialog" persistent fullscreen z-index="999">
+        <v-card>
+            <v-card-text class="p-8 d-flex align-center justify-center">
+                <div>
+                    <v-row justify="center" class="text-center space-y-4 mb-12">
+                        <v-col>
+                            <h1 class="text-congrats font-bold text-green-500">
+                                ALL SET.
+                            </h1>
+                            <h1 class="text-congrats font-bold text-blue-500">
+                                THANK YOU!
+                            </h1>
+                            <p class="text-xl text-gray-600">
+                                You've successfully submitted your entries
+                            </p>
+                        </v-col>
+                    </v-row>
+                    <!-- <v-row justify="center" class="mt-6">
+                        <v-col cols="12" md="8" lg="2"> -->
+                    <BaseButton @click="backHome()" :text="'RETURN TO HOME'" />
+                    <!-- </v-col> -->
+                    <!-- </v-row> -->
+                </div>
+            </v-card-text>
+        </v-card>
+    </v-dialog>
 </template>
 <style scoped>
 .card-border {
     border-radius: 20px !important;
+}
+
+.text-congrats {
+    font-size: 4rem;
+    line-height: 1;
 }
 </style>
