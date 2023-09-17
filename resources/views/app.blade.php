@@ -14,5 +14,6 @@
 
     @vite('resources/js/app.js')
 </body>
+<script id="youtube-iframe-js-api-script" src="https://www.youtube.com/iframe_api"></script>
 
 </html>

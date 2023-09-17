@@ -64,7 +64,7 @@ Route::group(['middleware' => 'auth.companyToken'], function () {
     Route::get('tokenCheck', function () {
         return response()->json([
             'message' => 'Valid token',
-            'juror' => request()->companyJuror
+            'juror' => request()->attributes->get('companyJuror', NULL)
         ]);
     });
     Route::get('judging', [JudgingController::class, 'index']); // List approved entries
