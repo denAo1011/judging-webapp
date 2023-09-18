@@ -14,6 +14,11 @@ export default {
                 this.entries = data.entries;
                 this.votedJurors = data.votedJurors;
             });
+
+            axios.get("/api/dashboard/rankings").then((response) => {
+                let data = response.data;
+                console.log(data);
+            });
         },
     },
 
