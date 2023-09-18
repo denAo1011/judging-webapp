@@ -8,11 +8,13 @@ export default {
     data() {
         return {
             token: "",
+            entry: {},
             entries: [],
             tallies: [],
             loading: false,
             confirmDialog: true,
             successDialog: false,
+            entryInfoDialog: false,
             rules: {
                 required: (value) => !!value || "Required.",
             },
@@ -113,6 +115,11 @@ export default {
             }
         },
 
+        entryInfo(entry) {
+            this.entry = entry;
+            this.entryInfoDialog = true;
+        },
+
         backHome() {
             this.$router.push({ name: "home" });
         },
@@ -144,12 +151,24 @@ export default {
                     md="4"
                     lg="4"
                 >
-                    <v-card height="400">
-                        <v-card-title class="text-center">
-                            {{ entry.title }}
-                        </v-card-title>
-
+                    <v-card height="400" class="elevation-0">
                         <v-card-text class="text-center">
+                            <div class="flex justify-between py-2">
+                                <div
+                                    class="text-left font-weight-bold text-xl text-truncate"
+                                >
+                                    {{ entry.title }}
+                                </div>
+                                <div class="text-right">
+                                    <v-icon
+                                        size="30"
+                                        @click="entryInfo(entry)"
+                                        color="primary"
+                                    >
+                                        mdi-information
+                                    </v-icon>
+                                </div>
+                            </div>
                             <YouTube
                                 :src="entry.link"
                                 width="100%"
@@ -228,6 +247,52 @@ export default {
                     <!-- </v-col> -->
                     <!-- </v-row> -->
                 </div>
+            </v-card-text>
+        </v-card>
+    </v-dialog>
+    <v-dialog v-model="entryInfoDialog" z-index="999" max-width="500">
+        <v-card>
+            <v-card-title class="text-center"> {{ entry.title }} </v-card-title>
+            <v-card-text class="p-8 d-flex align-center justify-center">
+                <!-- Add Synopsis and Other Information -->
+                <v-row justify="space-between" class="text-start">
+                    <v-col cols="12">
+                        <span class="text-gray-600">Synopsis: </span>
+                        <span class="text-black-600">
+                            {{ entry.synopsis }}
+                        </span>
+                    </v-col>
+                    <v-col cols="12">
+                        <span class="text-gray-600">Production Company: </span>
+                        <span class="text-black-600">
+                            {{ entry.production_company }}
+                        </span>
+                    </v-col>
+                    <v-col cols="12">
+                        <span class="text-gray-600">Producers: </span>
+                        <span class="text-black-600">
+                            {{ entry.producers }}
+                        </span>
+                    </v-col>
+                    <v-col cols="12">
+                        <span class="text-gray-600">Executive Producers: </span>
+                        <span class="text-black-600">
+                            {{ entry.executive_producers }}
+                        </span>
+                    </v-col>
+                    <v-col cols="12">
+                        <span class="text-gray-600">Director: </span>
+                        <span class="text-black-600">
+                            {{ entry.directors }}
+                        </span>
+                    </v-col>
+                    <v-col cols="12">
+                        <span class="text-gray-600">Writer: </span>
+                        <span class="text-black-600">
+                            {{ entry.writers }}
+                        </span>
+                    </v-col>
+                </v-row>
             </v-card-text>
         </v-card>
     </v-dialog>
