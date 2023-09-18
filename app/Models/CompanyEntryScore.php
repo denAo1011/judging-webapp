@@ -10,8 +10,8 @@ class CompanyEntryScore extends Model
     use HasFactory;
 
     protected $fillable = [
-        'company_token_id',
         'company_juror_id',
+        'company_entry_id',
         'level_one_rating',
         'level_two_rating',
     ];

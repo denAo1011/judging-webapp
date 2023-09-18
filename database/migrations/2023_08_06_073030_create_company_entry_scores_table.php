@@ -13,7 +13,7 @@ return new class extends Migration
     {
         Schema::create('company_entry_scores', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('company_token_id')->constrained('company_tokens', 'id')->onDelete('cascade');
+            // $table->foreignId('company_token_id')->constrained('company_tokens', 'id')->onDelete('cascade'); // This is not needed anymore, table deleted
             $table->foreignId('company_entry_id')->constrained('company_entries', 'id')->onDelete('cascade');
             $table->decimal('level_one_rating');
             $table->decimal('level_two_rating');
