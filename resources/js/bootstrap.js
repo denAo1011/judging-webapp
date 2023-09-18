@@ -13,7 +13,9 @@ window.axios.defaults.headers.common['X-Requested-With'] = 'XMLHttpRequest';
 window.axios.interceptors.request.use(
     (config) => {
         let token = store.getters.token;
+        let jurorToken = store.getters.jurorToken;
         if (token) config.headers["Authorization"] = `Bearer ${token}`;
+        if (jurorToken) config.headers["X-Juror-Token"] = `${jurorToken}`;
         return config;
     },
 

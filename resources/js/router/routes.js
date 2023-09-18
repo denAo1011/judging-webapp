@@ -37,7 +37,7 @@ export default [
   },
   {
     path: '/digital-judging/judge',
-    redirect: "/judge/process",
+    redirect: "/digital-judging/judge/process",
   },
   {
     path: '/digital-judging/judge/process',

@@ -16,7 +16,7 @@ class Setting extends Model
     // Get value by key
     public static function getValue($key)
     {
-        return self::whereKey($key)->first()->value ?? NULL;
+        return self::all()->where('key', $key)->first()->value ?? NULL;
     }
 
     // Determine if date now is within range of either level one or level two voting,
