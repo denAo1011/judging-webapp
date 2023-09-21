@@ -21,11 +21,11 @@ export default {
                 key: "company.name",
             },
             { title: "Title", key: "title", align: "start" },
-            {
-                title: "Production Company",
-                key: "production_company",
-                align: "start",
-            },
+            // {
+            //     title: "Production Company",
+            //     key: "production_company",
+            //     align: "start",
+            // },
             // {
             //     title: "Executive Producers",
             //     key: "executive_producers",

@@ -2,7 +2,7 @@
 // import "vue3-carousel/dist/carousel.css";
 // import Carousel from "vue3-carousel";
 
-import { ref } from "vue";
+import { ref, onMounted } from "vue";
 import { useRouter } from "vue-router";
 import BaseButton from "../../components/BaseButton.vue";
 const router = useRouter();
@@ -37,6 +37,16 @@ const jurors = ref([
 function goTo(route) {
     router.push(route);
 }
+
+function fetchJurors() {
+    window.axios.get("/api/companyJurors").then((response) => {
+        jurors.value = response.data.data;
+    });
+}
+
+onMounted(() => {
+    fetchJurors();
+});
 </script>
 <template>
     <div class="juror-container d-flex align-items-start py-12">
@@ -93,7 +103,7 @@ function goTo(route) {
                                         <p
                                             class="text-sm text-center text-primary"
                                         >
-                                            {{ juror.company }}
+                                            {{ juror.company.name }}
                                         </p>
                                     </v-card-text>
                                 </v-card>

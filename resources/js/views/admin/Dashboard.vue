@@ -3,6 +3,7 @@ export default {
     data: () => ({
         entries: {},
         jurors: 0,
+        votedJurors: 0,
     }),
     methods: {
         fetchDashboard() {
@@ -11,6 +12,12 @@ export default {
                 let data = response.data;
                 this.jurors = data.jurors;
                 this.entries = data.entries;
+                this.votedJurors = data.votedJurors;
+            });
+
+            axios.get("/api/dashboard/rankings").then((response) => {
+                let data = response.data;
+                console.log(data);
             });
         },
     },
@@ -33,7 +40,7 @@ export default {
                     <v-card-text>
                         <v-row justify="center">
                             <v-col cols="12" md="6" lg="3">
-                                <v-card>
+                                <v-card class="rounded-lg">
                                     <v-card-text class="text-center">
                                         <h1
                                             class="text-5xl font-bold text-primary"
@@ -49,7 +56,7 @@ export default {
                                 </v-card>
                             </v-col>
                             <v-col cols="12" md="6" lg="3">
-                                <v-card>
+                                <v-card class="rounded-lg">
                                     <v-card-text class="text-center">
                                         <h1
                                             class="text-5xl font-bold text-success"
@@ -59,13 +66,13 @@ export default {
                                         <h2
                                             class="text-xl font-bold text-success"
                                         >
-                                            Approved
+                                            Entries Approved
                                         </h2>
                                     </v-card-text>
                                 </v-card>
                             </v-col>
                             <v-col cols="12" md="6" lg="3">
-                                <v-card>
+                                <v-card class="rounded-lg">
                                     <v-card-text class="text-center">
                                         <h1
                                             class="text-5xl font-bold text-error"
@@ -75,13 +82,13 @@ export default {
                                         <h2
                                             class="text-xl font-bold text-error"
                                         >
-                                            Rejected
+                                            Entries Rejected
                                         </h2>
                                     </v-card-text>
                                 </v-card>
                             </v-col>
                             <v-col cols="12" md="6" lg="3">
-                                <v-card>
+                                <v-card class="rounded-lg">
                                     <v-card-text class="text-center">
                                         <h1
                                             class="text-5xl font-bold text-warning"
@@ -91,23 +98,39 @@ export default {
                                         <h2
                                             class="text-xl font-bold text-warning"
                                         >
-                                            Pending
+                                            Entries Pending
                                         </h2>
                                     </v-card-text>
                                 </v-card>
                             </v-col>
                             <v-col cols="12" md="6" lg="3">
-                                <v-card>
+                                <v-card class="rounded-lg">
                                     <v-card-text class="text-center">
                                         <h1
-                                            class="text-5xl font-bold text-secondary"
+                                            class="text-5xl font-bold text-primary"
                                         >
                                             {{ jurors }}
                                         </h1>
                                         <h2
-                                            class="text-xl font-bold text-secondary"
+                                            class="text-xl font-bold text-primary"
                                         >
                                             Total Jurors
+                                        </h2>
+                                    </v-card-text>
+                                </v-card>
+                            </v-col>
+                            <v-col cols="12" md="6" lg="3">
+                                <v-card class="rounded-lg">
+                                    <v-card-text class="text-center">
+                                        <h1
+                                            class="text-5xl font-bold text-success"
+                                        >
+                                            {{ votedJurors }}
+                                        </h1>
+                                        <h2
+                                            class="text-xl font-bold text-success"
+                                        >
+                                            Jurors Voted
                                         </h2>
                                     </v-card-text>
                                 </v-card>
