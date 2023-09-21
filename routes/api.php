@@ -57,6 +57,11 @@ Route::group(['middleware' => ['auth:sanctum']], function () {
     // Dashboard Route
     Route::get('dashboard/statistics', [DashboardController::class, 'getStatistics']);
     Route::get('dashboard/rankings', [DashboardController::class, 'getRankings']);
+
+    // Reports
+    Route::get('reports/companyEntries', [ReportController::class, 'downloadCompanyEntries']);
+    Route::get('reports/companyEntryLevelOneRankings', [ReportController::class, 'downloadCompanyEntryLevelOneRankings']);
+    Route::get('reports/companyEntryLevelTwoRankings', [ReportController::class, 'downloadCompanyEntryLevelTwoRankings']);
 });
 
 // Requests for this group, MUST contain header "X-Juror-Token"
