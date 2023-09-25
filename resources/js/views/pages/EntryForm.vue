@@ -68,6 +68,14 @@ export default {
     methods: {
         async submitEntry() {
             const { valid } = await this.$refs.form.validate();
+            if(this.entry.payment_reference.length == 0 || this.entry.payment_reference == null) {
+                await Swal.fire({
+                    icon: "warning",
+                    title: "Incomplete form!",
+                    text: "Please upload a screenshot of your payment referrence",
+                });
+                return;
+            }
             if (valid) {
                 window.axios
                     .post(
@@ -87,18 +95,7 @@ export default {
                         Swal.fire({
                             icon: "success",
                             title: "Entry Submitted!",
-                            icon: "success",
                         });
-                    })
-                    .catch((error) => {
-                        Swal.fire({
-                            icon: "error",
-                            title: "Something Went Wrong!",
-                            icon: "error",
-                        });
-                        console.log(error);
-                    })
-                    .finally(() => {
                         this.entry = {
                             ...this.entry,
                             link: "",
@@ -113,6 +110,16 @@ export default {
                             directors: "",
                             writers: "",
                         };
+                    })
+                    .catch((error) => {
+                        Swal.fire({
+                            icon: "error",
+                            title: "Something Went Wrong!",
+                        });
+                        console.log(error);
+                    })
+                    .finally(() => {
+
                     });
             }
         },
