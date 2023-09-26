@@ -50,7 +50,6 @@ export default {
                             Swal.fire({
                                 icon: "error",
                                 title: error.response.data.message,
-                                icon: "error",
                             });
                         }, 3000);
                     })
@@ -97,7 +96,6 @@ export default {
                         Swal.fire({
                             icon: "success",
                             title: "Tallies Submitted",
-                            icon: "success",
                         });
                     })
                     .catch((error) => {
@@ -110,7 +108,6 @@ export default {
                 Swal.fire({
                     icon: "error",
                     title: "Please rate all entries",
-                    icon: "error",
                 });
             }
         },
@@ -177,6 +174,8 @@ export default {
                                 class="contain"
                             />
                             <v-rating
+                                density="comfortable"
+                                length="10"
                                 color="primary"
                                 v-model="tallies[index].rating"
                                 :rules="[rules.required]"
