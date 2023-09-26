@@ -38,8 +38,8 @@ class DashboardController extends Controller
     {
         return response()
             ->json([
-                'level_one' => CompanyEntry::orderByAverageLevelOneRating()->get(),
-                'level_two' => CompanyEntry::orderByAverageLevelTwoRating()->get(),
+                'level_one' => CompanyEntry::orderByAverageLevelOneRating()->with('company')->get(),
+                'level_two' => CompanyEntry::orderByAverageLevelTwoRating()->with('company')->get(),
             ]);
     }
 }

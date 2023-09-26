@@ -3,15 +3,15 @@
 namespace App\Exports;
 
 use App\Models\CompanyEntry;
-use Maatwebsite\Excel\Concerns\FromCollection;
+use Maatwebsite\Excel\Concerns\FromQuery;
 
-class CompanyEntryLevelTwoRankingsExport implements FromCollection
+class CompanyEntryLevelTwoRankingsExport implements FromQuery
 {
     /**
      * @return \Illuminate\Support\Collection
      */
-    public function collection()
+    public function query()
     {
-        return CompanyEntry::orderByAverageLevelOneRating();
+        return CompanyEntry::orderByAverageLevelTwoRating();
     }
 }

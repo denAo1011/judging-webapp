@@ -6,6 +6,7 @@ use App\Http\Controllers\Api\CompanyEntryController;
 use App\Http\Controllers\Api\CompanyJurorController;
 use App\Http\Controllers\Api\JudgingController;
 use App\Http\Controllers\Api\DashboardController;
+use App\Http\Controllers\Api\ReportController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -28,6 +29,11 @@ Route::get('companies', [CompanyController::class, 'index']);
 Route::post('companies/{company}/companyEntries', [CompanyEntryController::class, 'store']);
 
 Route::get('companyJurors', [CompanyJurorController::class, 'index']);
+
+// Reports
+Route::get('reports/companyEntries', [ReportController::class, 'downloadCompanyEntries']);
+Route::get('reports/companyEntryLevelOneRankings', [ReportController::class, 'downloadCompanyEntryLevelOneRankings']);
+Route::get('reports/companyEntryLevelTwoRankings', [ReportController::class, 'downloadCompanyEntryLevelTwoRankings']);
 
 // Authenticated routes
 Route::group(['middleware' => ['auth:sanctum']], function () {
@@ -57,11 +63,6 @@ Route::group(['middleware' => ['auth:sanctum']], function () {
     // Dashboard Route
     Route::get('dashboard/statistics', [DashboardController::class, 'getStatistics']);
     Route::get('dashboard/rankings', [DashboardController::class, 'getRankings']);
-
-    // Reports
-    Route::get('reports/companyEntries', [ReportController::class, 'downloadCompanyEntries']);
-    Route::get('reports/companyEntryLevelOneRankings', [ReportController::class, 'downloadCompanyEntryLevelOneRankings']);
-    Route::get('reports/companyEntryLevelTwoRankings', [ReportController::class, 'downloadCompanyEntryLevelTwoRankings']);
 });
 
 // Requests for this group, MUST contain header "X-Juror-Token"

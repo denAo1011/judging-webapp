@@ -1,9 +1,36 @@
 <script>
+import { VDataTable } from "vuetify/labs/VDataTable";
 export default {
+    components: {
+        VDataTable,
+    },
     data: () => ({
         entries: {},
         jurors: 0,
         votedJurors: 0,
+        itemsPerPage: 10,
+        headers: [
+            {
+                title: "Network",
+                align: "start",
+                sortable: false,
+                key: "company.name",
+            },
+            { title: "Title", key: "title", align: "start" },
+            {
+                title: "Production Company",
+                key: "production_company",
+                align: "start",
+            },
+            {
+                title: "Score",
+                key: "avg_level_one_rating",
+                align: "start",
+            },
+        ],
+        levelOneRanking: [],
+        levelTwoanking: [],
+        loading: true,
     }),
     methods: {
         fetchDashboard() {
@@ -17,8 +44,18 @@ export default {
 
             axios.get("/api/dashboard/rankings").then((response) => {
                 let data = response.data;
-                console.log(data);
+                this.levelOneRanking = data.level_one;
+                this.levelTwoRanking = data.level_two;
+                this.loading = false;
             });
+        },
+
+        downloadRankings(rank) {
+            window.open(
+                window.location.origin +
+                    `/api/reports/companyEntryLevel${rank}Rankings`,
+                "_blank"
+            );
         },
     },
 
@@ -136,6 +173,74 @@ export default {
                                 </v-card>
                             </v-col>
                         </v-row>
+                    </v-card-text>
+                </v-card>
+            </v-col>
+        </v-row>
+    </v-container>
+    <v-container>
+        <v-row>
+            <v-col>
+                <v-card class="pa-10">
+                    <v-toolbar color="transparent">
+                        <h1 class="text-3xl font-bold text-primary">
+                            Level 1 Rankings
+                        </h1>
+                        <v-spacer></v-spacer>
+                        <v-btn
+                            color="success"
+                            variant="elevated"
+                            rounded="lg"
+                            prepend-icon="mdi-download"
+                            size="small"
+                            @click="downloadRankings('One')"
+                        >
+                            Download
+                        </v-btn>
+                    </v-toolbar>
+                    <v-card-text>
+                        <v-data-table
+                            v-model:items-per-page="itemsPerPage"
+                            :headers="headers"
+                            :items="levelOneRanking"
+                            :loading="loading"
+                            elevation="0"
+                            item-value="name"
+                        >
+                        </v-data-table>
+                    </v-card-text>
+                </v-card>
+            </v-col>
+        </v-row>
+        <v-row>
+            <v-col>
+                <v-card class="pa-10">
+                    <v-toolbar color="transparent">
+                        <h1 class="text-3xl font-bold text-primary">
+                            Level 2 Rankings
+                        </h1>
+                        <v-spacer></v-spacer>
+                        <v-btn
+                            color="success"
+                            variant="elevated"
+                            rounded="lg"
+                            prepend-icon="mdi-download"
+                            size="small"
+                            @click="downloadRankings('Two')"
+                        >
+                            Download
+                        </v-btn>
+                    </v-toolbar>
+                    <v-card-text>
+                        <v-data-table
+                            v-model:items-per-page="itemsPerPage"
+                            :headers="headers"
+                            :items="levelTwoRanking"
+                            :loading="loading"
+                            elevation="0"
+                            item-value="name"
+                        >
+                        </v-data-table>
                     </v-card-text>
                 </v-card>
             </v-col>

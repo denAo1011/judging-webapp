@@ -53,7 +53,7 @@ export default createStore({
   },
   plugins: [
     persistedState({
-      storage: window.sessionStorage,
+      storage: window.localStorage,
     }),
   ],
 });
