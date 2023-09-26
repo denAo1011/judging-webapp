@@ -65,37 +65,17 @@ class CompanyEntry extends Model
 
     public function scopeOrderByAverageLevelOneRating($query, $direction = 'desc')
     {
-        // Solution 1
-        // return $query->withAvg('companyEntryScores', 'level_one_rating')
-        //     ->orderBy('companyEntryScores_avg_level_one_rating', $direction);
-
-        // Solution 2
-        return $query->withAvg(['companyEntryScores as avg_level_one_rating' => function ($query) {
-            $query->select('level_one_rating');
-        }])->orderBy('avg_level_one_rating', $direction);
-
-        // Solution 3
-        // return $query->leftJoin('company_entry_scores', 'company_entries.id', '=', 'company_entry_scores.company_entry_id')
-        // ->select('company_entries.*', DB::raw('AVG(company_entry_scores.level_one_rating) as avg_level_one_rating'))
-        // ->groupBy('company_entries.id')
-        // ->orderBy('avg_level_one_rating', $direction);
+        return $query->leftJoin('company_entry_scores', 'company_entries.id', '=', 'company_entry_scores.company_entry_id')
+            ->select(DB::raw('AVG(company_entry_scores.level_one_rating) as avg_level_one_rating'), 'company_entries.*')
+            ->groupBy('company_entries.id')
+            ->orderBy('avg_level_one_rating', $direction);
     }
 
     public function scopeOrderByAverageLevelTwoRating($query, $direction = 'desc')
     {
-        // Solution 1
-        // return $query->withAvg('companyEntryScores', 'level_two_rating')
-        //     ->orderBy('companyEntryScores_avg_level_two_rating', $direction);
-
-        // Solution 2
-        return $query->withAvg(['companyEntryScores as avg_level_two_rating' => function ($query) {
-            $query->select('level_two_rating');
-        }])->orderBy('avg_level_two_rating', $direction);
-
-        // Solution 3
-        // return $query->leftJoin('company_entry_scores', 'company_entries.id', '=', 'company_entry_scores.company_entry_id')
-        //     ->select('company_entries.*', DB::raw('AVG(company_entry_scores.level_two_rating) as avg_level_two_rating'))
-        //     ->groupBy('company_entries.id')
-        //     ->orderBy('avg_level_two_rating', $direction);
+        return $query->leftJoin('company_entry_scores', 'company_entries.id', '=', 'company_entry_scores.company_entry_id')
+            ->select(DB::raw('AVG(company_entry_scores.level_two_rating) as avg_level_two_rating'), 'company_entries.*')
+            ->groupBy('company_entries.id')
+            ->orderBy('avg_level_two_rating', $direction);
     }
 }
