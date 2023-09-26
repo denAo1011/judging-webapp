@@ -67,14 +67,30 @@ export default {
     },
     methods: {
         async submitEntry() {
+            console.log(this.image_name[0].type);
             const { valid } = await this.$refs.form.validate();
-            if(this.entry.payment_reference.length == 0 || this.entry.payment_reference == null) {
+            if (
+                this.entry.payment_reference.length == 0 ||
+                this.entry.payment_reference == null
+            ) {
                 await Swal.fire({
                     icon: "warning",
                     title: "Incomplete form!",
                     text: "Please upload a screenshot of your payment referrence",
                 });
                 return;
+            }
+            //Check if image_name is a image file
+            let types = ["image/jpeg", "image/png", "image/jpg"];
+            if (
+                !this.image_name[0] ||
+                !types.includes(this.image_name[0].type)
+            ) {
+                await Swal.fire({
+                    icon: "warning",
+                    title: "Incomplete form!",
+                    text: "Please upload an image file only",
+                });
             }
             if (valid) {
                 window.axios
@@ -118,9 +134,7 @@ export default {
                         });
                         console.log(error);
                     })
-                    .finally(() => {
-
-                    });
+                    .finally(() => {});
             }
         },
         fetchNetworks() {
@@ -498,6 +512,7 @@ export default {
                                                 prepend-icon="mdi-paperclip"
                                                 variant="outlined"
                                                 @change="convertImage()"
+                                                accept="image/*"
                                                 :show-size="1000"
                                                 :rules="[rules.required]"
                                             >
