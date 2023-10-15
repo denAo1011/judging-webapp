@@ -8,6 +8,7 @@ use App\Http\Requests\StoreCompanyEntryRequest;
 use App\Http\Requests\UpdateCompanyEntryRequest;
 use App\Http\Resources\CompanyEntryResource;
 use App\Models\Company;
+use App\Models\Setting;
 
 class CompanyEntryController extends Controller
 {
@@ -29,10 +30,14 @@ class CompanyEntryController extends Controller
      */
     public function store(StoreCompanyEntryRequest $request, Company $company)
     {
-        $company = $company->companyEntries()
-            ->create($request->validated());
-
-        return new CompanyEntryResource($company);
+        if (Setting::getSubmissionDate()) {
+            $company = $company->companyEntries()
+                ->create($request->validated());
+            return new CompanyEntryResource($company);
+        } else {
+            return response()
+                ->json(['message' => 'Submission is closed.'], 400);
+        }
     }
 
     /**

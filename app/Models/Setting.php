@@ -38,4 +38,20 @@ class Setting extends Model
             return NULL;
         }
     }
+
+    //Determine if date now is within range of submission date
+    // return boolean
+    public static function getSubmissionDate(): bool
+    {
+        $now = now();
+
+        $submissionDateFrom = self::getValue('submission_date_from');
+        $submissionDateTo = self::getValue('submission_date_to');
+
+        if ($now->between($submissionDateFrom, $submissionDateTo)) {
+            return true;
+        } else {
+            return false;
+        }
+    }
 }

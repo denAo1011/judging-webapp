@@ -130,7 +130,7 @@ export default {
                     .catch((error) => {
                         Swal.fire({
                             icon: "error",
-                            title: "Something Went Wrong!",
+                            title: error.response.data.message,
                         });
                         console.log(error);
                     })
