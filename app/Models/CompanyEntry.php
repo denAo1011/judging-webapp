@@ -67,6 +67,7 @@ class CompanyEntry extends Model
     {
         return $query->leftJoin('company_entry_scores', 'company_entries.id', '=', 'company_entry_scores.company_entry_id')
             ->select(DB::raw('AVG(company_entry_scores.level_one_rating) as avg_level_one_rating'), 'company_entries.*')
+            ->where('company_entries.status','APPROVED')
             ->groupBy('company_entries.id')
             ->orderBy('avg_level_one_rating', $direction);
     }
@@ -75,6 +76,7 @@ class CompanyEntry extends Model
     {
         return $query->leftJoin('company_entry_scores', 'company_entries.id', '=', 'company_entry_scores.company_entry_id')
             ->select(DB::raw('AVG(company_entry_scores.level_two_rating) as avg_level_two_rating'), 'company_entries.*')
+            ->where('company_entries.status','APPROVED')
             ->groupBy('company_entries.id')
             ->orderBy('avg_level_two_rating', $direction);
     }
