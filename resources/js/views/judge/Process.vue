@@ -30,8 +30,8 @@ function goTo(route) {
                                         </ol>
                                         <p class="mb-6 text-base"><strong>Ratings:</strong>
                                             <ul class="list-disc pl-6">
-                                                <li>1-3 Stars = NOT Child Sensitive</li>
-                                                <li>4-5 Stars = Child Sensitive (elevated to the second level of judging)</li>
+                                                <li>1-6 Stars = NOT Child Sensitive</li>
+                                                <li>7-10 Stars = Child Sensitive (elevated to the second level of judging)</li>
                                             </ul>
                                         </p>
                                     </v-col>

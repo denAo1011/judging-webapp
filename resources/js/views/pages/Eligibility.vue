@@ -68,9 +68,11 @@ function goTo(route) {
                                 <v-row>
                                     <v-col cols="12" class="text-white">
                                         <h2 class="text-center text-base lg:text-3xl font-semibold my-4">Timelines and Deadlines</h2>
-                                        <p class="mb-2 text-base">Submission Deadline: <strong> August 26 to September 15, 2023</strong></p>
-                                        <p class="mb-2 text-base">First Level Judging: <strong> October 1 to 15, 2023</strong></p>
-                                        <p class="mb-2 text-base">Second Level Judging: <strong >November 1 to 15, 2023</strong></p>
+                                        <p class="mb-2 text-base">Submission Deadline: <strong> August 26 to October 14, 2023</strong></p>
+                                        <p class="mb-2 text-base">First Level Judging: <strong> October 15 to 22, 2023</strong></p>
+                                        <p class="mb-2 text-base">Net Makabata Stars Voting: <strong> October 15 to 22, 2023</strong></p>
+                                        <p class="mb-2 text-base">Second Level Judging: <strong >November 6 to 12, 2023</strong></p>
+                                        <p class="mb-2 text-base">Awarding: <strong >December 8, 2023</strong></p>
                                         <!-- Add more timeline and deadline details here -->
                                     </v-col>
                                 </v-row>
