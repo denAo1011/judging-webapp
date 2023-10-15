@@ -8,7 +8,7 @@ export default {
     data() {
         return {
             token: "",
-            entry: {},
+            consent: false,
             entries: [],
             tallies: [],
             loading: false,
@@ -89,7 +89,16 @@ export default {
                     valid = false;
                 }
             });
-            if (valid) {
+            //Validate entry form
+            const { validEntry } = await this.$refs.form.validate();
+            if (this.consent == false) {
+                Swal.fire({
+                    icon: "error",
+                    title: "Please check the data privacy consent",
+                });
+                return;
+            }
+            if (valid && this.consent) {
                 window.axios
                     .post("/api/judging", { tallies: this.tallies })
                     .then((response) => {
@@ -139,7 +148,7 @@ export default {
         ></v-progress-circular>
     </v-overlay>
     <div v-if="!confirmDialog && !loading">
-        <v-form ref="entriesForm" lazy-validation>
+        <v-form ref="form" lazy-validation>
             <v-row justify="center" class="pa-5">
                 <v-col
                     v-for="(entry, index) in entries"
@@ -178,10 +187,18 @@ export default {
                                 length="10"
                                 color="primary"
                                 v-model="tallies[index].rating"
-                                :rules="[rules.required]"
                             ></v-rating>
                         </v-card-text>
                     </v-card>
+                </v-col>
+                <v-col cols="12" class="ma-0">
+                    <v-checkbox
+                        color="success"
+                        v-model="consent"
+                        label="I HEREBY CERTIFY that the information provided in this form is complete, true and correct to the best of my knowledge. I give my consent to AnakTV  to collect, use and process my personal information. I understand that my consent does not preclude the existence of other criteria for lawful processing of personal data, and does not waive any of my rights under the Data Privacy Act of 2012 and other applicable laws."
+                        :rules="[rules.required]"
+                    >
+                    </v-checkbox>
                 </v-col>
             </v-row>
             <v-row justify="center">
