@@ -30,7 +30,7 @@ class CompanyEntryController extends Controller
      */
     public function store(StoreCompanyEntryRequest $request, Company $company)
     {
-        if (Setting::getSubmissionDate()) {
+        if (Setting::getSubmissionDate() || $request['gateway'] == 'admin') {
             $company = $company->companyEntries()
                 ->create($request->validated());
             return new CompanyEntryResource($company);

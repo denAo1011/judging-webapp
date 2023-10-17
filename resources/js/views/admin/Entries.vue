@@ -138,7 +138,6 @@ export default {
                     Swal.fire({
                         icon: "success",
                         title: "Entry Updated!",
-                        icon: "success",
                     });
                 })
                 .catch((error) => {
@@ -156,6 +155,7 @@ export default {
                             "/companyEntries",
                         {
                             ...this.entry,
+                            gateway: 'admin',
                             email: this.entry.contact_person_email,
                             premiere_date: moment(
                                 this.entry.premiere_date
@@ -164,26 +164,12 @@ export default {
                     )
                     .then((response) => {
                         // Store.dispatch("login", response.data.token);
+                        this.fetchEntries();
+                        this.entryDialog = false;
                         Swal.fire({
                             icon: "success",
                             title: "Entry Submitted!",
-                            icon: "success",
                         });
-                        this.fetchEntries();
-                    })
-                    .catch((error) => {
-                        Swal.fire({
-                            icon: "error",
-                            title: "Invalid Credentials",
-                            icon: "error",
-                        });
-                        // this.errors = {
-                        //     email: error.response.data,
-                        //     password: error.response.data,
-                        // };
-                        console.log(error);
-                    })
-                    .finally(() => {
                         this.entry = {
                             ...this.entry,
                             link: "",
@@ -198,7 +184,15 @@ export default {
                             directors: "",
                             writers: "",
                         };
-                    });
+                    })
+                    .catch((error) => {
+                        Swal.fire({
+                            icon: "error",
+                            title: error.response.data.message,
+                        });
+                        console.log(error);
+                    })
+                    .finally(() => {});
             }
         },
 
