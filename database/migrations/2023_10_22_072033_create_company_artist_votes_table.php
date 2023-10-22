@@ -11,12 +11,11 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('company_artists', function (Blueprint $table) {
+        Schema::create('company_artist_votes', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('company_id')->constrained('companies')->onDelete('cascade');
-            $table->string('name');
-            $table->string('gender', 10);
-            $table->string('image');
+            $table->foreignId('company_artist_id')->constrained('company_artists')->onDelete('cascade');
+            $table->string('ip_address', 45);
+            $table->string('user_agent');
             $table->timestamps();
         });
     }
@@ -26,6 +25,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('artists');
+        Schema::dropIfExists('company_artist_votes');
     }
 };

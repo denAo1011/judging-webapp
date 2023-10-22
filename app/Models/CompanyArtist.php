@@ -19,6 +19,10 @@ class CompanyArtist extends Model
         'imaage'
     ];
 
+    protected $appends = [
+        'votes'
+    ];
+
     public function company()
     {
         return $this->belongsTo(Company::class);
@@ -31,5 +35,15 @@ class CompanyArtist extends Model
             $imageUrl = $this->uploadBase64EncodedImage($value, $fileName, 'artist-images');
             $this->attributes['image'] = $imageUrl;
         }
+    }
+
+    public function companyArtistVotes()
+    {
+        return $this->hasMany(CompanyArtistVote::class);
+    }
+
+    public function getVotesAttribute()
+    {
+        return $this->companyArtistVotes()->count();
     }
 }

@@ -8,6 +8,7 @@ use App\Http\Controllers\Api\CompanyJurorController;
 use App\Http\Controllers\Api\JudgingController;
 use App\Http\Controllers\Api\DashboardController;
 use App\Http\Controllers\Api\ReportController;
+use App\Http\Controllers\Api\VoteController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -30,6 +31,9 @@ Route::get('companies', [CompanyController::class, 'index']);
 Route::post('companies/{company}/companyEntries', [CompanyEntryController::class, 'store']);
 
 Route::get('companyJurors', [CompanyJurorController::class, 'index']);
+
+// Voting
+Route::post('companyArtists/{companyArtist}/vote', VoteController::class);
 
 // Reports
 Route::get('reports/companyEntries', [ReportController::class, 'downloadCompanyEntries']);
@@ -72,7 +76,8 @@ Route::group(['middleware' => ['auth:sanctum']], function () {
 
     // Dashboard Route
     Route::get('dashboard/statistics', [DashboardController::class, 'getStatistics']);
-    Route::get('dashboard/rankings', [DashboardController::class, 'getRankings']);
+    Route::get('dashboard/rankings', [DashboardController::class, 'getEntryRankings']);
+    Route::get('dashboard/rankings/artists', [DashboardController::class, 'getArtistRankings']);
 });
 
 // Requests for this group, MUST contain header "X-Juror-Token"
