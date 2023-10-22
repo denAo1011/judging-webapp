@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\Api\AuthenticationController;
+use App\Http\Controllers\Api\CompanyArtistController;
 use App\Http\Controllers\Api\CompanyController;
 use App\Http\Controllers\Api\CompanyEntryController;
 use App\Http\Controllers\Api\CompanyJurorController;
@@ -51,6 +52,15 @@ Route::group(['middleware' => ['auth:sanctum']], function () {
     Route::get('companyEntries/{companyEntry}', [CompanyEntryController::class, 'show']);
     Route::put('companyEntries/{companyEntry}', [CompanyEntryController::class, 'update']);
     Route::delete('companyEntries/{companyEntry}', [CompanyEntryController::class, 'destroy']);
+
+    // Company artists routes
+    Route::get('companyArtists', [CompanyArtistController::class, 'index']);
+    Route::get('companyArtists/{companyArtist}', [CompanyArtistController::class, 'show']);
+    Route::put('companyArtists/{companyArtist}', [CompanyArtistController::class, 'update']);
+    Route::delete('companyArtists/{companyArtist}', [CompanyArtistController::class, 'destroy']);
+
+    // Create an company artist
+    Route::post('companies/{company}/companyArtists', [CompanyArtistController::class, 'store']);
 
     // Company jurors routes
     Route::get('companyJurors/{companyJuror}', [CompanyJurorController::class, 'show']);
