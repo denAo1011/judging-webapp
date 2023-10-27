@@ -1,12 +1,14 @@
 <?php
 
 use App\Http\Controllers\Api\AuthenticationController;
+use App\Http\Controllers\Api\CompanyArtistController;
 use App\Http\Controllers\Api\CompanyController;
 use App\Http\Controllers\Api\CompanyEntryController;
 use App\Http\Controllers\Api\CompanyJurorController;
 use App\Http\Controllers\Api\JudgingController;
 use App\Http\Controllers\Api\DashboardController;
 use App\Http\Controllers\Api\ReportController;
+use App\Http\Controllers\Api\VoteController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -30,6 +32,9 @@ Route::post('companies/{company}/companyEntries', [CompanyEntryController::class
 
 Route::get('companyJurors', [CompanyJurorController::class, 'index']);
 
+// Voting
+Route::post('companyArtists/{companyArtist}/vote', VoteController::class);
+
 // Reports
 Route::get('reports/companyEntries', [ReportController::class, 'downloadCompanyEntries']);
 Route::get('reports/companyEntryLevelOneRankings', [ReportController::class, 'downloadCompanyEntryLevelOneRankings']);
@@ -52,6 +57,15 @@ Route::group(['middleware' => ['auth:sanctum']], function () {
     Route::put('companyEntries/{companyEntry}', [CompanyEntryController::class, 'update']);
     Route::delete('companyEntries/{companyEntry}', [CompanyEntryController::class, 'destroy']);
 
+    // Company artists routes
+    Route::get('companyArtists', [CompanyArtistController::class, 'index']);
+    Route::get('companyArtists/{companyArtist}', [CompanyArtistController::class, 'show']);
+    Route::put('companyArtists/{companyArtist}', [CompanyArtistController::class, 'update']);
+    Route::delete('companyArtists/{companyArtist}', [CompanyArtistController::class, 'destroy']);
+
+    // Create an company artist
+    Route::post('companies/{company}/companyArtists', [CompanyArtistController::class, 'store']);
+
     // Company jurors routes
     Route::get('companyJurors/{companyJuror}', [CompanyJurorController::class, 'show']);
     Route::put('companyJurors/{companyJuror}', [CompanyJurorController::class, 'update']);
@@ -62,7 +76,8 @@ Route::group(['middleware' => ['auth:sanctum']], function () {
 
     // Dashboard Route
     Route::get('dashboard/statistics', [DashboardController::class, 'getStatistics']);
-    Route::get('dashboard/rankings', [DashboardController::class, 'getRankings']);
+    Route::get('dashboard/rankings', [DashboardController::class, 'getEntryRankings']);
+    Route::get('dashboard/rankings/artists', [DashboardController::class, 'getArtistRankings']);
 });
 
 // Requests for this group, MUST contain header "X-Juror-Token"
