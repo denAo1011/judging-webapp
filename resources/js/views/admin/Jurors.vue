@@ -28,6 +28,11 @@ export default {
                 key: "token",
                 align: "end",
             },
+            {
+                title: "Status",
+                key: "voted_at",
+                align: "end",
+            },
             { title: "Actions", key: "actions", align: "end" },
         ],
         search: "",
@@ -189,6 +194,11 @@ export default {
                             item-value="name"
                             @update:options="fetchJurors()"
                         >
+                            <template v-slot:item.voted_at="{ item }">
+                                <v-chip :color="item.selectable.voted_at != null ? 'success' : 'warning'">
+                                    {{  item.selectable.voted_at != null ? "Voted" : "Pending" }}
+                                </v-chip>
+                            </template>
                             <template v-slot:item.actions="{ item }">
                                 <v-btn
                                     color="warning"

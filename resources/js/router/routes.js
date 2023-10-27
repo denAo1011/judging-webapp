@@ -50,6 +50,11 @@ export default [
     name: 'judging',
   },
   {
+    path: '/digital-judging/judge/voting',
+    component: () =>import('../views/judge/Voting.vue'),
+    name: 'voting'
+  },
+  {
     path: '/digital-judging/signin',
     component: () =>import('../views/pages/SignIn.vue'),
     name: 'signin',
