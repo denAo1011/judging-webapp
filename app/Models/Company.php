@@ -23,4 +23,9 @@ class Company extends Model
     {
         return $this->hasMany(CompanyEntry::class);
     }
+
+    public function companyArtists()
+    {
+        return $this->hasMany(CompanyArtist::class);
+    }
 }

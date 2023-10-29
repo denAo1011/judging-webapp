@@ -31,6 +31,7 @@ Route::get('companies', [CompanyController::class, 'index']);
 Route::post('companies/{company}/companyEntries', [CompanyEntryController::class, 'store']);
 
 Route::get('companyJurors', [CompanyJurorController::class, 'index']);
+Route::get('companyArtists', [CompanyArtistController::class, 'index']);
 
 // Voting
 Route::post('companyArtists/{companyArtist}/vote', VoteController::class);
@@ -58,7 +59,6 @@ Route::group(['middleware' => ['auth:sanctum']], function () {
     Route::delete('companyEntries/{companyEntry}', [CompanyEntryController::class, 'destroy']);
 
     // Company artists routes
-    Route::get('companyArtists', [CompanyArtistController::class, 'index']);
     Route::get('companyArtists/{companyArtist}', [CompanyArtistController::class, 'show']);
     Route::put('companyArtists/{companyArtist}', [CompanyArtistController::class, 'update']);
     Route::delete('companyArtists/{companyArtist}', [CompanyArtistController::class, 'destroy']);

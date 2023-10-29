@@ -16,11 +16,15 @@ class CompanyArtist extends Model
         'company_id',
         'name',
         'gender',
-        'imaage'
+        'image'
     ];
 
     protected $appends = [
         'votes'
+    ];
+
+    protected $with = [
+        'company'
     ];
 
     public function company()

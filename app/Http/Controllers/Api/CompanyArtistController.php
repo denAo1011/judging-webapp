@@ -16,12 +16,12 @@ class CompanyArtistController extends Controller
      */
     public function index()
     {
-        $perPage = request('perPage', 10);
+        // $perPage = request('perPage', 10);
 
-        if ($perPage < 0) // Return all companies
-            return CompanyArtistResource::collection(CompanyArtist::all());
-        else // Return paginated companies
-            return CompanyArtistResource::collection(CompanyArtist::paginate($perPage));
+        // if ($perPage < 0) // Return all companies
+        return CompanyArtistResource::collection(CompanyArtist::all());
+        // else // Return paginated companies
+        // return CompanyArtistResource::collection(CompanyArtist::paginate($perPage));
     }
 
     /**
@@ -29,7 +29,7 @@ class CompanyArtistController extends Controller
      */
     public function store(StoreCompanyArtistRequest $request, Company $company)
     {
-        $company = $company->companyEntries()
+        $company = $company->companyArtists()
             ->create($request->validated());
         return new CompanyArtistResource($company);
     }

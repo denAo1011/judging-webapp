@@ -9,15 +9,7 @@ export default {
         return {
             loading: false,
             successDialog: false,
-            artists: [
-                { id: 1, name: "Artist 1",image:'https://cdn.vuetifyjs.com/images/cards/house.jpg', gender: "Male" },
-                { id: 2, name: "Artist 2",image:'https://cdn.vuetifyjs.com/images/cards/house.jpg', gender: "Female" },
-                { id: 3, name: "Artist 3",image:'https://cdn.vuetifyjs.com/images/cards/house.jpg', gender: "Male" },
-                { id: 4, name: "Artist 4",image:'https://cdn.vuetifyjs.com/images/cards/house.jpg', gender: "Female" },
-                { id: 5, name: "Artist 5",image:'https://cdn.vuetifyjs.com/images/cards/house.jpg', gender: "Male" },
-                { id: 6, name: "Artist 6",image:'https://cdn.vuetifyjs.com/images/cards/house.jpg', gender: "Female" },
-                { id: 7, name: "Artist 7",image:'https://cdn.vuetifyjs.com/images/cards/house.jpg', gender: "Male" },
-            ],
+            artists: [],
             rules: {
                 required: (value) => !!value || "Required.",
             },
@@ -44,7 +36,7 @@ export default {
             window.axios
                 .get("/api/companyArtists")
                 .then((response) => {
-                    this.artists = response.data;
+                    this.artists = response.data.data;
                 })
                 .catch((error) => {
                     console.log(error);
@@ -58,11 +50,16 @@ export default {
         async voteArtist(artist) {
             //Check if all tallies rating is not null
             window.axios
-                .post(`/api/companyArtists/${this.artists.id}/vote`)
+                .post(`/api/companyArtists/${artist.id}/vote`)
                 .then((response) => {
                     Swal.fire({
+                        toast: true,
                         icon: "success",
                         title: "Successfully Voted!",
+                        position: "top-end",
+                        showConfirmButton: false,
+                        timer: 3000,
+                        timerProgressBar: true,
                     });
                 })
                 .catch((error) => {
@@ -77,6 +74,10 @@ export default {
             this.$router.push({ name: "home" });
         },
     },
+
+    mounted() {
+            this.fetchArtists();
+        },
 };
 </script>
 
@@ -120,6 +121,7 @@ export default {
                                     class="align-end"
                                     gradient="to bottom, rgba(0,0,0,.1), rgba(0,0,0,.5)"
                                     cover
+                                    height="400"
                                 >
                                     <v-card-title>
                                         <div
@@ -218,7 +220,7 @@ export default {
     </div>
     <v-dialog v-model="successDialog" persistent fullscreen z-index="999">
         <v-card>
-            <v-card-text class="p-8 d-flex align-center justify-center">
+            <v-card-text class="p-8 d-flex align-center justify-center dialog-card">
                 <div>
                     <v-row justify="center" class="text-center space-y-4 mb-12">
                         <v-col>
@@ -251,5 +253,9 @@ export default {
 .text-congrats {
     font-size: 4rem;
     line-height: 1;
+}
+
+.dialog-card {
+    background: url("/images/bg3.png");
 }
 </style>
