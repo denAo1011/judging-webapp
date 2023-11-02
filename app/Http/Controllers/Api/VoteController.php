@@ -10,6 +10,10 @@ class VoteController extends Controller
 {
     public function __invoke(Request $request, CompanyArtist $companyArtist)
     {
+        $request->validate([
+            'email' => ['required', 'email'],
+        ]);
+
         $ipAddress = $request->ip();
         $userAgent = $request->userAgent();
 
@@ -28,6 +32,7 @@ class VoteController extends Controller
         $companyArtist->companyArtistVotes()->create([
             'ip_address' => $ipAddress,
             'user_agent' => $userAgent,
+            'email' => $request->input('email'),
         ]);
 
         return response()->json([
