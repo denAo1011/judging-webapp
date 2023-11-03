@@ -37,17 +37,31 @@ export default {
         filteredArtists() {
             const filters = {
                 name: this.artist.name.toLowerCase(),
-                gender: this.artist.gender.toUpperCase() !== "ALL" ? this.artist.gender.toUpperCase() : null,
-                company_id: this.artist.network ? parseInt(this.artist.network, 10) : null
+                gender:
+                    this.artist.gender.toUpperCase() !== "ALL"
+                        ? this.artist.gender.toUpperCase()
+                        : null,
+                company_id: this.artist.network
+                    ? parseInt(this.artist.network, 10)
+                    : null,
             };
 
-            return this.artists.filter(artist => {
-                if (filters.gender !== null && artist.gender !== filters.gender) return false;
-                if (filters.company_id !== null && artist.company_id !== filters.company_id) return false;
-                if (filters.name && !artist.name.toLowerCase().includes(filters.name)) return false;
+            return this.artists.filter((artist) => {
+                if (filters.gender !== null && artist.gender !== filters.gender)
+                    return false;
+                if (
+                    filters.company_id !== null &&
+                    artist.company_id !== filters.company_id
+                )
+                    return false;
+                if (
+                    filters.name &&
+                    !artist.name.toLowerCase().includes(filters.name)
+                )
+                    return false;
                 return true;
             });
-        }
+        },
     },
     methods: {
         goTo(route) {
@@ -56,7 +70,9 @@ export default {
 
         fetchArtists() {
             window.axios
-                .get("/api/companyArtists")
+                .get("/api/companyArtists", {
+                    perPage: 0,
+                })
                 .then((response) => {
                     this.artists = response.data.data;
                 })
@@ -82,7 +98,7 @@ export default {
                     this.networks.unshift({
                         id: 0,
                         name: "ALL",
-                    })
+                    });
                 })
                 .catch((error) => {
                     console.log(error);
@@ -124,7 +140,7 @@ export default {
         },
 
         backHome() {
-            if(this.votesCount > 1){
+            if (this.votesCount > 1) {
                 this.$router.push({ name: "home" });
             } else {
                 this.successDialog = false;
@@ -133,9 +149,9 @@ export default {
     },
 
     mounted() {
-            this.fetchArtists();
-            this.fetchNetworks();
-        },
+        this.fetchArtists();
+        this.fetchNetworks();
+    },
 };
 </script>
 
@@ -155,11 +171,7 @@ export default {
     </v-overlay>
     <div class="px-4" v-if="!loading">
         <v-row justify="center" class="py-12 text-center">
-            <h1
-                class="text-5xl font-bold"
-            >
-                WELCOME TO ANAK MAKABATA AWARDS
-            </h1>
+            <h1 class="text-5xl font-bold">WELCOME TO ANAK MAKABATA AWARDS</h1>
         </v-row>
         <v-row justify="center">
             <v-col cols="12" md="6">
@@ -175,22 +187,16 @@ export default {
                     variant="underlined"
                     v-model="artist.network"
                 >
-                    <template v-slot:label
-                    >Network
-                        </template
-                    >
+                    <template v-slot:label>Network </template>
                 </v-select>
             </v-col>
             <v-col cols="12" class="ma-0" md="2">
                 <v-select
-                    :items="['ALL','MALE','FEMALE','OTHER']"
+                    :items="['ALL', 'MALE', 'FEMALE', 'OTHER']"
                     variant="underlined"
                     v-model="artist.gender"
                 >
-                    <template v-slot:label
-                    >Gender
-                        </template
-                    >
+                    <template v-slot:label>Gender </template>
                 </v-select>
             </v-col>
             <v-col cols="12" class="ma-0" md="2">
@@ -198,33 +204,34 @@ export default {
                     variant="underlined"
                     label="Name"
                     v-model="artist.name"
-                ><template v-slot:label
-                >Name</template
-                ></v-text-field
+                    ><template v-slot:label>Name</template></v-text-field
                 >
             </v-col>
         </v-row>
-<!--        One Artist Only-->
+        <!--        One Artist Only-->
         <v-row justify="center">
-            <v-col cols="12" lg="9">
+            <v-col cols="12" lg="11">
                 <v-form ref="maleForm" lazy-validation>
-                    <v-row justify="center" >
+                    <v-row justify="center">
                         <v-col
                             v-for="(artist, index) in filteredArtists"
                             :key="index"
                             cols="12"
-                            md="4"
-                            lg="4"
+                            md="3"
+                            lg="3"
                         >
                             <v-card class="elevation-0">
-                                    <v-card-title>
-                                        <div
-                                            class="text-center font-weight-bold text-3xl lg:text-4xl text-truncate text-black"
-                                        >
-                                            {{ artist.name }}
-                                        </div>
-                                    </v-card-title>
-                                <BaseButton @click="voteArtist(artist)" :text="'Vote'" />
+                                <v-card-title>
+                                    <div
+                                        class="text-center font-weight-bold text-3xl lg:text-4xl text-truncate text-black"
+                                    >
+                                        {{ artist.name }}
+                                    </div>
+                                </v-card-title>
+                                <BaseButton
+                                    @click="voteArtist(artist)"
+                                    :text="'Vote'"
+                                />
                             </v-card>
                         </v-col>
                     </v-row>
@@ -247,7 +254,7 @@ export default {
                         :rules="[rules.email]"
                     >
                         <template v-slot:label
-                        >Please enter your email
+                            >Please enter your email
                             <strong class="text-error">*</strong>
                         </template>
                     </v-text-field>
@@ -266,14 +273,16 @@ export default {
                     variant="elevated"
                     color="primary"
                     @click="validateEmail()"
-                >Confirm</v-btn
+                    >Confirm</v-btn
                 >
             </v-card-actions>
         </v-card>
     </v-dialog>
     <v-dialog v-model="successDialog" persistent fullscreen z-index="999">
         <v-card>
-            <v-card-text class="p-8 d-flex align-center justify-center dialog-card">
+            <v-card-text
+                class="p-8 d-flex align-center justify-center dialog-card"
+            >
                 <div>
                     <v-row justify="center" class="text-center space-y-4 mb-12">
                         <v-col>
@@ -290,7 +299,10 @@ export default {
                     </v-row>
                     <!-- <v-row justify="center" class="mt-6">
                         <v-col cols="12" md="8" lg="2"> -->
-                    <BaseButton @click="backHome()" :text="votesCount > 1 ? 'RETURN HOME' : 'VOTE AGAIN'" />
+                    <BaseButton
+                        @click="backHome()"
+                        :text="votesCount > 1 ? 'RETURN HOME' : 'VOTE AGAIN'"
+                    />
                     <!-- </v-col> -->
                     <!-- </v-row> -->
                 </div>
