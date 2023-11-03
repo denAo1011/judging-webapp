@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\Api\AuthenticationController;
 use App\Http\Controllers\Api\CompanyArtistController;
+use App\Http\Controllers\Api\CompanyArtistVoteController;
 use App\Http\Controllers\Api\CompanyController;
 use App\Http\Controllers\Api\CompanyEntryController;
 use App\Http\Controllers\Api\CompanyJurorController;
@@ -62,6 +63,9 @@ Route::group(['middleware' => ['auth:sanctum']], function () {
     Route::get('companyArtists/{companyArtist}', [CompanyArtistController::class, 'show']);
     Route::put('companyArtists/{companyArtist}', [CompanyArtistController::class, 'update']);
     Route::delete('companyArtists/{companyArtist}', [CompanyArtistController::class, 'destroy']);
+
+    // Company Artists Votes routes
+    Route::get('companyArtistsVotes', [CompanyArtistVoteController::class, 'index']);
 
     // Create an company artist
     Route::post('companies/{company}/companyArtists', [CompanyArtistController::class, 'store']);

@@ -12,7 +12,7 @@ class CompanyArtistVoteController extends Controller
     /**
      * Handle the incoming request.
      */
-    public function __invoke(Request $request)
+    public function index(Request $request)
     {
         $perPage = request('perPage', 10);
 

@@ -24,11 +24,11 @@ export default {
                 align: "end",
             },
 
-            {
-                title: "Image",
-                key: "image",
-                align: "end",
-            },
+            // {
+            //     title: "Image",
+            //     key: "image",
+            //     align: "end",
+            // },
             {
                 title: "Votes",
                 key: "votes",
@@ -209,9 +209,9 @@ export default {
                             item-value="name"
                             @update:options="fetchArtists()"
                         >
-                            <template v-slot:item.image="{ item }">
-                               <v-img :src="item.selectable.image" />
-                            </template>
+<!--                            <template v-slot:item.image="{ item }">-->
+<!--                               <v-img :src="item.selectable.image" />-->
+<!--                            </template>-->
                             <template v-slot:item.actions="{ item }">
                                 <v-btn
                                     color="warning"
@@ -241,7 +241,7 @@ export default {
             <v-card-text>
                 <v-form ref="form">
                     <v-row>
-                        <v-col cols="12" class="ma-0" md="6">
+                        <v-col cols="12" class="ma-0" md="4">
                             <v-select
                                 :items="networks"
                                 item-value="id"
@@ -258,7 +258,7 @@ export default {
                                 >
                             </v-select>
                         </v-col>
-                        <v-col cols="12" class="ma-0" md="6">
+                        <v-col cols="12" class="ma-0" md="4">
                             <v-text-field
                                 variant="underlined"
                                 label="Name"
@@ -272,7 +272,7 @@ export default {
                                 ></v-text-field
                             >
                         </v-col>
-                        <v-col cols="12" class="ma-0" md="6">
+                        <v-col cols="12" class="ma-0" md="4">
                             <v-select
                                 :items="['MALE','FEMALE','OTHER']"
                                 variant="underlined"
@@ -287,15 +287,15 @@ export default {
                                 >
                             </v-select>
                         </v-col>
-                        <v-col cols="12" class="ma-0" md="6">
-                            <v-file-input
-                                chips
-                                variant=underlined
-                                v-model="image_name"
-                                accept="image/*"
-                                @change="convertImage()"
-                        />
-                        </v-col>
+<!--                        <v-col cols="12" class="ma-0" md="6">-->
+<!--                            <v-file-input-->
+<!--                                chips-->
+<!--                                variant=underlined-->
+<!--                                v-model="image_name"-->
+<!--                                accept="image/*"-->
+<!--                                @change="convertImage()"-->
+<!--                        />-->
+<!--                        </v-col>-->
                     </v-row>
                     <v-row justify="end" class="mb-2">
                         <!-- <v-col cols="7" md="4" lg="4"> -->

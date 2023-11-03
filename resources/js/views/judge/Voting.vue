@@ -7,24 +7,46 @@ export default {
     components: { BaseButton, YouTube },
     data() {
         return {
-            loading: false,
+            loading: true,
+            confirmDialog: true,
             successDialog: false,
+            email: "",
+            verify: null,
             artists: [],
+            networks: [],
+            artist: {
+                name: "",
+                gender: "ALL",
+                network: 0,
+            },
+            votesCount: 0,
             rules: {
                 required: (value) => !!value || "Required.",
+                email: (value) => {
+                    if (!value) {
+                        return "Required.";
+                    } else if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(value)) {
+                        return "Invalid Email.";
+                    }
+                    return true;
+                },
             },
         };
     },
     computed: {
-        maleArtists() {
-            return this.artists.filter((artist) => {
-                return artist.gender === "Male";
-            })
-        },
-        femaleArtists() {
-            return this.artists.filter((artist) => {
-                return artist.gender === "Female";
-            })
+        filteredArtists() {
+            const filters = {
+                name: this.artist.name.toLowerCase(),
+                gender: this.artist.gender.toUpperCase() !== "ALL" ? this.artist.gender.toUpperCase() : null,
+                company_id: this.artist.network ? parseInt(this.artist.network, 10) : null
+            };
+
+            return this.artists.filter(artist => {
+                if (filters.gender !== null && artist.gender !== filters.gender) return false;
+                if (filters.company_id !== null && artist.company_id !== filters.company_id) return false;
+                if (filters.name && !artist.name.toLowerCase().includes(filters.name)) return false;
+                return true;
+            });
         }
     },
     methods: {
@@ -47,11 +69,34 @@ export default {
                 });
         },
 
+        fetchNetworks() {
+            axios
+                .get("/api/companies", {
+                    params: {
+                        perPage: 0,
+                    },
+                })
+                .then((response) => {
+                    this.networks = response.data.data;
+                    //Add network at front
+                    this.networks.unshift({
+                        id: 0,
+                        name: "ALL",
+                    })
+                })
+                .catch((error) => {
+                    console.log(error);
+                });
+        },
+
         async voteArtist(artist) {
             //Check if all tallies rating is not null
             window.axios
-                .post(`/api/companyArtists/${artist.id}/vote`)
+                .post(`/api/companyArtists/${artist.id}/vote`, {
+                    email: this.email,
+                })
                 .then((response) => {
+                    this.votesCount++;
                     Swal.fire({
                         toast: true,
                         icon: "success",
@@ -70,13 +115,26 @@ export default {
                 });
         },
 
+        async validateEmail() {
+            const { valid } = await this.$refs.emailForm.validate();
+            if (valid) {
+                this.confirmDialog = false;
+                this.loading = false;
+            }
+        },
+
         backHome() {
-            this.$router.push({ name: "home" });
+            if(this.votesCount > 1){
+                this.$router.push({ name: "home" });
+            } else {
+                this.successDialog = false;
+            }
         },
     },
 
     mounted() {
             this.fetchArtists();
+            this.fetchNetworks();
         },
 };
 </script>
@@ -95,7 +153,7 @@ export default {
             indeterminate
         ></v-progress-circular>
     </v-overlay>
-    <div v-if="!loading">
+    <div class="px-4" v-if="!loading">
         <v-row justify="center" class="py-12 text-center">
             <h1
                 class="text-5xl font-bold"
@@ -103,34 +161,69 @@ export default {
                 WELCOME TO ANAK MAKABATA AWARDS
             </h1>
         </v-row>
+        <v-row justify="center">
+            <v-col cols="12" md="6">
+                <h2 class="text-4xl font-bold">Filter</h2>
+            </v-col>
+        </v-row>
+        <v-row justify="center">
+            <v-col cols="12" class="ma-0" md="2">
+                <v-select
+                    :items="networks"
+                    item-value="id"
+                    item-title="name"
+                    variant="underlined"
+                    v-model="artist.network"
+                >
+                    <template v-slot:label
+                    >Network
+                        </template
+                    >
+                </v-select>
+            </v-col>
+            <v-col cols="12" class="ma-0" md="2">
+                <v-select
+                    :items="['ALL','MALE','FEMALE','OTHER']"
+                    variant="underlined"
+                    v-model="artist.gender"
+                >
+                    <template v-slot:label
+                    >Gender
+                        </template
+                    >
+                </v-select>
+            </v-col>
+            <v-col cols="12" class="ma-0" md="2">
+                <v-text-field
+                    variant="underlined"
+                    label="Name"
+                    v-model="artist.name"
+                ><template v-slot:label
+                >Name</template
+                ></v-text-field
+                >
+            </v-col>
+        </v-row>
 <!--        One Artist Only-->
         <v-row justify="center">
             <v-col cols="12" lg="9">
                 <v-form ref="maleForm" lazy-validation>
                     <v-row justify="center" >
                         <v-col
-                            v-for="(artist, index) in artists"
+                            v-for="(artist, index) in filteredArtists"
                             :key="index"
                             cols="12"
                             md="4"
                             lg="4"
                         >
                             <v-card class="elevation-0">
-                                <v-img
-                                    :src="artist.image"
-                                    class="align-end"
-                                    gradient="to bottom, rgba(0,0,0,.1), rgba(0,0,0,.5)"
-                                    cover
-                                    height="400"
-                                >
                                     <v-card-title>
                                         <div
-                                            class="text-center font-weight-bold text-2xl text-truncate text-white"
+                                            class="text-center font-weight-bold text-3xl lg:text-4xl text-truncate text-black"
                                         >
                                             {{ artist.name }}
                                         </div>
                                     </v-card-title>
-                                </v-img>
                                 <BaseButton @click="voteArtist(artist)" :text="'Vote'" />
                             </v-card>
                         </v-col>
@@ -138,86 +231,46 @@ export default {
                 </v-form>
             </v-col>
         </v-row>
-<!--        Separate Voting for Male and Female-->
-<!--        <v-row>-->
-<!--            <v-col cols="12" lg="6">-->
-<!--                <v-row justify="center" class="pa-5 text-center">-->
-<!--                    <h2-->
-<!--                        class="text-4xl font-black text-gray-700"-->
-<!--                    >-->
-<!--                        FOR MALE CATEGORY-->
-<!--                    </h2>-->
-<!--                </v-row>-->
-<!--                <v-form ref="maleForm" lazy-validation>-->
-<!--                    <v-row justify="center" class="pa-5">-->
-<!--                        <v-col-->
-<!--                            v-for="(artist, index) in maleArtists"-->
-<!--                            :key="index"-->
-<!--                            cols="12"-->
-<!--                            md="4"-->
-<!--                            lg="4"-->
-<!--                        >-->
-<!--                            <v-card class="elevation-0">-->
-<!--                                <v-img-->
-<!--                                    :src="artist.image"-->
-<!--                                    class="align-end"-->
-<!--                                    gradient="to bottom, rgba(0,0,0,.1), rgba(0,0,0,.5)"-->
-<!--                                    cover-->
-<!--                                >-->
-<!--                                    <v-card-title>-->
-<!--                                        <div-->
-<!--                                            class="text-center font-weight-bold text-2xl text-truncate text-white"-->
-<!--                                        >-->
-<!--                                            {{ artist.name }}-->
-<!--                                        </div>-->
-<!--                                    </v-card-title>-->
-<!--                                </v-img>-->
-<!--                                <BaseButton @click="voteArtist(artist)" :text="'Vote'" />-->
-<!--                            </v-card>-->
-<!--                        </v-col>-->
-<!--                    </v-row>-->
-<!--                </v-form>-->
-<!--            </v-col>-->
-<!--            <v-col cols="12" lg="6">-->
-<!--                <v-row justify="center" class="pa-5 text-center">-->
-<!--                    <h2-->
-<!--                        class="text-4xl font-black text-gray-700"-->
-<!--                    >-->
-<!--                        FOR FEMALE CATEGORY-->
-<!--                    </h2>-->
-<!--                </v-row>-->
-<!--                <v-form ref="femaleForm" lazy-validation>-->
-<!--                    <v-row justify="center" class="pa-5">-->
-<!--                        <v-col-->
-<!--                            v-for="(artist, index) in femaleArtists"-->
-<!--                            :key="index"-->
-<!--                            cols="12"-->
-<!--                            md="4"-->
-<!--                            lg="4"-->
-<!--                        >-->
-<!--                            <v-card class="elevation-0">-->
-<!--                                <v-img-->
-<!--                                    :src="artist.image"-->
-<!--                                    class="align-end"-->
-<!--                                    gradient="to bottom, rgba(0,0,0,.1), rgba(0,0,0,.5)"-->
-<!--                                    cover-->
-<!--                                >-->
-<!--                                    <v-card-title>-->
-<!--                                        <div-->
-<!--                                            class="text-center font-weight-bold text-2xl text-truncate text-white"-->
-<!--                                        >-->
-<!--                                            {{ artist.name }}-->
-<!--                                        </div>-->
-<!--                                    </v-card-title>-->
-<!--                                </v-img>-->
-<!--                                <BaseButton @click="voteArtist(artist)" :text="'Vote'" />-->
-<!--                            </v-card>-->
-<!--                        </v-col>-->
-<!--                    </v-row>-->
-<!--                </v-form>-->
-<!--            </v-col>-->
-<!--        </v-row>-->
     </div>
+    <v-dialog v-model="confirmDialog" persistent max-width="500" z-index="999">
+        <v-card>
+            <v-card-title class="text-center"> Guest Information </v-card-title>
+
+            <v-card-text>
+                <v-form ref="emailForm" lazy-validation>
+                    <v-text-field
+                        v-model="email"
+                        label="Please enter your email"
+                        placeholder="Input Email"
+                        variant="outlined"
+                        :show-size="1000"
+                        :rules="[rules.email]"
+                    >
+                        <template v-slot:label
+                        >Please enter your email
+                            <strong class="text-error">*</strong>
+                        </template>
+                    </v-text-field>
+                    <v-checkbox
+                        color="success"
+                        v-model="verify"
+                        label="I give my consent to AnakTV  to collect, use and process my personal information. I understand that my consent does not preclude the existence of other criteria for lawful processing of personal data, and does not waive any of my rights under the Data Privacy Act of 2012 and other applicable laws. I HEREBY CERTIFY that the information I provide in this form is complete, true and correct to the best of my knowledge."
+                        :rules="[rules.required]"
+                    >
+                    </v-checkbox>
+                </v-form>
+            </v-card-text>
+            <v-card-actions>
+                <v-btn
+                    block
+                    variant="elevated"
+                    color="primary"
+                    @click="validateEmail()"
+                >Confirm</v-btn
+                >
+            </v-card-actions>
+        </v-card>
+    </v-dialog>
     <v-dialog v-model="successDialog" persistent fullscreen z-index="999">
         <v-card>
             <v-card-text class="p-8 d-flex align-center justify-center dialog-card">
@@ -237,7 +290,7 @@ export default {
                     </v-row>
                     <!-- <v-row justify="center" class="mt-6">
                         <v-col cols="12" md="8" lg="2"> -->
-                    <BaseButton @click="backHome()" :text="'RETURN TO HOME'" />
+                    <BaseButton @click="backHome()" :text="votesCount > 1 ? 'RETURN HOME' : 'VOTE AGAIN'" />
                     <!-- </v-col> -->
                     <!-- </v-row> -->
                 </div>

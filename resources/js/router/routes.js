@@ -87,6 +87,11 @@ export default [
         component: () =>import('../views/admin/Artists.vue'),
       },
       {
+          path: '/digital-judging/admin/artists-votes',
+          name: 'artists-votes',
+          component: () =>import('../views/admin/ArtistsVotes.vue'),
+      },
+      {
         path: '/digital-judging/admin/dashboard',
         name: 'dashboard',
         component: () =>import('../views/admin/Dashboard.vue'),

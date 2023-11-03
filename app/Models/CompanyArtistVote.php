@@ -15,6 +15,10 @@ class CompanyArtistVote extends Model
         'email',
     ];
 
+    protected $with = [
+        'companyArtist'
+    ];
+
     public function companyArtist()
     {
         return $this->belongsTo(CompanyArtist::class);

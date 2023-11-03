@@ -37,6 +37,9 @@ function logout() {
             <v-list-item to="/digital-judging/admin/artists">
                 <v-list-item-title>Artists</v-list-item-title>
             </v-list-item>
+            <v-list-item to="/digital-judging/admin/artists-votes">
+                <v-list-item-title>Artists Votes List</v-list-item-title>
+            </v-list-item>
         </v-list>
         <template v-slot:append>
             <v-list :lines="false" density="compact" nav>
