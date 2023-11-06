@@ -122,12 +122,18 @@ export default {
                         timer: 3000,
                         timerProgressBar: true,
                     });
+                    this.successDialog = true;
                 })
                 .catch((error) => {
+                    Swal.fire({
+                        icon: "error",
+                        title: error.response.data.message,
+                    });
                     console.log(error);
+                    this.$router.push({ name: "home" });
                 })
                 .finally(() => {
-                    this.successDialog = true;
+
                 });
         },
 
