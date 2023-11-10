@@ -19,7 +19,7 @@ class CompanyArtistController extends Controller
         // $perPage = request('perPage', 10);
 
         // if ($perPage < 0) // Return all companies
-        return CompanyArtistResource::collection(CompanyArtist::all());
+        return CompanyArtistResource::collection(CompanyArtist::all()->sortBy('name'));
         // else // Return paginated companies
         // return CompanyArtistResource::collection(CompanyArtist::paginate($perPage));
     }
