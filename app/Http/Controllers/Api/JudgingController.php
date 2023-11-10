@@ -26,10 +26,10 @@ class JudgingController extends Controller
                 ->whereNotIn('company_id', [$companyJuror->company_id])
                 ->get();
         } elseif ($levelOfVoting === 'LEVEL_TWO') {
-            $companyEntries = CompanyEntry::withAvg('companyEntryScores', 'rating1')
+            $companyEntries = CompanyEntry::withAvg('companyEntryScores', 'level_one_rating')
                 ->whereStatus('APPROVED')
                 ->whereNotIn('company_id', [$companyJuror->company_id])
-                ->having('companyEntryScores_avg_rating1', '>', 6.9)
+                ->having('company_entry_scores_avg_level_one_rating', '>', 6.9)
                 ->inRandomOrder()
                 ->get();
         } else $companyEntries = [];
