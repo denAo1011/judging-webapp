@@ -8,6 +8,7 @@ use App\Models\CompanyEntry;
 use App\Models\CompanyEntryScore;
 use App\Models\Setting;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class JudgingController extends Controller
 {
@@ -25,11 +26,13 @@ class JudgingController extends Controller
             $companyEntries = CompanyEntry::whereStatus('APPROVED')
                 ->whereNotIn('company_id', [$companyJuror->company_id])
                 ->get();
-        } elseif ($levelOfVoting === 'LEVEL_TWO') {
-            $companyEntries = CompanyEntry::withAvg('companyEntryScores', 'level_one_rating')
-                ->whereStatus('APPROVED')
-                ->whereNotIn('company_id', [$companyJuror->company_id])
-                ->having('company_entry_scores_avg_level_one_rating', '>', 6.9)
+        } elseif ($levelOfVoting === 'LEVEL_TWO') { 
+            $companyEntries = CompanyEntry::leftJoin('company_entry_scores', 'company_entries.id', '=', 'company_entry_scores.company_entry_id')
+                ->select(DB::raw('AVG(company_entry_scores.level_one_rating) as avg_level_one_rating'), 'company_entries.*')
+                ->where('company_entry_scores.level_one_rating', '>', 0)
+                ->where('company_entries.status','APPROVED')
+                ->groupBy('company_entries.id') 
+                ->having('avg_level_one_rating', '>', 6.9) 
                 ->inRandomOrder()
                 ->get();
         } else $companyEntries = [];

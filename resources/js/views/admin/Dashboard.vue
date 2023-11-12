@@ -9,7 +9,7 @@ export default {
         jurors: 0,
         votedJurors: 0,
         itemsPerPage: 10,
-        headers: [
+        levelOneHeaders: [
             {
                 title: "Network",
                 align: "start",
@@ -25,6 +25,25 @@ export default {
             {
                 title: "Score",
                 key: "avg_level_one_rating",
+                align: "start",
+            },
+        ],
+         levelTwoHeaders: [
+            {
+                title: "Network",
+                align: "start",
+                sortable: false,
+                key: "company.name",
+            },
+            { title: "Title", key: "title", align: "start" },
+            {
+                title: "Production Company",
+                key: "production_company",
+                align: "start",
+            },
+            {
+                title: "Score",
+                key: "avg_level_two_rating",
                 align: "start",
             },
         ],
@@ -201,7 +220,7 @@ export default {
                     <v-card-text>
                         <v-data-table
                             v-model:items-per-page="itemsPerPage"
-                            :headers="headers"
+                            :headers="levelOneHeaders"
                             :items="levelOneRanking"
                             :loading="loading"
                             elevation="0"
@@ -234,7 +253,7 @@ export default {
                     <v-card-text>
                         <v-data-table
                             v-model:items-per-page="itemsPerPage"
-                            :headers="headers"
+                            :headers="levelTwoHeaders"
                             :items="levelTwoRanking"
                             :loading="loading"
                             elevation="0"
