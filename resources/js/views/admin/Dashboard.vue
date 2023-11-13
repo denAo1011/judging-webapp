@@ -48,7 +48,7 @@ export default {
             },
         ],
         levelOneRanking: [],
-        levelTwoanking: [],
+        levelTwoRanking: [],
         loading: true,
     }),
     methods: {
