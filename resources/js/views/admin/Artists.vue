@@ -34,6 +34,11 @@ export default {
                 key: "votes",
                 align: "end",
             },
+            {
+                title: "Unique Votes",
+                key: "unique_votes",
+                align: "end",
+            },
             { title: "Actions", key: "actions", align: "end" },
         ],
         search: "",
