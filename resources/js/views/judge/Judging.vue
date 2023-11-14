@@ -29,6 +29,9 @@ export default {
             if (valid) {
                 this.confirmDialog = false;
                 this.loading = true;
+                //Clear store jurorToken
+                store.dispatch("setJurorToken", null);
+
                 //Add in the axios headers the token
                 window.axios.defaults.headers.common["X-Juror-Token"] =
                     this.token;
@@ -49,7 +52,7 @@ export default {
                             this.loading = false;
                             Swal.fire({
                                 icon: "error",
-                                title: error.response.data.message,
+                                title: error.response.data.error,
                             });
                         }, 3000);
                     })
@@ -148,7 +151,7 @@ export default {
         ></v-progress-circular>
     </v-overlay>
     <div v-if="!confirmDialog && !loading">
-        <v-form ref="form" lazy-validation>
+        <v-form ref="form" lazy-validation @submit.prevent="submitEntries()">
             <v-row justify="center" class="pa-5">
                 <v-col
                     v-for="(entry, index) in entries"
@@ -213,7 +216,7 @@ export default {
             <v-card-title class="text-center"> Enter Juror Token </v-card-title>
 
             <v-card-text>
-                <v-form ref="tokenForm" lazy-validation>
+                <v-form ref="tokenForm" lazy-validation @submit.prevent="validateToken()">
                     <v-text-field
                         v-model="token"
                         label="Juror Token"
