@@ -71,7 +71,10 @@ export default {
         fetchArtists() {
             window.axios
                 .get("/api/companyArtists", {
-                    perPage: 0,
+                    params:{
+                        perPage: 0,
+                        public: true
+                    }
                 })
                 .then((response) => {
                     this.artists = response.data.data;

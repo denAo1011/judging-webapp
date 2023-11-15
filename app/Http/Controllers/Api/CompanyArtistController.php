@@ -17,11 +17,23 @@ class CompanyArtistController extends Controller
     public function index()
     {
         // $perPage = request('perPage', 10);
-
+        $public = request('public', false);
         // if ($perPage < 0) // Return all companies
-        return CompanyArtistResource::collection(CompanyArtist::all()->sortBy('name'));
+        // return CompanyArtistResource::collection(CompanyArtist::all()->sortBy('name'));
         // else // Return paginated companies
         // return CompanyArtistResource::collection(CompanyArtist::paginate($perPage));
+        if(!$public)
+        {
+            $artists = CompanyArtistResource::collection(CompanyArtist::all()->sortBy('votes')->reverse());
+
+            foreach ($artists as $artist) {
+                $artist['unique_votes'] = $artist->UniqueVotesCount();
+            }
+
+            return $artists;
+        }
+
+        return CompanyArtistResource::collection(CompanyArtist::all()->sortBy('name'));
     }
 
     /**

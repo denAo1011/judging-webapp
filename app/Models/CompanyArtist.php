@@ -21,7 +21,7 @@ class CompanyArtist extends Model
 
     protected $appends = [
         'votes',
-        'unique_votes'
+//        'unique_votes'
     ];
 
     protected $with = [
@@ -47,12 +47,7 @@ class CompanyArtist extends Model
         return $this->hasMany(CompanyArtistVote::class);
     }
 
-    public function getVotesAttribute()
-    {
-        return $this->companyArtistVotes()->count();
-    }
-
-    public function getUniqueVotesAttribute()
+    public function UniqueVotesCount()
     {
         $votes = $this->companyArtistVotes()->get();
         $uniqueVotes = $votes->unique(function ($vote) {
@@ -61,4 +56,19 @@ class CompanyArtist extends Model
 
         return $uniqueVotes->count();
     }
+
+    public function getVotesAttribute()
+    {
+        return $this->companyArtistVotes()->count();
+    }
+//
+//    public function getUniqueVotesAttribute()
+//    {
+//        $votes = $this->companyArtistVotes()->get();
+//        $uniqueVotes = $votes->unique(function ($vote) {
+//            return $vote->email . '|' . $this->gender;
+//        });
+//
+//        return $uniqueVotes->count();
+//    }
 }
