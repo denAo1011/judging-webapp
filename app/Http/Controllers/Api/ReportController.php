@@ -25,4 +25,10 @@ class ReportController extends Controller
     {
         return Excel::download(new \App\Exports\CompanyEntryLevelTwoRankingsExport, 'company_entry_level_two_ranking.xlsx');
     }
+
+    // Download all company artist votes
+    public function downloadCompanyArtistVotes(Request $request)
+    {
+        return Excel::download(new \App\Exports\CompanyArtistVotesExport, 'company_artist_votes.xlsx');
+    }
 }

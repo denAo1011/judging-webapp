@@ -48,8 +48,9 @@ class DashboardController extends Controller
      * Get company artist scores
      */
     public function getArtistRankings() {
-        $artists = CompanyArtist::leftJoin('company_entries', 'company_entries.id', 'company_artists.company_entry_id')
-            ->select('company_artists.*', DB::raw('COUNT(company_artist_votes.id) as votes'))
+        $artists = CompanyArtist::leftJoin('company_artist_votes', 'company_artist_votes.company_artist_id', 'company_artists.id')
+            ->select('company_artists.*', DB::raw('COUNT(*) as votes'))
+            ->groupBy('company_artists.id')
             ->orderBy('votes', 'desc')
             ->get();
 

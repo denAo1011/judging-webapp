@@ -41,6 +41,7 @@ Route::post('companyArtists/{companyArtist}/vote', VoteController::class);
 Route::get('reports/companyEntries', [ReportController::class, 'downloadCompanyEntries']);
 Route::get('reports/companyEntryLevelOneRankings', [ReportController::class, 'downloadCompanyEntryLevelOneRankings']);
 Route::get('reports/companyEntryLevelTwoRankings', [ReportController::class, 'downloadCompanyEntryLevelTwoRankings']);
+Route::get('reports/companyArtistVotes', [ReportController::class, 'downloadCompanyArtistVotes']);
 
 // Authenticated routes
 Route::group(['middleware' => ['auth:sanctum']], function () {
