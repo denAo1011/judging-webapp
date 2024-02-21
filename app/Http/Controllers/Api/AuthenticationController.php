@@ -21,7 +21,7 @@ class AuthenticationController extends Controller
         $user = User::where('email', $validatedEmail)->firstOrFail();
 
         if (Hash::check($validatedPassword, $user->password)) {
-            $token = $user->createToken('LaravelPasswordGrantClient')->accessToken;
+            $token = $user->createToken('LaravelPasswordGrantClient')->plainTextToken;
             return response($token);
         }
 
